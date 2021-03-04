@@ -6,4 +6,4 @@ TACKtical, is a streamlined business management tool for equestrian professional
 Our product will be in the form of an iOS application. TACKtical will have three primary components: scheduling, barn data, and metric tracking. The scheduling component of our application is a calendar-like interface that lists all lessons, clinics, shows, training rides, vet and farrier visits. The barn data is the accumulation of all scheduling data into horse, client, and instructor profiles along with any additional entered information for that profile. The final component of our app is a metric tracking and business analytics tool that would track the barn data over time and present it in a helpful visual summary for our client. 
 
 
-We will be using agile development to create our product.
+We will be using agile development process with two week sprints to create our product.
