@@ -3,16 +3,20 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1B554558F71F4B9A3B6C8DBF /* Pods_TACKtical.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55F1B55EC5A6AE3C4698B068 /* Pods_TACKtical.framework */; };
+		21EBF39749DF02144E26512B /* Pods_TACKtical_TACKticalUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF7AD6C25537F385AC53953A /* Pods_TACKtical_TACKticalUITests.framework */; };
 		494E1C1F2610621F0077BD2D /* TACKticalApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494E1C1E2610621F0077BD2D /* TACKticalApp.swift */; };
 		494E1C212610621F0077BD2D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494E1C202610621F0077BD2D /* ContentView.swift */; };
 		494E1C23261062200077BD2D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 494E1C22261062200077BD2D /* Assets.xcassets */; };
 		494E1C26261062200077BD2D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 494E1C25261062200077BD2D /* Preview Assets.xcassets */; };
 		494E1C31261062200077BD2D /* TACKticalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494E1C30261062200077BD2D /* TACKticalTests.swift */; };
 		494E1C3C261062210077BD2D /* TACKticalUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494E1C3B261062210077BD2D /* TACKticalUITests.swift */; };
+		67E21A07261170E100E73DB7 /* DatabaseExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67E21A06261170E100E73DB7 /* DatabaseExample.swift */; };
+		C9D0ED3A6D3AAD3F6A1C1974 /* Pods_TACKticalTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 872F4F50459AB78AA432F298 /* Pods_TACKticalTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,6 +37,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1288A12B7348922719FFEDB0 /* Pods-TACKtical.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TACKtical.debug.xcconfig"; path = "Target Support Files/Pods-TACKtical/Pods-TACKtical.debug.xcconfig"; sourceTree = "<group>"; };
+		2923A4996C7A37884F838C01 /* Pods-TACKtical-TACKticalUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TACKtical-TACKticalUITests.debug.xcconfig"; path = "Target Support Files/Pods-TACKtical-TACKticalUITests/Pods-TACKtical-TACKticalUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		38B2D5EAC02691D99D759E26 /* Pods-TACKticalTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TACKticalTests.debug.xcconfig"; path = "Target Support Files/Pods-TACKticalTests/Pods-TACKticalTests.debug.xcconfig"; sourceTree = "<group>"; };
 		494E1C1B2610621F0077BD2D /* TACKtical.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TACKtical.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		494E1C1E2610621F0077BD2D /* TACKticalApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TACKticalApp.swift; sourceTree = "<group>"; };
 		494E1C202610621F0077BD2D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -45,6 +52,13 @@
 		494E1C37261062210077BD2D /* TACKticalUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TACKticalUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		494E1C3B261062210077BD2D /* TACKticalUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TACKticalUITests.swift; sourceTree = "<group>"; };
 		494E1C3D261062210077BD2D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		55F1B55EC5A6AE3C4698B068 /* Pods_TACKtical.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TACKtical.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		67E21A06261170E100E73DB7 /* DatabaseExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseExample.swift; sourceTree = "<group>"; };
+		872F4F50459AB78AA432F298 /* Pods_TACKticalTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TACKticalTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		90F489FA07064A61778C10FA /* Pods-TACKtical-TACKticalUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TACKtical-TACKticalUITests.release.xcconfig"; path = "Target Support Files/Pods-TACKtical-TACKticalUITests/Pods-TACKtical-TACKticalUITests.release.xcconfig"; sourceTree = "<group>"; };
+		A6A221A94B3451F8034D5B78 /* Pods-TACKticalTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TACKticalTests.release.xcconfig"; path = "Target Support Files/Pods-TACKticalTests/Pods-TACKticalTests.release.xcconfig"; sourceTree = "<group>"; };
+		EF4671FE5209381A029D46E6 /* Pods-TACKtical.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TACKtical.release.xcconfig"; path = "Target Support Files/Pods-TACKtical/Pods-TACKtical.release.xcconfig"; sourceTree = "<group>"; };
+		EF7AD6C25537F385AC53953A /* Pods_TACKtical_TACKticalUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TACKtical_TACKticalUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +66,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1B554558F71F4B9A3B6C8DBF /* Pods_TACKtical.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,6 +74,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C9D0ED3A6D3AAD3F6A1C1974 /* Pods_TACKticalTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -66,12 +82,23 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				21EBF39749DF02144E26512B /* Pods_TACKtical_TACKticalUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		15CCE79E23FAD2074E4984DA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				55F1B55EC5A6AE3C4698B068 /* Pods_TACKtical.framework */,
+				EF7AD6C25537F385AC53953A /* Pods_TACKtical_TACKticalUITests.framework */,
+				872F4F50459AB78AA432F298 /* Pods_TACKticalTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		494E1C122610621F0077BD2D = {
 			isa = PBXGroup;
 			children = (
@@ -79,6 +106,8 @@
 				494E1C2F261062200077BD2D /* TACKticalTests */,
 				494E1C3A261062210077BD2D /* TACKticalUITests */,
 				494E1C1C2610621F0077BD2D /* Products */,
+				D3F53E1394F0ED719FC94428 /* Pods */,
+				15CCE79E23FAD2074E4984DA /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -97,6 +126,7 @@
 			children = (
 				494E1C1E2610621F0077BD2D /* TACKticalApp.swift */,
 				494E1C202610621F0077BD2D /* ContentView.swift */,
+				67E21A06261170E100E73DB7 /* DatabaseExample.swift */,
 				494E1C22261062200077BD2D /* Assets.xcassets */,
 				494E1C27261062200077BD2D /* Info.plist */,
 				494E1C24261062200077BD2D /* Preview Content */,
@@ -130,6 +160,19 @@
 			path = TACKticalUITests;
 			sourceTree = "<group>";
 		};
+		D3F53E1394F0ED719FC94428 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				1288A12B7348922719FFEDB0 /* Pods-TACKtical.debug.xcconfig */,
+				EF4671FE5209381A029D46E6 /* Pods-TACKtical.release.xcconfig */,
+				2923A4996C7A37884F838C01 /* Pods-TACKtical-TACKticalUITests.debug.xcconfig */,
+				90F489FA07064A61778C10FA /* Pods-TACKtical-TACKticalUITests.release.xcconfig */,
+				38B2D5EAC02691D99D759E26 /* Pods-TACKticalTests.debug.xcconfig */,
+				A6A221A94B3451F8034D5B78 /* Pods-TACKticalTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -137,9 +180,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 494E1C40261062210077BD2D /* Build configuration list for PBXNativeTarget "TACKtical" */;
 			buildPhases = (
+				24E647B17F40BBAB462F4EBF /* [CP] Check Pods Manifest.lock */,
 				494E1C172610621F0077BD2D /* Sources */,
 				494E1C182610621F0077BD2D /* Frameworks */,
 				494E1C192610621F0077BD2D /* Resources */,
+				7D44E4339B4FC1F7ADAD011A /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -154,6 +199,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 494E1C43261062210077BD2D /* Build configuration list for PBXNativeTarget "TACKticalTests" */;
 			buildPhases = (
+				DF3FAC3E5D5224837347D4EF /* [CP] Check Pods Manifest.lock */,
 				494E1C28261062200077BD2D /* Sources */,
 				494E1C29261062200077BD2D /* Frameworks */,
 				494E1C2A261062200077BD2D /* Resources */,
@@ -172,9 +218,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 494E1C46261062210077BD2D /* Build configuration list for PBXNativeTarget "TACKticalUITests" */;
 			buildPhases = (
+				90603CCC91B5613A35902615 /* [CP] Check Pods Manifest.lock */,
 				494E1C33261062210077BD2D /* Sources */,
 				494E1C34261062210077BD2D /* Frameworks */,
 				494E1C35261062210077BD2D /* Resources */,
+				E34446F5F92A18120570C8A0 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -254,12 +302,116 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		24E647B17F40BBAB462F4EBF /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TACKtical-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7D44E4339B4FC1F7ADAD011A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TACKtical/Pods-TACKtical-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TACKtical/Pods-TACKtical-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TACKtical/Pods-TACKtical-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		90603CCC91B5613A35902615 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TACKtical-TACKticalUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DF3FAC3E5D5224837347D4EF /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TACKticalTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E34446F5F92A18120570C8A0 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TACKtical-TACKticalUITests/Pods-TACKtical-TACKticalUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TACKtical-TACKticalUITests/Pods-TACKtical-TACKticalUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TACKtical-TACKticalUITests/Pods-TACKtical-TACKticalUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		494E1C172610621F0077BD2D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				494E1C212610621F0077BD2D /* ContentView.swift in Sources */,
+				67E21A07261170E100E73DB7 /* DatabaseExample.swift in Sources */,
 				494E1C1F2610621F0077BD2D /* TACKticalApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -414,6 +566,7 @@
 		};
 		494E1C41261062210077BD2D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1288A12B7348922719FFEDB0 /* Pods-TACKtical.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -435,6 +588,7 @@
 		};
 		494E1C42261062210077BD2D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EF4671FE5209381A029D46E6 /* Pods-TACKtical.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -456,6 +610,7 @@
 		};
 		494E1C44261062210077BD2D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 38B2D5EAC02691D99D759E26 /* Pods-TACKticalTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -477,6 +632,7 @@
 		};
 		494E1C45261062210077BD2D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A6A221A94B3451F8034D5B78 /* Pods-TACKticalTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -498,6 +654,7 @@
 		};
 		494E1C47261062210077BD2D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2923A4996C7A37884F838C01 /* Pods-TACKtical-TACKticalUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -517,6 +674,7 @@
 		};
 		494E1C48261062210077BD2D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 90F489FA07064A61778C10FA /* Pods-TACKtical-TACKticalUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
