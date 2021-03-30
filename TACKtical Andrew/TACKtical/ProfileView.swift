@@ -11,16 +11,20 @@ struct ContentView: View {
     
     @State var riderProfile = false
     @State var horseProfile = false
+    @State var editProfile = false
     
     var body: some View {
         if riderProfile {
-            RiderView(horseProfile: $horseProfile, riderProfile: $riderProfile)
+            RiderView(horseProfile: $horseProfile, riderProfile: $riderProfile, editProfile: $editProfile)
         }
         else if horseProfile{
-            HorseView(riderProfile: $riderProfile, horseProfile: $horseProfile)
+            HorseView(riderProfile: $riderProfile, horseProfile: $horseProfile, editProfile: $editProfile)
         }
-        else {
-            editView()
+        else if editProfile{
+            editView(horseProfile: $horseProfile, editProfile: $editProfile)
+        }
+        else{
+            HorseView(riderProfile: $riderProfile, horseProfile: $horseProfile, editProfile: $editProfile)
         }
     }
 }
@@ -30,6 +34,7 @@ struct ContentView: View {
 struct HorseView: View {
     @Binding var riderProfile: Bool
     @Binding var horseProfile: Bool
+    @Binding var editProfile: Bool
     
     var body: some View {
         GeometryReader{ geometry in
@@ -38,7 +43,9 @@ struct HorseView: View {
                 Image("Horse").resizable().clipShape(Circle()).shadow(radius:10).overlay(Circle().stroke(Color(red: 102/255, green: 172/255, blue: 189/255, opacity: 1.0), lineWidth: 5)).frame(width:UIScreen.main.bounds.height * 0.2, height:UIScreen.main.bounds.height*0.2).padding(UIScreen.main.bounds.height*0.005)
                 Text("Mayor").fontWeight(.semibold).multilineTextAlignment(.center).font(.system(size:UIScreen.main.bounds.height*0.045)).frame(height: UIScreen.main.bounds.height * 0.035).padding(UIScreen.main.bounds.height*0.005)
                 Button(action: {
-                    print("Changing to Editing Profile")
+                    editProfile = true
+                    riderProfile = false
+                    horseProfile = false
                 }) {
                     Text("Edit Profile").font(.system(size:UIScreen.main.bounds.height*0.025))
                 }.frame(width:UIScreen.main.bounds.width*0.3, height:UIScreen.main.bounds.height*0.035, alignment:.center).foregroundColor(.black).background(Color(UIColor.lightGray)).opacity(0.7).cornerRadius(16).padding(UIScreen.main.bounds.height*0.005)
@@ -62,6 +69,7 @@ struct HorseView: View {
                     Button(action: {
                         riderProfile = true
                         horseProfile = false
+                        editProfile = false
                     }) {
                         Text("Rider Profile").font(.system(size:UIScreen.main.bounds.height*0.025))
                     }.frame(width:UIScreen.main.bounds.width*0.6, height:UIScreen.main.bounds.height*0.008, alignment:.center).foregroundColor(.white).padding(UIScreen.main.bounds.height*0.02).background(Color(red: 102/255, green: 172/255, blue: 189/255, opacity: 1.0)).cornerRadius(16)
@@ -76,6 +84,7 @@ struct HorseView: View {
 struct RiderView: View {
     @Binding var horseProfile: Bool
     @Binding var riderProfile: Bool
+    @Binding var editProfile: Bool
     
     var body: some View {
         
@@ -85,7 +94,9 @@ struct RiderView: View {
                 Image("Lebron").resizable().clipShape(Circle()).shadow(radius:10).overlay(Circle().stroke(Color(red: 102/255, green: 172/255, blue: 189/255, opacity: 1.0), lineWidth: 5)).frame(width:UIScreen.main.bounds.height * 0.2, height:UIScreen.main.bounds.height*0.2).padding(UIScreen.main.bounds.height*0.005)
                 Text("Lebron James").fontWeight(.semibold).multilineTextAlignment(.center).font(.system(size:UIScreen.main.bounds.height*0.045)).frame(height: UIScreen.main.bounds.height * 0.035).padding(UIScreen.main.bounds.height*0.005)
                 Button(action: {
-                    print("Changing to Editing Profile")
+                    editProfile = true
+                    horseProfile = false
+                    riderProfile = false
                 }) {
                     Text("Edit Profile").font(.system(size:UIScreen.main.bounds.height*0.025))
                 }.frame(width:UIScreen.main.bounds.width*0.3, height:UIScreen.main.bounds.height*0.035, alignment:.center).foregroundColor(.black).background(Color(UIColor.lightGray)).opacity(0.7).cornerRadius(16).padding(UIScreen.main.bounds.height*0.005)
@@ -121,6 +132,9 @@ struct RiderView: View {
 
 
 struct editView: View {
+    @Binding var horseProfile: Bool
+    @Binding var editProfile: Bool
+    
     @State private var height: String = ""
     @State private var owner: String = ""
     @State private var feed: String = ""
@@ -152,7 +166,8 @@ struct editView: View {
             
                 VStack(alignment: .center, spacing: UIScreen.main.bounds.height*0.01){
                     Button(action: {
-                        print("Going to upcoming Training Rides")
+                        horseProfile = true
+                        editProfile = false
                     }) {
                         Text("Save Changes").font(.system(size:UIScreen.main.bounds.height*0.025))
                     }.frame(width:UIScreen.main.bounds.width*0.6, height:UIScreen.main.bounds.height*0.008, alignment:.center).foregroundColor(.white).padding(UIScreen.main.bounds.height*0.02).background(Color(red: 102/255, green: 172/255, blue: 189/255, opacity: 1.0)).cornerRadius(16)
