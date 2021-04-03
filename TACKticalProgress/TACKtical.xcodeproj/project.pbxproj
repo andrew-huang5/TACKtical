@@ -15,6 +15,7 @@
 		494E1C26261062200077BD2D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 494E1C25261062200077BD2D /* Preview Assets.xcassets */; };
 		494E1C31261062200077BD2D /* TACKticalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494E1C30261062200077BD2D /* TACKticalTests.swift */; };
 		494E1C3C261062210077BD2D /* TACKticalUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494E1C3B261062210077BD2D /* TACKticalUITests.swift */; };
+		49697C48261918B600052F8F /* RiderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49697C47261918B600052F8F /* RiderView.swift */; };
 		67E21A07261170E100E73DB7 /* DatabaseExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67E21A06261170E100E73DB7 /* DatabaseExample.swift */; };
 		AB673B002613447600A4BE17 /* NewProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB673AFF2613447600A4BE17 /* NewProfileView.swift */; };
 		AB986646261868CC006F66EA /* BarnDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB986645261868CC006F66EA /* BarnDataView.swift */; };
@@ -59,6 +60,7 @@
 		494E1C37261062210077BD2D /* TACKticalUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TACKticalUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		494E1C3B261062210077BD2D /* TACKticalUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TACKticalUITests.swift; sourceTree = "<group>"; };
 		494E1C3D261062210077BD2D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		49697C47261918B600052F8F /* RiderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiderView.swift; sourceTree = "<group>"; };
 		55F1B55EC5A6AE3C4698B068 /* Pods_TACKtical.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TACKtical.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		67E21A06261170E100E73DB7 /* DatabaseExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseExample.swift; sourceTree = "<group>"; };
 		872F4F50459AB78AA432F298 /* Pods_TACKticalTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TACKticalTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -67,7 +69,7 @@
 		AB673AFF2613447600A4BE17 /* NewProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileView.swift; sourceTree = "<group>"; };
 		AB986645261868CC006F66EA /* BarnDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarnDataView.swift; sourceTree = "<group>"; };
 		AB98664A2618FA79006F66EA /* CreateProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProfileView.swift; sourceTree = "<group>"; };
-		ABBACB052612583300818408 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		ABBACB052612583300818408 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; name = "GoogleService-Info.plist"; path = "../../Downloads/GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		ABBACB2B2612602D00818408 /* Horse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Horse.swift; sourceTree = "<group>"; };
 		ABBACB302612655A00818408 /* HorseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorseViewModel.swift; sourceTree = "<group>"; };
 		ABBACB3D2613046A00818408 /* editProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = editProfile.swift; sourceTree = "<group>"; };
@@ -151,6 +153,7 @@
 				ABBACB052612583300818408 /* GoogleService-Info.plist */,
 				494E1C27261062200077BD2D /* Info.plist */,
 				494E1C24261062200077BD2D /* Preview Content */,
+				49697C47261918B600052F8F /* RiderView.swift */,
 			);
 			path = TACKtical;
 			sourceTree = "<group>";
@@ -435,6 +438,7 @@
 				494E1C212610621F0077BD2D /* ContentView.swift in Sources */,
 				67E21A07261170E100E73DB7 /* DatabaseExample.swift in Sources */,
 				ABBACB312612655A00818408 /* HorseViewModel.swift in Sources */,
+				49697C48261918B600052F8F /* RiderView.swift in Sources */,
 				AB98664B2618FA79006F66EA /* CreateProfileView.swift in Sources */,
 				ABBACB3E2613046A00818408 /* editProfile.swift in Sources */,
 				494E1C1F2610621F0077BD2D /* TACKticalApp.swift in Sources */,

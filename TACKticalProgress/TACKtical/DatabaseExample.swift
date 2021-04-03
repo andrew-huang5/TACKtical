@@ -2,7 +2,6 @@
 //  DatabaseExample.swift
 //  TACKtical
 //
-//  Created by Haris Nashed on 3/28/21.
 //
 
 import Foundation

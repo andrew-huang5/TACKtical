@@ -2,7 +2,6 @@
 //  Horse.swift
 //  TACKtical
 //
-//  Created by 谢正恺 on 3/29/21.
 //
 
 import Foundation

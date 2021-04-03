@@ -2,7 +2,6 @@
 //  CreateProfileView.swift
 //  TACKtical
 //
-//  Created by 谢正恺 on 4/3/21.
 //
 
 import SwiftUI

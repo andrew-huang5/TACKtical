@@ -2,7 +2,6 @@
 //  editProfile.swift
 //  TACKtical
 //
-//  Created by 谢正恺 on 3/30/21.
 //
 
 import SwiftUI
