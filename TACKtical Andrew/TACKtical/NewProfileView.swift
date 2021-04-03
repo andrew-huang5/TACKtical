@@ -9,7 +9,7 @@ import SwiftUI
 
 
 struct NewProfileView: View {
-    @State private var editProfile = false
+//    @State private var editProfile = false
 //    var horse = Horse(DOB: "2021", height: 16, horseID: 1, name: "Haha", weight: 200)
     
     @ObservedObject private var viewModel = HorseViewModel()
@@ -17,7 +17,7 @@ struct NewProfileView: View {
     
     
     var body: some View {
-        GeometryReader{ ggeometry in
+        GeometryReader{ geometry in
             VStack(){
 //                Text("Horse Profile").fontWeight(.semibold).foregroundColor(.white).multilineTextAlignment(.center).font(.system(size: UIScreen.main.bounds.height*0.05)).frame(width: UIScreen.main.bounds.width * 0.8, height: UIScreen.main.bounds.height * 0.1).background(Color(red: 102/255, green: 172/255, blue: 189/255, opacity: 1.0)).padding(UIScreen.main.bounds.height*0.005)
                 Image("Horse").resizable().clipShape(Circle()).shadow(radius:10).overlay(Circle().stroke(Color(red: 102/255, green: 172/255, blue: 189/255, opacity: 1.0), lineWidth: 5)).frame(width:UIScreen.main.bounds.height * 0.2, height:UIScreen.main.bounds.height*0.2).padding(UIScreen.main.bounds.height*0.005)

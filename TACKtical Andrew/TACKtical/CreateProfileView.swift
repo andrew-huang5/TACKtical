@@ -1,64 +1,64 @@
 //
-//  editProfile.swift
+//  CreateProfileView.swift
 //  TACKtical
 //
-//  Created by 谢正恺 on 3/30/21.
+//  Created by 谢正恺 on 4/3/21.
 //
 
 import SwiftUI
 import Firebase
 
-struct EditProfileView: View {
+struct CreateProfileView: View {
     @ObservedObject private var viewModel = HorseViewModel()
-    @State var name = "Mayor"
-    @State var birth = "Jan/1/2015"
-    @State var gender = "female"
-    @State var color = "Chestnut"
-    @State var height = "16"
-    @State var owner = "Lebron James"
-    @State var arrival = "Jan/1/2020"
-    @State var feed = "Grain & Hay"
+    @State var name = ""
+    @State var birth = ""
+    @State var gender = ""
+    @State var color = ""
+    @State var height = ""
+    @State var owner = ""
+    @State var arrival = ""
+    @State var feed = ""
     var body: some View {
         VStack {
             VStack{
                 HStack() {
                     Text("Name: ").foregroundColor(.blue)
-                    TextField("Enter new name", text: $name)
+                    TextField("Enter name", text: $name)
                 }
                 
                 HStack() {
                     Text("Date of Birth: ").foregroundColor(.blue)
-                    TextField("Enter new date of birth", text: $birth)
+                    TextField("Enter date", text: $birth)
                 }
                 
                 HStack() {
                     Text("Gender: ").foregroundColor(.blue)
-                    TextField("Enter new horse gender", text: $gender)
+                    TextField("Enter gender", text: $gender)
                 }
                 
                 HStack() {
                     Text("Color: ").foregroundColor(.blue)
-                    TextField("Enter new horse color", text: $color)
+                    TextField("Enter color", text: $color)
                 }
                 
                 HStack() {
                     Text("Height: ").foregroundColor(.blue)
-                    TextField("Enter new horse height", text: $height)
+                    TextField("Enter height", text: $height)
                 }
                 
                 HStack() {
                     Text("Owner: ").foregroundColor(.blue)
-                    TextField("Enter new owner", text: $owner)
+                    TextField("Enter owner", text: $owner)
                 }
                 
                 HStack() {
                     Text("Arrival Date: ").foregroundColor(.blue)
-                    TextField("Enter new arrival date", text: $arrival)
+                    TextField("Enter date", text: $arrival)
                 }
                 
                 HStack() {
                     Text("Feed: ").foregroundColor(.blue)
-                    TextField("Enter new horse feed", text: $feed)
+                    TextField("Enter feed", text: $feed)
                 }
                 
                 Button(action: {upload()}){
@@ -77,8 +77,8 @@ struct EditProfileView: View {
     
 }
 
-struct EditProfileView_Previews: PreviewProvider {
+struct CreateProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        EditProfileView()
+        CreateProfileView()
     }
 }

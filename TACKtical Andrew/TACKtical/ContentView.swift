@@ -9,7 +9,7 @@ import SwiftUI
 
 
 struct ContentView: View {
-    @State private var editProfile = false
+//    @State private var editProfile = false
 //    var horse = Horse(DOB: "2021", height: 16, horseID: 1, name: "Haha", weight: 200)
     
     @ObservedObject private var viewModel = HorseViewModel()
@@ -19,39 +19,54 @@ struct ContentView: View {
     var body: some View {
         NavigationView{
             VStack(){
-//                Text("Horse Profile").fontWeight(.semibold).foregroundColor(.white).multilineTextAlignment(.center).font(.system(size: UIScreen.main.bounds.height*0.05)).frame(width: UIScreen.main.bounds.width * 0.8, height: UIScreen.main.bounds.height * 0.1).background(Color(red: 102/255, green: 172/255, blue: 189/255, opacity: 1.0)).padding(UIScreen.main.bounds.height*0.005)
-                Image("Horse").resizable().clipShape(Circle()).shadow(radius:10).overlay(Circle().stroke(Color(red: 102/255, green: 172/255, blue: 189/255, opacity: 1.0), lineWidth: 5)).frame(width:UIScreen.main.bounds.height * 0.2, height:UIScreen.main.bounds.height*0.2).padding(UIScreen.main.bounds.height*0.005)
-                Text(viewModel.horse.name).fontWeight(.semibold).multilineTextAlignment(.center).font(.system(size:UIScreen.main.bounds.height*0.045)).frame(height: UIScreen.main.bounds.height * 0.035).padding(UIScreen.main.bounds.height*0.005)
-                NavigationLink(destination: EditProfileView()) {
-                    Text("Edit Profile").font(.system(size:UIScreen.main.bounds.height*0.025))
-                }.frame(width:UIScreen.main.bounds.width*0.3, height:UIScreen.main.bounds.height*0.035, alignment:.center).foregroundColor(.black).background(Color(UIColor.lightGray)).opacity(0.7).cornerRadius(16).padding(UIScreen.main.bounds.height*0.005)
-            
-                VStack(alignment: .center, spacing: UIScreen.main.bounds.height*0.01){
-                    Text("Date of Birth: " + viewModel.horse.birth).font(.system(size:UIScreen.main.bounds.height*0.025))
-                    Text("Gender: " + viewModel.horse.gender).font(.system(size:UIScreen.main.bounds.height*0.025))
-                    Text("Color: " + viewModel.horse.color).font(.system(size:UIScreen.main.bounds.height*0.025))
-                    Text("Height: " + viewModel.horse.height).font(.system(size:UIScreen.main.bounds.height*0.025))
-                    Text("Owner: " + viewModel.horse.owner).font(.system(size:UIScreen.main.bounds.height*0.025))
-                    Text("Arrival Date: " + viewModel.horse.arrivalDate).font(.system(size:UIScreen.main.bounds.height*0.025))
-                    Text("Feed: " + viewModel.horse.feed).font(.system(size:UIScreen.main.bounds.height*0.025))
-                }.padding(UIScreen.main.bounds.height*0.005)
-            
-                VStack(alignment: .center, spacing: UIScreen.main.bounds.height*0.01){
-                    Button(action: {
-                        print("Going to upcoming Training Rides")
-                    }) {
-                        Text("Upcoming Training Rides").font(.system(size:UIScreen.main.bounds.height*0.025))
-                    }.frame(width:UIScreen.main.bounds.width*0.6, height:UIScreen.main.bounds.height*0.008, alignment:.center).foregroundColor(.white).padding(UIScreen.main.bounds.height*0.02).background(Color(red: 102/255, green: 172/255, blue: 189/255, opacity: 1.0)).cornerRadius(16)
-                    Button(action: {
-                        print("Going to Rider Profile")
-                    }) {
-                        Text("Rider Profiles").font(.system(size:UIScreen.main.bounds.height*0.025))
-                    }.frame(width:UIScreen.main.bounds.width*0.6, height:UIScreen.main.bounds.height*0.008, alignment:.center).foregroundColor(.white).padding(UIScreen.main.bounds.height*0.02).background(Color(red: 102/255, green: 172/255, blue: 189/255, opacity: 1.0)).cornerRadius(16)
-                }.padding(UIScreen.main.bounds.height*0.005)
+                Text("Hello User,\nHere is a preview of your day:").font(.system(size:UIScreen.main.bounds.height*0.03)).frame(width: UIScreen.main.bounds.width * 0.8, height: UIScreen.main.bounds.height * 0.1).background(Color(red: 173/255, green: 216/255, blue: 230/255, opacity: 1.0))
+                VStack(spacing: UIScreen.main.bounds.height*0.02) {
+                    VStack(alignment: .leading){
+                        Text("9:00 am ").font(.system(size:UIScreen.main.bounds.height*0.025))
+                        Text("\tRise and shine").font(.system(size:UIScreen.main.bounds.height*0.025)).frame(width: UIScreen.main.bounds.width * 0.7, alignment: .leading)
+                    }
+                    VStack(alignment: .leading){
+                        Text("10:00 am ").font(.system(size:UIScreen.main.bounds.height*0.025))
+                        Text("\tLesson with Bob").font(.system(size:UIScreen.main.bounds.height*0.025)).frame(width: UIScreen.main.bounds.width * 0.7, alignment: .leading)
+                    }
+                    VStack(alignment: .leading){
+                        Text("11:00 am ").font(.system(size:UIScreen.main.bounds.height*0.025))
+                        Text("\tPrepare lunch for meeting").font(.system(size:UIScreen.main.bounds.height*0.025)).frame(width: UIScreen.main.bounds.width * 0.7, alignment: .leading)
+                    }
+                    VStack(alignment: .leading){
+                        Text("12:00 pm ").font(.system(size:UIScreen.main.bounds.height*0.025))
+                        Text("\tLunch meeting with partners").font(.system(size:UIScreen.main.bounds.height*0.025)).frame(width: UIScreen.main.bounds.width * 0.7, alignment: .leading)
+                    }
+                    VStack(alignment: .leading){
+                        Text("1:00 pm ").font(.system(size:UIScreen.main.bounds.height*0.025))
+                        Text("\tFix the broken gate").font(.system(size:UIScreen.main.bounds.height*0.025)).frame(width: UIScreen.main.bounds.width * 0.7, alignment: .leading)
+                    }
+                    VStack(alignment: .leading){
+                        Text("2:00 pm ").font(.system(size:UIScreen.main.bounds.height*0.025))
+                        Text("\tStable cleaning").font(.system(size:UIScreen.main.bounds.height*0.025)).frame(width: UIScreen.main.bounds.width * 0.7, alignment: .leading)
+                    }
+                }.padding(EdgeInsets(top: 0, leading: UIScreen.main.bounds.width*0.15, bottom: UIScreen.main.bounds.height*0.01, trailing: UIScreen.main.bounds.width*0.15)).frame(width: UIScreen.main.bounds.width * 0.8, height: UIScreen.main.bounds.height * 0.5).background(Color(red: 240/255, green: 248/255, blue: 255/255, opacity: 1.0))
+                
+                HStack(spacing: UIScreen.main.bounds.width*0.1) {
+                    NavigationLink(destination: NewProfileView()) {
+                        Text("Horse")
+                    }.frame(width: UIScreen.main.bounds.width*0.2, height: UIScreen.main.bounds.width*0.2)
+                    .foregroundColor(Color.white)
+                    .background(Color(red: 102/255, green: 172/255, blue: 189/255, opacity: 1.0)).clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
+                    NavigationLink(destination: BarnDataView()) {
+                        Text("Barn Data")
+                    }.frame(width: UIScreen.main.bounds.width*0.2, height: UIScreen.main.bounds.width*0.2)
+                    .foregroundColor(Color.white)
+                    .background(Color(red: 102/255, green: 172/255, blue: 189/255, opacity: 1.0)).clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
+                    Text("Schedule").font(.system(size:UIScreen.main.bounds.height*0.025)).frame(width: UIScreen.main.bounds.width*0.2, height: UIScreen.main.bounds.width*0.2)
+                    .foregroundColor(Color.white)
+                    .background(Color(red: 102/255, green: 172/255, blue: 189/255, opacity: 1.0)).clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
+                }
+                
+                
             }
-            .padding(EdgeInsets(top: 0, leading: UIScreen.main.bounds.width*0.092, bottom: 0, trailing: UIScreen.main.bounds.width*0.092)).navigationBarTitle("Horse Profile", displayMode: .inline)
+            .padding(EdgeInsets(top: 0, leading: UIScreen.main.bounds.width*0.092, bottom: 0, trailing: UIScreen.main.bounds.width*0.092)).navigationBarTitle("TACKtical", displayMode: .inline)
         }.onAppear() {
-            self.viewModel.fetchData()
             UINavigationBar.appearance().backgroundColor = UIColor(red: 102/255, green: 172/255, blue: 189/255, alpha:1)
         }
     }
