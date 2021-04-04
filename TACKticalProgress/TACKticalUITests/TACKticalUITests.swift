@@ -31,23 +31,54 @@ class TACKticalUITests: XCTestCase {
         let app = XCUIApplication()
         app.launch()
         
+        //this test method tests the navigation of the application as the user clicks through the various screens
         let horseButton = app.buttons["Horse"]
         horseButton.tap()
+        XCTAssertTrue(app.buttons["Upcoming Training Rides"].exists)
         app.buttons["Upcoming Training Rides"].tap()
+        XCTAssertTrue(app.buttons["Edit Profile"].exists)
         app.buttons["Edit Profile"].tap()
+        XCTAssertTrue(app.textFields["Enter new name"].exists)
         app.textFields["Enter new name"].tap()
+        XCTAssertTrue(app.navigationBars["Edit Profile"].buttons["Horse Profile"].exists)
         app.navigationBars["Edit Profile"].buttons["Horse Profile"].tap()
-        
+
         let tackticalButton = app.navigationBars["Horse Profile"].buttons["TACKtical"]
+        XCTAssertTrue(tackticalButton.exists)
         tackticalButton.tap()
+        XCTAssertTrue(app.staticTexts["Schedule"].exists)
         app.staticTexts["Schedule"].tap()
+        XCTAssertTrue(horseButton.exists)
         horseButton.tap()
+        XCTAssertTrue(tackticalButton.exists)
         tackticalButton.tap()
         
 
         // Use recording to get started writing UI tests.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
-
+    }
+    
+    func testBarnDataDropDowns() throws {
+        let app = XCUIApplication()
+        app.launch()
+        XCUIApplication().buttons["Barn Data"].tap()
+        
+        app.staticTexts["Horse Name"].tap()
+        app.buttons["Mayor"].tap()
+        app.navigationBars["Horse Profile"].buttons["Barn Data"].tap()
+        app.images["chevron.up"].tap()
+        
+        app.staticTexts["Rider Name"].tap()
+        app.buttons["Mayor"].tap()
+        app.navigationBars["Horse Profile"].buttons["Barn Data"].tap()
+        app.images["chevron.up"].tap()
+        
+        app.staticTexts["Instructor Name"].tap()
+        app.buttons["Mayor"].tap()
+        app.navigationBars["Horse Profile"].buttons["Barn Data"].tap()
+        app.images["chevron.up"].tap()
+                
+    }
 
     func testLaunchPerformance() throws {
         if #available(macOS 10.15, iOS 13.0, tvOS 13.0, *) {
