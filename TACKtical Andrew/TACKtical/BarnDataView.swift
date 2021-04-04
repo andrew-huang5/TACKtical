@@ -9,6 +9,8 @@ import SwiftUI
 
 struct BarnDataView: View {
     
+    
+    
     var body: some View {
         VStack {
             VStack {
@@ -56,13 +58,13 @@ struct BarnDataView: View {
             HStack(spacing: UIScreen.main.bounds.width*0.15) {
                 NavigationLink(
                     destination: CreateProfileView()) {
-                    Text("Create \nProfile").foregroundColor(.black)
+                    Text("Create \nProfile").font(.system(size:UIScreen.main.bounds.height*0.03)).foregroundColor(.black)
                 }.frame(width:UIScreen.main.bounds.width*0.25, height:UIScreen.main.bounds.height*0.09).font(.system(size:UIScreen.main.bounds.height*0.03)).background(Color(red: 240/255, green: 248/255, blue: 255/255, opacity: 1.0))
                 
                 NavigationLink(
                     destination: CreateProfileView()) {
-                    Text("Edit/Delete \nProfile").foregroundColor(.black)
-                }.frame(width:UIScreen.main.bounds.width*0.25, height:UIScreen.main.bounds.height*0.09).font(.system(size:UIScreen.main.bounds.height*0.025)).background(Color(red: 240/255, green: 248/255, blue: 255/255, opacity: 1.0))
+                    Text("Delete \nProfile").font(.system(size:UIScreen.main.bounds.height*0.03)).foregroundColor(.black)
+                }.frame(width:UIScreen.main.bounds.width*0.25, height:UIScreen.main.bounds.height*0.09).background(Color(red: 240/255, green: 248/255, blue: 255/255, opacity: 1.0))
             }
         }.padding(EdgeInsets(top: 0, leading: UIScreen.main.bounds.width*0.092, bottom: 0, trailing: UIScreen.main.bounds.width*0.092)).navigationBarTitle("Barn Data", displayMode: .inline)
     }
@@ -75,6 +77,7 @@ struct BarnDataView_Previews: PreviewProvider {
 }
 
 struct Dropdown1: View{
+    @ObservedObject private var viewModel = HorseViewModel()
     @State var expand = false
     var body: some View{
         VStack() {
@@ -87,11 +90,16 @@ struct Dropdown1: View{
                 }
                 
                 if expand{
-                    NavigationLink(destination: NewProfileView()) {
-                        Text("Mayor").font(.system(size:UIScreen.main.bounds.height*0.02)).foregroundColor(.black)
+                    List(viewModel.horses, id: \.self) { horse in
+                        NavigationLink(destination: NewProfileView(name: horse.name)) {
+                            Text(horse.name).font(.system(size:UIScreen.main.bounds.height*0.02)).foregroundColor(.black)
+                        }
                     }
+                    
                 }
-            }.background(Color(red: 211/255, green: 211/255, blue: 211/255, opacity: 1.0)).cornerRadius(3)
+            }.background(Color(red: 211/255, green: 211/255, blue: 211/255, opacity: 1.0)).cornerRadius(3).onAppear() {
+                self.viewModel.fetchAllData()
+            }
         }
     }
 }
@@ -109,7 +117,7 @@ struct Dropdown2: View{
                 }
                 
                 if expand{
-                    NavigationLink(destination: NewProfileView()) {
+                    NavigationLink(destination: NewProfileView(name: "Mayor")) {
                         Text("Mayor").font(.system(size:UIScreen.main.bounds.height*0.02)).foregroundColor(.black)
                     }
                 }
@@ -131,7 +139,7 @@ struct Dropdown3: View{
                 }
                 
                 if expand{
-                    NavigationLink(destination: NewProfileView()) {
+                    NavigationLink(destination: NewProfileView(name: "Mayor")) {
                         Text("Mayor").font(.system(size:UIScreen.main.bounds.height*0.02)).foregroundColor(.black)
                     }
                 }

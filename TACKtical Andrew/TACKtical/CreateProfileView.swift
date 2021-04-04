@@ -65,14 +65,14 @@ struct CreateProfileView: View {
                     Text("Upload").font(.system(size:UIScreen.main.bounds.height*0.025))
                 }.frame(width:UIScreen.main.bounds.width*0.3, height:UIScreen.main.bounds.height*0.035, alignment:.center).foregroundColor(.black).background(Color(UIColor.lightGray)).opacity(0.7).cornerRadius(16).padding(UIScreen.main.bounds.height*0.005)
             }
-            NavigationLink(destination: NewProfileView()) {
+            NavigationLink(destination: NewProfileView(name: name)) {
                 Text("New Profile").font(.system(size:UIScreen.main.bounds.height*0.025))
             }.frame(width:UIScreen.main.bounds.width*0.3, height:UIScreen.main.bounds.height*0.035, alignment:.center).foregroundColor(.black).background(Color(UIColor.lightGray)).opacity(0.7).cornerRadius(16).padding(UIScreen.main.bounds.height*0.005)
-        }.padding(EdgeInsets(top: 0, leading: UIScreen.main.bounds.width*0.15, bottom: 0, trailing: UIScreen.main.bounds.width*0.15)).navigationBarTitle("Edit Profile", displayMode: .inline)
+        }.padding(EdgeInsets(top: 0, leading: UIScreen.main.bounds.width*0.15, bottom: 0, trailing: UIScreen.main.bounds.width*0.15)).navigationBarTitle("Create Profile", displayMode: .inline)
     }
     func upload() {
         let db = Firestore.firestore()
-        db.collection("Profiles").document("Horse1").setData(["Arrival Date": arrival, "color": color, "Date of Birth": birth, "Feed": feed, "Gender": gender, "Height": height, "ID": "Horse1", "Owner": owner, "name":name], merge:true)
+        db.collection("Profiles").document(name).setData(["Arrival Date": arrival, "Color": color, "Date of Birth": birth, "Feed": feed, "Gender": gender, "Height": height, "Owner": owner, "name":name], merge:true)
     }
     
 }

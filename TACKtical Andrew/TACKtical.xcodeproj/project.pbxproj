@@ -19,6 +19,7 @@
 		AB673B002613447600A4BE17 /* NewProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB673AFF2613447600A4BE17 /* NewProfileView.swift */; };
 		AB986646261868CC006F66EA /* BarnDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB986645261868CC006F66EA /* BarnDataView.swift */; };
 		AB98664B2618FA79006F66EA /* CreateProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB98664A2618FA79006F66EA /* CreateProfileView.swift */; };
+		AB98665026194872006F66EA /* RiderProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB98664F26194872006F66EA /* RiderProfile.swift */; };
 		ABBACB062612583300818408 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ABBACB052612583300818408 /* GoogleService-Info.plist */; };
 		ABBACB2C2612602D00818408 /* Horse.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABBACB2B2612602D00818408 /* Horse.swift */; };
 		ABBACB312612655A00818408 /* HorseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABBACB302612655A00818408 /* HorseViewModel.swift */; };
@@ -67,6 +68,7 @@
 		AB673AFF2613447600A4BE17 /* NewProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileView.swift; sourceTree = "<group>"; };
 		AB986645261868CC006F66EA /* BarnDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarnDataView.swift; sourceTree = "<group>"; };
 		AB98664A2618FA79006F66EA /* CreateProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProfileView.swift; sourceTree = "<group>"; };
+		AB98664F26194872006F66EA /* RiderProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiderProfile.swift; sourceTree = "<group>"; };
 		ABBACB052612583300818408 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		ABBACB2B2612602D00818408 /* Horse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Horse.swift; sourceTree = "<group>"; };
 		ABBACB302612655A00818408 /* HorseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorseViewModel.swift; sourceTree = "<group>"; };
@@ -145,6 +147,7 @@
 				AB986645261868CC006F66EA /* BarnDataView.swift */,
 				AB98664A2618FA79006F66EA /* CreateProfileView.swift */,
 				AB673AFF2613447600A4BE17 /* NewProfileView.swift */,
+				AB98664F26194872006F66EA /* RiderProfile.swift */,
 				ABBACB302612655A00818408 /* HorseViewModel.swift */,
 				67E21A06261170E100E73DB7 /* DatabaseExample.swift */,
 				494E1C22261062200077BD2D /* Assets.xcassets */,
@@ -436,6 +439,7 @@
 				67E21A07261170E100E73DB7 /* DatabaseExample.swift in Sources */,
 				ABBACB312612655A00818408 /* HorseViewModel.swift in Sources */,
 				AB98664B2618FA79006F66EA /* CreateProfileView.swift in Sources */,
+				AB98665026194872006F66EA /* RiderProfile.swift in Sources */,
 				ABBACB3E2613046A00818408 /* editProfile.swift in Sources */,
 				494E1C1F2610621F0077BD2D /* TACKticalApp.swift in Sources */,
 				AB986646261868CC006F66EA /* BarnDataView.swift in Sources */,
