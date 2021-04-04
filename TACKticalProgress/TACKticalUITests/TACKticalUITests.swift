@@ -1,3 +1,7 @@
+// Group 3 - Andrew Huang, Haris Nashed, Maddie Pinard, Zhengkai Xie
+// Emails: andrew.huang@vanderbilt.edu, haris.r.nashed@vanderbilt.edu,
+//      zhengkai.xie@vanderbilt.edu, madeleine.j.pinard@vanderbilt.edu
+// Homework 4
 //
 //  TACKticalUITests.swift
 //  TACKticalUITests
