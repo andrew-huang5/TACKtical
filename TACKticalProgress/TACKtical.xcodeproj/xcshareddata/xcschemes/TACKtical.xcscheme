@@ -47,6 +47,7 @@
                BlueprintName = "TACKticalUITests"
                ReferencedContainer = "container:TACKtical.xcodeproj">
             </BuildableReference>
+<<<<<<< HEAD
             <SkippedTests>
                <Test
                   Identifier = "TACKticalUITests/testBarnDataDropDowns()">
@@ -55,6 +56,8 @@
                   Identifier = "TACKticalUITests/testExample()">
                </Test>
             </SkippedTests>
+=======
+>>>>>>> b66955ac602cac9342ed6c5b03102ab66b997441
          </TestableReference>
       </Testables>
    </TestAction>

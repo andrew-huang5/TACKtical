@@ -1,16 +1,15 @@
+  
 //
 //  Horse.swift
 //  TACKtical
 //
 //
-
 import Foundation
 import SwiftUI
 
-struct Horse {
+struct Horse: Hashable {
     var arrivalDate: String
     var height: String
-    var horseID: String
     var gender: String
     var birth: String
     var owner: String
