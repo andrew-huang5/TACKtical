@@ -26,6 +26,20 @@ class TACKticalUITests: XCTestCase {
         // UI tests must launch the application that they test.
         let app = XCUIApplication()
         app.launch()
+        
+        let horseButton = app.buttons["Horse"]
+        horseButton.tap()
+        app.buttons["Upcoming Training Rides"].tap()
+        app.buttons["Edit Profile"].tap()
+        app.textFields["Enter new name"].tap()
+        app.navigationBars["Edit Profile"].buttons["Horse Profile"].tap()
+        
+        let tackticalButton = app.navigationBars["Horse Profile"].buttons["TACKtical"]
+        tackticalButton.tap()
+        app.staticTexts["Schedule"].tap()
+        horseButton.tap()
+        tackticalButton.tap()
+        
 
         // Use recording to get started writing UI tests.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
