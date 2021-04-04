@@ -3,7 +3,6 @@
 //  TACKtical
 //
 //
-
 import SwiftUI
 
 struct RiderView: View {
@@ -11,10 +10,9 @@ struct RiderView: View {
         
         GeometryReader{ geometry in
             VStack(){
-                Text("Rider Profile").fontWeight(.semibold).foregroundColor(.white).multilineTextAlignment(.center).font(.system(size: UIScreen.main.bounds.height*0.05)).frame(width: UIScreen.main.bounds.width * 0.8, height: UIScreen.main.bounds.height * 0.1).background(Color(red: 102/255, green: 172/255, blue: 189/255, opacity: 1.0)).padding(UIScreen.main.bounds.height*0.005)
                 Image("Lebron").resizable().clipShape(Circle()).shadow(radius:10).overlay(Circle().stroke(Color(red: 102/255, green: 172/255, blue: 189/255, opacity: 1.0), lineWidth: 5)).frame(width:UIScreen.main.bounds.height * 0.2, height:UIScreen.main.bounds.height*0.2).padding(UIScreen.main.bounds.height*0.005)
                 Text("Lebron James").fontWeight(.semibold).multilineTextAlignment(.center).font(.system(size:UIScreen.main.bounds.height*0.045)).frame(height: UIScreen.main.bounds.height * 0.035).padding(UIScreen.main.bounds.height*0.005)
-                NavigationLink(destination: EditProfileView()) {
+                Button(action: {print("Going to upcoming Training Rides")}) {
                     Text("Edit Profile").font(.system(size:UIScreen.main.bounds.height*0.025))
                 }.frame(width:UIScreen.main.bounds.width*0.3, height:UIScreen.main.bounds.height*0.035, alignment:.center).foregroundColor(.black).background(Color(UIColor.lightGray)).opacity(0.7).cornerRadius(16).padding(UIScreen.main.bounds.height*0.005)
             
@@ -34,14 +32,12 @@ struct RiderView: View {
                     }) {
                         Text("Upcoming Training Rides").font(.system(size:UIScreen.main.bounds.height*0.025))
                     }.frame(width:UIScreen.main.bounds.width*0.6, height:UIScreen.main.bounds.height*0.008, alignment:.center).foregroundColor(.white).padding(UIScreen.main.bounds.height*0.02).background(Color(red: 102/255, green: 172/255, blue: 189/255, opacity: 1.0)).cornerRadius(16)
-                    Button(action: {
-                        print("Going to Horse Profile")
-                    }) {
+                    NavigationLink(destination: NewProfileView(name: "Mayor")) {
                         Text("Horse Profile").font(.system(size:UIScreen.main.bounds.height*0.025))
                     }.frame(width:UIScreen.main.bounds.width*0.6, height:UIScreen.main.bounds.height*0.008, alignment:.center).foregroundColor(.white).padding(UIScreen.main.bounds.height*0.02).background(Color(red: 102/255, green: 172/255, blue: 189/255, opacity: 1.0)).cornerRadius(16)
                 }.padding(UIScreen.main.bounds.height*0.005)
             }
-            .padding(EdgeInsets(top: 0, leading: UIScreen.main.bounds.width*0.092, bottom: 0, trailing: UIScreen.main.bounds.width*0.092))
+            .padding(EdgeInsets(top: 0.05, leading: UIScreen.main.bounds.width*0.155, bottom: 0.05, trailing: UIScreen.main.bounds.width*0.155)).navigationBarTitle("Rider Profile", displayMode: .inline)
         }
     }
 }
