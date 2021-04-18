@@ -18,3 +18,15 @@ struct Horse: Hashable {
     var color: Int
     var name: String
 }
+  
+struct Rider: Hashable {
+    var id: String
+    var joinedDate: Date
+    var height: Int
+    var gender: Int
+    var age: Int
+    var horse: String
+    var name: String
+    var email: String
+    var phone: String
+}

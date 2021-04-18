@@ -49,17 +49,19 @@ struct ContentView: View {
                 HStack(spacing: UIScreen.main.bounds.width*0.1) {
                     NavigationLink(destination: NewProfileView(id:"Horse1")) {
                         Text("Horse")
-                    }.frame(width: UIScreen.main.bounds.width*0.2, height: UIScreen.main.bounds.width*0.2)
+                    }.frame(width: UIScreen.main.bounds.width*0.23, height: UIScreen.main.bounds.width*0.23)
                     .foregroundColor(Color.white)
                     .background(Color(red: 102/255, green: 172/255, blue: 189/255, opacity: 1.0)).clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
                     NavigationLink(destination: BarnDataView()) {
                         Text("Barn Data")
-                    }.frame(width: UIScreen.main.bounds.width*0.2, height: UIScreen.main.bounds.width*0.2)
+                    }.frame(width: UIScreen.main.bounds.width*0.23, height: UIScreen.main.bounds.width*0.23)
                     .foregroundColor(Color.white)
                     .background(Color(red: 102/255, green: 172/255, blue: 189/255, opacity: 1.0)).clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
-                    Text("Schedule").font(.system(size:UIScreen.main.bounds.height*0.025)).frame(width: UIScreen.main.bounds.width*0.2, height: UIScreen.main.bounds.width*0.2)
-                    .foregroundColor(Color.white)
-                    .background(Color(red: 102/255, green: 172/255, blue: 189/255, opacity: 1.0)).clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
+                    NavigationLink(destination: CalendarView()) {
+                                            Text("Schedule")
+                                        }.frame(width: UIScreen.main.bounds.width*0.23, height: UIScreen.main.bounds.width*0.23)
+                                        .foregroundColor(Color.white)
+                                        .background(Color(red: 102/255, green: 172/255, blue: 189/255, opacity: 1.0)).clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
                 }
                 
                 

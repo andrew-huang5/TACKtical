@@ -21,6 +21,11 @@
 		AB72B15E26257CE700D3A121 /* DeleteProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB72B15D26257CE700D3A121 /* DeleteProfileView.swift */; };
 		AB72B1632625E27600D3A121 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB72B1622625E27600D3A121 /* ImagePicker.swift */; };
 		AB72B19D262A9D1400D3A121 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = AB72B19C262A9D1400D3A121 /* SDWebImageSwiftUI */; };
+		AB8D88CF262B68AF001D1C62 /* AddEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8D88CE262B68AF001D1C62 /* AddEventView.swift */; };
+		AB8D88D4262B68F1001D1C62 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8D88D3262B68F1001D1C62 /* CalendarView.swift */; };
+		AB8D88DA262B6C1E001D1C62 /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = AB8D88D9262B6C1E001D1C62 /* FSCalendar */; };
+		AB8D88DF262B7620001D1C62 /* RiderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8D88DE262B7620001D1C62 /* RiderViewModel.swift */; };
+		AB8D88E4262B77ED001D1C62 /* DayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8D88E3262B77ED001D1C62 /* DayView.swift */; };
 		AB986646261868CC006F66EA /* BarnDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB986645261868CC006F66EA /* BarnDataView.swift */; };
 		AB98664B2618FA79006F66EA /* CreateProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB98664A2618FA79006F66EA /* CreateProfileView.swift */; };
 		ABBACB062612583300818408 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ABBACB052612583300818408 /* GoogleService-Info.plist */; };
@@ -72,6 +77,10 @@
 		AB673AFF2613447600A4BE17 /* NewProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileView.swift; sourceTree = "<group>"; };
 		AB72B15D26257CE700D3A121 /* DeleteProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteProfileView.swift; sourceTree = "<group>"; };
 		AB72B1622625E27600D3A121 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		AB8D88CE262B68AF001D1C62 /* AddEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEventView.swift; sourceTree = "<group>"; };
+		AB8D88D3262B68F1001D1C62 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
+		AB8D88DE262B7620001D1C62 /* RiderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiderViewModel.swift; sourceTree = "<group>"; };
+		AB8D88E3262B77ED001D1C62 /* DayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayView.swift; sourceTree = "<group>"; };
 		AB986645261868CC006F66EA /* BarnDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarnDataView.swift; sourceTree = "<group>"; };
 		AB98664A2618FA79006F66EA /* CreateProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProfileView.swift; sourceTree = "<group>"; };
 		ABBACB052612583300818408 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "TACKtical/GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
@@ -88,6 +97,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AB72B19D262A9D1400D3A121 /* SDWebImageSwiftUI in Frameworks */,
+				AB8D88DA262B6C1E001D1C62 /* FSCalendar in Frameworks */,
 				1B554558F71F4B9A3B6C8DBF /* Pods_TACKtical.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -148,12 +158,16 @@
 			children = (
 				494E1C1E2610621F0077BD2D /* TACKticalApp.swift */,
 				ABBACB2B2612602D00818408 /* Horse.swift */,
+				AB8D88DE262B7620001D1C62 /* RiderViewModel.swift */,
 				494E1C202610621F0077BD2D /* ContentView.swift */,
 				ABBACB3D2613046A00818408 /* editProfile.swift */,
 				AB986645261868CC006F66EA /* BarnDataView.swift */,
 				AB72B1622625E27600D3A121 /* ImagePicker.swift */,
 				AB72B15D26257CE700D3A121 /* DeleteProfileView.swift */,
 				AB98664A2618FA79006F66EA /* CreateProfileView.swift */,
+				AB8D88CE262B68AF001D1C62 /* AddEventView.swift */,
+				AB8D88D3262B68F1001D1C62 /* CalendarView.swift */,
+				AB8D88E3262B77ED001D1C62 /* DayView.swift */,
 				AB673AFF2613447600A4BE17 /* NewProfileView.swift */,
 				ABBACB302612655A00818408 /* HorseViewModel.swift */,
 				67E21A06261170E100E73DB7 /* DatabaseExample.swift */,
@@ -225,6 +239,7 @@
 			name = TACKtical;
 			packageProductDependencies = (
 				AB72B19C262A9D1400D3A121 /* SDWebImageSwiftUI */,
+				AB8D88D9262B6C1E001D1C62 /* FSCalendar */,
 			);
 			productName = TACKtical;
 			productReference = 494E1C1B2610621F0077BD2D /* TACKtical.app */;
@@ -302,6 +317,7 @@
 			mainGroup = 494E1C122610621F0077BD2D;
 			packageReferences = (
 				AB72B19B262A9D1400D3A121 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
+				AB8D88D8262B6C1E001D1C62 /* XCRemoteSwiftPackageReference "FSCalendar" */,
 			);
 			productRefGroup = 494E1C1C2610621F0077BD2D /* Products */;
 			projectDirPath = "";
@@ -449,13 +465,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB8D88DF262B7620001D1C62 /* RiderViewModel.swift in Sources */,
+				AB8D88E4262B77ED001D1C62 /* DayView.swift in Sources */,
 				494E1C212610621F0077BD2D /* ContentView.swift in Sources */,
 				67E21A07261170E100E73DB7 /* DatabaseExample.swift in Sources */,
 				ABBACB312612655A00818408 /* HorseViewModel.swift in Sources */,
 				49697C48261918B600052F8F /* RiderView.swift in Sources */,
 				AB98664B2618FA79006F66EA /* CreateProfileView.swift in Sources */,
+				AB8D88CF262B68AF001D1C62 /* AddEventView.swift in Sources */,
 				AB72B15E26257CE700D3A121 /* DeleteProfileView.swift in Sources */,
 				ABBACB3E2613046A00818408 /* editProfile.swift in Sources */,
+				AB8D88D4262B68F1001D1C62 /* CalendarView.swift in Sources */,
 				494E1C1F2610621F0077BD2D /* TACKticalApp.swift in Sources */,
 				AB986646261868CC006F66EA /* BarnDataView.swift in Sources */,
 				AB72B1632625E27600D3A121 /* ImagePicker.swift in Sources */,
@@ -790,6 +810,14 @@
 				minimumVersion = 2.0.2;
 			};
 		};
+		AB8D88D8262B6C1E001D1C62 /* XCRemoteSwiftPackageReference "FSCalendar" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/WenchaoD/FSCalendar.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.8.2;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -797,6 +825,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = AB72B19B262A9D1400D3A121 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
 			productName = SDWebImageSwiftUI;
+		};
+		AB8D88D9262B6C1E001D1C62 /* FSCalendar */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AB8D88D8262B6C1E001D1C62 /* XCRemoteSwiftPackageReference "FSCalendar" */;
+			productName = FSCalendar;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
