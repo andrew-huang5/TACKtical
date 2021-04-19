@@ -37,7 +37,7 @@ struct NewProfileView: View {
                 }
                 .onAppear() {
                     let storage = Storage.storage().reference()
-                    storage.child(id).downloadURL { (url, err) in
+                    storage.child("\(id)/\(id)").downloadURL { (url, err) in
                         
                         if err != nil{
                             
@@ -58,7 +58,7 @@ struct NewProfileView: View {
                     Text("Gender: " + genderChoices[viewModel.horse.gender]).font(.system(size:UIScreen.main.bounds.height*0.025))
                     Text("Color: " + colorChoices[viewModel.horse.color]).font(.system(size:UIScreen.main.bounds.height*0.025))
                     Text("Height: " + heightChoices[viewModel.horse.height]).font(.system(size:UIScreen.main.bounds.height*0.025))
-                    Text("Owner: " + viewModel.horse.owner).font(.system(size:UIScreen.main.bounds.height*0.025))
+                    Text("Owner: " + viewModel.horse.ownerName).font(.system(size:UIScreen.main.bounds.height*0.025))
                     Text("Arrival Date: " + date_to_string(d: viewModel.horse.arrivalDate)).font(.system(size:UIScreen.main.bounds.height*0.025))
                     Text("Feed: " + feedChoices[viewModel.horse.feed]).font(.system(size:UIScreen.main.bounds.height*0.025))
                 }.padding(UIScreen.main.bounds.height*0.005)
@@ -69,7 +69,7 @@ struct NewProfileView: View {
                     }) {
                         Text("Upcoming Training Rides").font(.system(size:UIScreen.main.bounds.height*0.025))
                     }.frame(width:UIScreen.main.bounds.width*0.6, height:UIScreen.main.bounds.height*0.008, alignment:.center).foregroundColor(.white).padding(UIScreen.main.bounds.height*0.02).background(Color(red: 102/255, green: 172/255, blue: 189/255, opacity: 1.0)).cornerRadius(16)
-                    NavigationLink(destination: RiderView()) {
+                    NavigationLink(destination: NewRiderProfileView(id:viewModel.horse.owner)) {
                         Text("Rider Profiles").font(.system(size:UIScreen.main.bounds.height*0.025))
                     }.frame(width:UIScreen.main.bounds.width*0.6, height:UIScreen.main.bounds.height*0.008, alignment:.center).foregroundColor(.white).padding(UIScreen.main.bounds.height*0.02).background(Color(red: 102/255, green: 172/255, blue: 189/255, opacity: 1.0)).cornerRadius(16)
                 }.padding(UIScreen.main.bounds.height*0.005)
@@ -92,11 +92,10 @@ struct NewRiderProfileView: View {
 //    var horse = Horse(DOB: "2021", height: 16, horseID: 1, name: "Haha", weight: 200)
     var id: String
     
-    @ObservedObject private var viewModel = HorseViewModel()
-    var colorChoices = ["Bay", "Chestnut", "Gray", "Dun"]
+    @ObservedObject private var viewModel = RiderViewModel()
     var genderChoices = ["Male", "Female"]
-    var heightChoices = ["10", "11", "12", "13", "14", "15", "16"]
-    var feedChoices = ["Pasture Grass", "Hay", "Grains", "Salt & Minerals", "Bran", "Garden Refuse", "Fruit & Veggie"]
+    var heightChoices = ["6.1", "6.2", "6.3", "6.4", "6.5", "6.6", "6.7", "6.8", "6.9", "6.10", "6.11", "7.0"]
+    var ageChoices = [5, 10, 15, 20, 25, 30]
     //var horse = viewModel.horses[0]
     //let formatter1 = DateFormatter()
     @State var url = ""
@@ -116,7 +115,7 @@ struct NewRiderProfileView: View {
                 }
                 .onAppear() {
                     let storage = Storage.storage().reference()
-                    storage.child(id).downloadURL { (url, err) in
+                    storage.child("\(id)/\(id)").downloadURL { (url, err) in
                         
                         if err != nil{
                             
@@ -127,19 +126,18 @@ struct NewRiderProfileView: View {
                         self.url = "\(url!)"
                     }
                 }
-                Text(viewModel.horse.name).fontWeight(.semibold).multilineTextAlignment(.center).font(.system(size:UIScreen.main.bounds.height*0.045)).frame(height: UIScreen.main.bounds.height * 0.035).padding(UIScreen.main.bounds.height*0.005)
-                NavigationLink(destination: EditProfileView(id: id, horse: viewModel.horse)) {
+                Text(viewModel.rider.name).fontWeight(.semibold).multilineTextAlignment(.center).font(.system(size:UIScreen.main.bounds.height*0.045)).frame(height: UIScreen.main.bounds.height * 0.035).padding(UIScreen.main.bounds.height*0.005)
+                NavigationLink(destination: EditRiderProfileView(id: id, rider: viewModel.rider)) {
                     Text("Edit Profile").font(.system(size:UIScreen.main.bounds.height*0.025))
                 }.frame(width:UIScreen.main.bounds.width*0.3, height:UIScreen.main.bounds.height*0.035, alignment:.center).foregroundColor(.black).background(Color(UIColor.lightGray)).opacity(0.7).cornerRadius(16).padding(UIScreen.main.bounds.height*0.005)
             
                 VStack(alignment: .center, spacing: UIScreen.main.bounds.height*0.01){
-                    Text("Date of Birth: " + date_to_string(d: viewModel.horse.birth)).font(.system(size:UIScreen.main.bounds.height*0.025))
-                    Text("Gender: " + genderChoices[viewModel.horse.gender]).font(.system(size:UIScreen.main.bounds.height*0.025))
-                    Text("Color: " + colorChoices[viewModel.horse.color]).font(.system(size:UIScreen.main.bounds.height*0.025))
-                    Text("Height: " + heightChoices[viewModel.horse.height]).font(.system(size:UIScreen.main.bounds.height*0.025))
-                    Text("Owner: " + viewModel.horse.owner).font(.system(size:UIScreen.main.bounds.height*0.025))
-                    Text("Arrival Date: " + date_to_string(d: viewModel.horse.arrivalDate)).font(.system(size:UIScreen.main.bounds.height*0.025))
-                    Text("Feed: " + feedChoices[viewModel.horse.feed]).font(.system(size:UIScreen.main.bounds.height*0.025))
+                    Text("Joined Date: " + date_to_string(d: viewModel.rider.joinedDate)).font(.system(size:UIScreen.main.bounds.height*0.025))
+                    Text("Gender: " + genderChoices[viewModel.rider.gender]).font(.system(size:UIScreen.main.bounds.height*0.025))
+                    Text("Height: " + heightChoices[viewModel.rider.height]).font(.system(size:UIScreen.main.bounds.height*0.025))
+                    Text("Owned Horse: " + viewModel.rider.horseName).font(.system(size:UIScreen.main.bounds.height*0.025))
+                    Text("Email: " + viewModel.rider.email).font(.system(size:UIScreen.main.bounds.height*0.025))
+                    Text("Phone: " + viewModel.rider.phone).font(.system(size:UIScreen.main.bounds.height*0.025))
                 }.padding(UIScreen.main.bounds.height*0.005)
             
                 VStack(alignment: .center, spacing: UIScreen.main.bounds.height*0.01){
@@ -148,12 +146,12 @@ struct NewRiderProfileView: View {
                     }) {
                         Text("Upcoming Training Rides").font(.system(size:UIScreen.main.bounds.height*0.025))
                     }.frame(width:UIScreen.main.bounds.width*0.6, height:UIScreen.main.bounds.height*0.008, alignment:.center).foregroundColor(.white).padding(UIScreen.main.bounds.height*0.02).background(Color(red: 102/255, green: 172/255, blue: 189/255, opacity: 1.0)).cornerRadius(16)
-                    NavigationLink(destination: RiderView()) {
-                        Text("Rider Profiles").font(.system(size:UIScreen.main.bounds.height*0.025))
+                    NavigationLink(destination: NewProfileView(id: viewModel.rider.horse)) {
+                        Text("Horse Profile").font(.system(size:UIScreen.main.bounds.height*0.025))
                     }.frame(width:UIScreen.main.bounds.width*0.6, height:UIScreen.main.bounds.height*0.008, alignment:.center).foregroundColor(.white).padding(UIScreen.main.bounds.height*0.02).background(Color(red: 102/255, green: 172/255, blue: 189/255, opacity: 1.0)).cornerRadius(16)
                 }.padding(UIScreen.main.bounds.height*0.005)
             }
-            .padding(EdgeInsets(top: UIScreen.main.bounds.height*0.05, leading: UIScreen.main.bounds.width*0.15, bottom: 0, trailing: UIScreen.main.bounds.width*0.15)).navigationBarTitle("Horse Profile", displayMode: .inline)
+            .padding(EdgeInsets(top: UIScreen.main.bounds.height*0.05, leading: UIScreen.main.bounds.width*0.15, bottom: 0, trailing: UIScreen.main.bounds.width*0.15)).navigationBarTitle("Rider Profile", displayMode: .inline)
         }.onAppear() {
             self.viewModel.fetchData(id: id)
         }

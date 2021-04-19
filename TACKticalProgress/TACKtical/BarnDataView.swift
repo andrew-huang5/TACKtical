@@ -43,7 +43,7 @@ struct BarnDataView: View {
                     
                     HStack {
                         Dropdown2()
-                    }.padding(EdgeInsets(top: UIScreen.main.bounds.height*0.1, leading: UIScreen.main.bounds.width*0.15, bottom: 0, trailing: UIScreen.main.bounds.width*0.15))
+                    }.padding(EdgeInsets(top: UIScreen.main.bounds.height*0.1, leading: UIScreen.main.bounds.width*0.15, bottom: 0, trailing: UIScreen.main.bounds.width*0.15)).zIndex(10)
                     
                     HStack {
                         Dropdown3()
@@ -54,7 +54,7 @@ struct BarnDataView: View {
             
             HStack(spacing: UIScreen.main.bounds.width*0.15) {
                 NavigationLink(
-                    destination: CreateProfileView(id: UUID().uuidString)) {
+                    destination: CreateProfileView()) {
                     Text("Create \nProfile").font(.system(size:UIScreen.main.bounds.height*0.03)).foregroundColor(.black)
                 }.frame(width:UIScreen.main.bounds.width*0.25, height:UIScreen.main.bounds.height*0.09).font(.system(size:UIScreen.main.bounds.height*0.03)).background(Color(red: 240/255, green: 248/255, blue: 255/255, opacity: 1.0))
                 
@@ -102,6 +102,7 @@ struct Dropdown1: View{
 }
 
 struct Dropdown2: View{
+    @ObservedObject private var viewModel = RiderViewModel()
     @State var expand = false
     var body: some View{
         VStack() {
@@ -114,10 +115,14 @@ struct Dropdown2: View{
                 }
                 
                 if expand{
-                    NavigationLink(destination: NewProfileView(id: "Horse1")) {
-                        Text("Mayor").font(.system(size:UIScreen.main.bounds.height*0.02)).foregroundColor(.black)
+                    List(viewModel.riders, id: \.self) { rider in
+                        NavigationLink(destination: NewRiderProfileView(id: rider.id)) {
+                            Text(rider.name).font(.system(size:UIScreen.main.bounds.height*0.02)).foregroundColor(.black)
+                        }
                     }
                 }
+            }.onAppear() {
+                    self.viewModel.fetchAllData()
             }.background(Color(red: 211/255, green: 211/255, blue: 211/255, opacity: 1.0)).cornerRadius(3)
         }
     }

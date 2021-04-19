@@ -7,7 +7,7 @@
 import Foundation
 import SwiftUI
 
-struct Horse: Hashable {
+struct Horse: Identifiable & Hashable {
     var id: String
     var arrivalDate: Date
     var height: Int
@@ -17,9 +17,10 @@ struct Horse: Hashable {
     var feed: Int
     var color: Int
     var name: String
+    var ownerName: String
 }
   
-struct Rider: Hashable {
+struct Rider: Identifiable & Hashable {
     var id: String
     var joinedDate: Date
     var height: Int
@@ -29,4 +30,5 @@ struct Rider: Hashable {
     var name: String
     var email: String
     var phone: String
+    var horseName: String
 }

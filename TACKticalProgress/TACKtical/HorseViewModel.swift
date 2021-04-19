@@ -8,7 +8,7 @@ import FirebaseFirestore
 
 class HorseViewModel: ObservableObject {
     
-    @Published var horse = Horse(id: "", arrivalDate: Date(), height: 0, gender: 0, birth: Date(), owner: "", feed: 0, color: 0, name: "")
+    @Published var horse = Horse(id: "", arrivalDate: Date(), height: 0, gender: 0, birth: Date(), owner: "", feed: 0, color: 0, name: "", ownerName: "")
     @Published var horses = [Horse]()
     
     private var db = Firestore.firestore()
@@ -37,8 +37,9 @@ class HorseViewModel: ObservableObject {
                 formatter1.dateStyle = .medium
                 let birth = formatter1.date(from: birth_string)!
                 let arrivalDate = formatter1.date(from: arrivalDate_string)!
+                let ownerName = data["Owner Name"] as? String ?? ""
                 
-                return Horse(id: id, arrivalDate: arrivalDate, height: height, gender: gender, birth: birth , owner: owner, feed: feed, color: color, name: name)
+                return Horse(id: id, arrivalDate: arrivalDate, height: height, gender: gender, birth: birth , owner: owner, feed: feed, color: color, name: name, ownerName: ownerName)
             }
         }
     }
@@ -61,8 +62,9 @@ class HorseViewModel: ObservableObject {
                     formatter1.dateStyle = .medium
                     let birth = formatter1.date(from: birth_string)!
                     let arrivalDate = formatter1.date(from: arrivalDate_string)!
+                    let ownerName = p["Owner Name"] as? String ?? ""
                     
-                    self.horse = Horse(id: id, arrivalDate: arrivalDate, height: height, gender: gender, birth: birth, owner: owner, feed: feed, color: color, name: name)
+                    self.horse = Horse(id: id, arrivalDate: arrivalDate, height: height, gender: gender, birth: birth, owner: owner, feed: feed, color: color, name: name, ownerName: ownerName)
                     
                 }
             }
