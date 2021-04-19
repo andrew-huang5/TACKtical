@@ -148,7 +148,7 @@ struct NewRiderProfileView: View {
                     }.frame(width:UIScreen.main.bounds.width*0.6, height:UIScreen.main.bounds.height*0.008, alignment:.center).foregroundColor(.white).padding(UIScreen.main.bounds.height*0.02).background(Color(red: 102/255, green: 172/255, blue: 189/255, opacity: 1.0)).cornerRadius(16)
                     NavigationLink(destination: NewProfileView(id: viewModel.rider.horse)) {
                         Text("Horse Profile").font(.system(size:UIScreen.main.bounds.height*0.025))
-                    }.frame(width:UIScreen.main.bounds.width*0.6, height:UIScreen.main.bounds.height*0.008, alignment:.center).foregroundColor(.white).padding(UIScreen.main.bounds.height*0.02).background(Color(red: 102/255, green: 172/255, blue: 189/255, opacity: 1.0)).cornerRadius(16)
+                    }.disabled(viewModel.rider.horse == "").frame(width:UIScreen.main.bounds.width*0.6, height:UIScreen.main.bounds.height*0.008, alignment:.center).foregroundColor(.white).padding(UIScreen.main.bounds.height*0.02).background(Color(red: 102/255, green: 172/255, blue: 189/255, opacity: 1.0)).cornerRadius(16)
                 }.padding(UIScreen.main.bounds.height*0.005)
             }
             .padding(EdgeInsets(top: UIScreen.main.bounds.height*0.05, leading: UIScreen.main.bounds.width*0.15, bottom: 0, trailing: UIScreen.main.bounds.width*0.15)).navigationBarTitle("Rider Profile", displayMode: .inline)

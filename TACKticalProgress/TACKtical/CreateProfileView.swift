@@ -175,6 +175,9 @@ struct CreateHorseProfileView: View {
         formatter1.dateStyle = .medium
         
         db.collection("HorseProfiles").document(id).setData(["Arrival Date": formatter1.string(from: arrival), "Color": color, "Date of Birth": formatter1.string(from: birth), "Feed": feed, "Gender": gender, "Height": height, "ID": id, "Owner": owner, "name":name, "Owner Name":ownerName], merge:true)
+        if owner != ""{
+            db.collection("RiderProfiles").document(owner).updateData(["Owned Horse": id, "Horse Name": name])
+        }
     }
     
     func uploadImage(image: UIImage) {
@@ -208,6 +211,7 @@ struct CreateRiderProfileView: View {
     @State var email: String = ""
     @State var phone: String = ""
     @State var horseName: String = ""
+    @State var prevOwner: String = ""
     var genderChoices = ["Male", "Female"]
     var heightChoices = ["6.1", "6.2", "6.3", "6.4", "6.5", "6.6", "6.7", "6.8", "6.9", "6.10", "6.11", "7.0"]
     var ageChoices = ["5", "10", "15", "20", "25", "30"]
@@ -297,7 +301,7 @@ struct CreateRiderProfileView: View {
                 
                 
                 ZStack(alignment: .top) {
-                    CustomHorseSearchBar(horses: self.$viewModel2.horses, horse: $horse, horseName: $horseName, txt: "").padding(.top)
+                    CustomHorseSearchBar(horses: self.$viewModel2.horses, horse: $horse, horseName: $horseName, prevOwner: $prevOwner, txt: "").padding(.top)
                 }.onAppear() {
                     self.viewModel2.fetchAllData()
                 }
@@ -325,6 +329,8 @@ struct CreateRiderProfileView: View {
                             uploadImage(image: UIImage(imageLiteralResourceName: "Lebron"))
                         }
                     }
+                    print(horse)
+                    print(prevOwner)
                     upload()}){
                 Text("Upload").font(.system(size:UIScreen.main.bounds.height*0.025))
             }.frame(width:UIScreen.main.bounds.width*0.3, height:UIScreen.main.bounds.height*0.035, alignment:.center).foregroundColor(.black).background(Color(UIColor.lightGray)).opacity(0.7).cornerRadius(16).padding(UIScreen.main.bounds.height*0.005)
@@ -346,6 +352,14 @@ struct CreateRiderProfileView: View {
         formatter1.dateStyle = .medium
         
         db.collection("RiderProfiles").document(id).setData(["Age": age, "Email": email, "Gender": gender, "Height": height, "ID": id, "Joined Date": formatter1.string(from: joinedDate), "Owned Horse": horse, "Phone": phone, "name":name, "Horse Name": horseName], merge:true)
+        if horse != ""{
+            //db.collection("RiderProfiles").document(id).collection("Horses").document(horse).setData(["Horse Name": horseName], merge: true)
+            if prevOwner != ""{
+                print(prevOwner)
+                db.collection("RiderProfiles").document(prevOwner).updateData(["Owned Horse": "", "Horse Name": ""])
+            }
+            db.collection("HorseProfiles").document(horse).updateData(["Owner": id, "Owner Name": name])
+        }
     }
     
     func uploadImage(image: UIImage) {
@@ -378,6 +392,7 @@ struct CustomHorseSearchBar: View {
     @Binding var horses: [Horse]
     @Binding var horse: String
     @Binding var horseName: String
+    @Binding var prevOwner: String
     @State var txt: String
     
     var body: some View{
@@ -403,6 +418,7 @@ struct CustomHorseSearchBar: View {
                     Button(action: {
                         horse = i.id
                         horseName = i.name
+                        prevOwner = i.owner
                         self.txt = i.name
                     }) {
                         Text(i.name)

@@ -131,6 +131,9 @@ struct EditProfileView: View {
         formatter1.dateStyle = .medium
         
         db.collection("HorseProfiles").document(id).setData(["Arrival Date": formatter1.string(from: horse.arrivalDate), "Color": horse.color, "Date of Birth": formatter1.string(from: horse.birth), "Feed": horse.feed, "Gender": horse.gender, "Height": horse.height, "Owner": horse.owner, "name":horse.name, "Owner Name": horse.ownerName], merge:true)
+        if horse.owner != ""{
+            db.collection("RiderProfiles").document(horse.owner).updateData(["Owned Horse": id, "Horse Name": horse.name])
+        }
     }
     
     func uploadImage(image: UIImage) {
@@ -155,6 +158,7 @@ struct EditProfileView: View {
 struct EditRiderProfileView: View {
     var id: String
     @State var rider: Rider
+    @State var prevOwner: String = ""
     @ObservedObject private var viewModel = RiderViewModel()
     @ObservedObject private var viewModel2 = HorseViewModel()
     
@@ -246,7 +250,7 @@ struct EditRiderProfileView: View {
                 }
                 
                 ZStack(alignment: .top) {
-                    CustomHorseSearchBar(horses: self.$viewModel2.horses, horse: $rider.horse, horseName: $rider.horseName, txt: rider.horseName).padding(.top)
+                    CustomHorseSearchBar(horses: self.$viewModel2.horses, horse: $rider.horse, horseName: $rider.horseName, prevOwner: $prevOwner, txt: rider.horseName).padding(.top)
                 }.onAppear() {
                     self.viewModel2.fetchAllData()
                 }
@@ -276,6 +280,10 @@ struct EditRiderProfileView: View {
         formatter1.dateStyle = .medium
         
         db.collection("RiderProfiles").document(id).setData(["Age": rider.age, "Email": rider.email, "Gender": rider.gender, "Height": rider.height, "ID": rider.id, "Joined Date": formatter1.string(from: rider.joinedDate), "Owned Horse": rider.horse, "Phone": rider.phone, "name":rider.name, "Horse Name":rider.horseName], merge:true)
+        if rider.horse != ""{
+            db.collection("HorseProfiles").document(rider.horse).updateData(["Owner": id, "Owner Name": rider.name])
+        }
+        
     }
     
     func uploadImage(image: UIImage) {

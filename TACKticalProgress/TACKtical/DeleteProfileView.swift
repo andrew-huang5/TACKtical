@@ -229,6 +229,9 @@ struct PopUpWindow: View {
     func deleteProfile(horse: Horse) {
         let db = Firestore.firestore()
         db.collection("HorseProfiles").document(horse.id).delete()
+        if horse.owner != ""{
+            db.collection("RiderProfiles").document(horse.owner).updateData(["Owner": "", "Owner Name": ""])
+        }
     }
     func deleteImage(horse: Horse) {
         let storage = Storage.storage()
@@ -317,6 +320,9 @@ struct PopUpWindowforRider: View {
     func deleteProfile(rider: Rider) {
         let db = Firestore.firestore()
         db.collection("RiderProfiles").document(rider.id).delete()
+        if rider.horse != ""{
+            db.collection("HorseProfiles").document(rider.horse).updateData(["Owner": "", "Owner Name": ""])
+        }
     }
     func deleteImage(rider: Rider) {
         let storage = Storage.storage()
