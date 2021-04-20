@@ -129,6 +129,7 @@ struct Dropdown2: View{
 }
 
 struct Dropdown3: View{
+    @ObservedObject private var viewModel = InstructorViewModel()
     @State var expand = false
     var body: some View{
         VStack() {
@@ -141,10 +142,14 @@ struct Dropdown3: View{
                 }
                 
                 if expand{
-                    NavigationLink(destination: NewProfileView(id: "Horse1")) {
-                        Text("Mayor").font(.system(size:UIScreen.main.bounds.height*0.02)).foregroundColor(.black)
+                    List(viewModel.instructors, id: \.self) { instructor in
+                        NavigationLink(destination: NewInstructorProfileView(id: instructor.id)) {
+                            Text(instructor.name).font(.system(size:UIScreen.main.bounds.height*0.02)).foregroundColor(.black)
+                        }
                     }
                 }
+            }.onAppear() {
+                    self.viewModel.fetchAllData()
             }.background(Color(red: 211/255, green: 211/255, blue: 211/255, opacity: 1.0)).cornerRadius(3)
         }
     }

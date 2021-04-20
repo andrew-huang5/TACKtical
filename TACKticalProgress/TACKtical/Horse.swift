@@ -31,4 +31,19 @@ struct Rider: Identifiable & Hashable {
     var email: String
     var phone: String
     var horseName: String
+    var instructor: String
+    var instructorName: String
+}
+
+struct Instructor: Identifiable & Hashable {
+    var id: String
+    var joinedDate: Date
+    var height: Int
+    var gender: Int
+    var age: Int
+    var student: String
+    var name: String
+    var email: String
+    var phone: String
+    var studentName: String
 }

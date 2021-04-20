@@ -36,7 +36,7 @@ struct DeleteProfileView: View {
                         Dropdown6()
                     }.padding(EdgeInsets(top: UIScreen.main.bounds.height*0.3, leading: UIScreen.main.bounds.width*0.15, bottom: 0, trailing: UIScreen.main.bounds.width*0.15))
                 }
-            }.padding(EdgeInsets(top: 0, leading: UIScreen.main.bounds.width*0.15, bottom: UIScreen.main.bounds.height*0.01, trailing: UIScreen.main.bounds.width*0.15)).frame(width: UIScreen.main.bounds.width * 0.8, height: UIScreen.main.bounds.height * 0.5).background(Color(red: 240/255, green: 248/255, blue: 255/255, opacity: 1.0))
+            }.padding(EdgeInsets(top: 0, leading: UIScreen.main.bounds.width*0.15, bottom: UIScreen.main.bounds.height*0.01, trailing: UIScreen.main.bounds.width*0.15)).frame(width: UIScreen.main.bounds.width * 0.8, height: UIScreen.main.bounds.height * 0.7).background(Color(red: 240/255, green: 248/255, blue: 255/255, opacity: 1.0))
         }.padding(EdgeInsets(top: 0, leading: UIScreen.main.bounds.width*0.092, bottom: 0, trailing: UIScreen.main.bounds.width*0.092)).navigationBarTitle("Delete Profiles", displayMode: .inline)
         
     }
@@ -94,7 +94,7 @@ struct Dropdown4: View{
 }
 
 struct Dropdown5: View{
-    @State var rider: Rider = Rider(id: "", joinedDate: Date(), height: 0, gender: 0, age: 0, horse: "", name: "", email: "", phone: "", horseName: "")
+    @State var rider: Rider = Rider(id: "", joinedDate: Date(), height: 0, gender: 0, age: 0, horse: "", name: "", email: "", phone: "", horseName: "", instructor: "", instructorName: "")
     @ObservedObject private var viewModel = RiderViewModel()
     @State private var showPopUp: Bool = false
     @State var expand = false
@@ -103,7 +103,7 @@ struct Dropdown5: View{
             VStack() {
                 VStack() {
                     HStack() {
-                        Text("Horse Name").font(.system(size:UIScreen.main.bounds.height*0.02)).frame(width:UIScreen.main.bounds.width*0.63)
+                        Text("Rider Name").font(.system(size:UIScreen.main.bounds.height*0.02)).frame(width:UIScreen.main.bounds.width*0.63)
                         Image(systemName: expand ? "chevron.up":"chevron.down").resizable().frame(width:UIScreen.main.bounds.width*0.03, height:UIScreen.main.bounds.height*0.015)
                     }.onTapGesture {
                         self.expand.toggle()
@@ -137,24 +137,45 @@ struct Dropdown5: View{
 }
 
 struct Dropdown6: View{
+    @State var instructor: Instructor = Instructor(id: "", joinedDate: Date(), height: 0, gender: 0, age: 0, student: "", name: "", email: "", phone: "", studentName: "")
+    @ObservedObject private var viewModel = InstructorViewModel()
+    @State private var showPopUp: Bool = false
     @State var expand = false
     var body: some View{
-        VStack() {
+        ZStack() {
             VStack() {
-                HStack() {
-                    Text("Instructor Name").font(.system(size:UIScreen.main.bounds.height*0.02)).frame(width:UIScreen.main.bounds.width*0.63)
-                    Image(systemName: expand ? "chevron.up":"chevron.down").resizable().frame(width:UIScreen.main.bounds.width*0.03, height:UIScreen.main.bounds.height*0.015)
-                }.onTapGesture {
-                    self.expand.toggle()
-                }
-                
-                if expand{
-                    NavigationLink(destination: NewProfileView(id: "Horse1")) {
-                        Text("Mayor").font(.system(size:UIScreen.main.bounds.height*0.02)).foregroundColor(.black)
+                VStack() {
+                    HStack() {
+                        Text("Instructor Name").font(.system(size:UIScreen.main.bounds.height*0.02)).frame(width:UIScreen.main.bounds.width*0.63)
+                        Image(systemName: expand ? "chevron.up":"chevron.down").resizable().frame(width:UIScreen.main.bounds.width*0.03, height:UIScreen.main.bounds.height*0.015)
+                    }.onTapGesture {
+                        self.expand.toggle()
                     }
-                }
-            }.background(Color(red: 211/255, green: 211/255, blue: 211/255, opacity: 1.0)).cornerRadius(3)
+                    
+                    if expand{
+                        List(viewModel.instructors, id: \.self) { instructor in
+                            Button(action: {
+                                self.instructor = instructor
+                                withAnimation(.linear(duration: 0.3)) {
+                                    showPopUp.toggle()
+                                }
+                                //deleteProfile(horse: horse)
+                                
+                            }) {
+                                Text(instructor.name).font(.system(size:UIScreen.main.bounds.height*0.02)).foregroundColor(.black)
+                            }
+                            
+                        }
+                        
+                    }
+                }.onAppear() {
+                    self.viewModel.fetchAllData()
+                }.background(Color(red: 211/255, green: 211/255, blue: 211/255, opacity: 1.0)).cornerRadius(3)
+            }
+            PopUpWindowforInstructor(title: "Notice", message: "Sure about deleting this?", buttonText1: "Yes", buttonText2: "No", instructor: instructor, show: $showPopUp)
         }
+        
+        
     }
 }
 
@@ -323,11 +344,105 @@ struct PopUpWindowforRider: View {
         if rider.horse != ""{
             db.collection("HorseProfiles").document(rider.horse).updateData(["Owner": "", "Owner Name": ""])
         }
+        if rider.instructor != ""{
+            db.collection("InstructorProfiles").document(rider.instructor).updateData(["Student": "", "Student Name": ""])
+        }
     }
     func deleteImage(rider: Rider) {
         let storage = Storage.storage()
         // Create a reference to the file to delete
         let desertRef = storage.reference().child("\(rider.id)/\(rider.id)")
+
+        // Delete the file
+        desertRef.delete { error in
+            if let error = error {
+                print("an error has occured - \(error.localizedDescription)")
+            } else {
+                print("Image deleted successfully!")
+          }
+        }
+    }
+}
+
+struct PopUpWindowforInstructor: View {
+    var title: String
+    var message: String
+    var buttonText1: String
+    var buttonText2: String
+    var instructor: Instructor
+    @Binding var show: Bool
+
+    var body: some View {
+        ZStack {
+            if show {
+                // PopUp background color
+                Color.black.opacity(show ? 0.3 : 0).edgesIgnoringSafeArea(.all)
+
+                // PopUp Window
+                VStack(alignment: .center, spacing: 0) {
+                    Text(title)
+                        .frame(maxWidth: .infinity)
+                        .frame(height: 45, alignment: .center)
+                        .font(Font.system(size: 23, weight: .semibold))
+                        .foregroundColor(Color.white)
+                        .background(Color(#colorLiteral(red: 0.6196078431, green: 0.1098039216, blue: 0.2509803922, alpha: 1)))
+
+                    Text(message)
+                        .multilineTextAlignment(.center)
+                        .font(Font.system(size: 16, weight: .semibold))
+                        .padding(EdgeInsets(top: 20, leading: 25, bottom: 20, trailing: 25))
+                        .foregroundColor(Color.white)
+
+                    HStack() {
+                        Button(action: {
+                            // Dismiss the PopUp
+                            deleteProfile(instructor: instructor)
+                            deleteImage(instructor: instructor)
+                            withAnimation(.linear(duration: 0.3)) {
+                                show = false
+                            }
+                        }, label: {
+                            Text(buttonText1)
+                                .frame(maxWidth: .infinity)
+                                .frame(height: 54, alignment: .center)
+                                .foregroundColor(Color.white)
+                                .background(Color(#colorLiteral(red: 0.6196078431, green: 0.1098039216, blue: 0.2509803922, alpha: 1)))
+                                .font(Font.system(size: 23, weight: .semibold))
+                        }).buttonStyle(PlainButtonStyle())
+                        
+                        Button(action: {
+                            // Dismiss the PopUp
+                            withAnimation(.linear(duration: 0.3)) {
+                                show = false
+                            }
+                        }, label: {
+                            Text(buttonText2)
+                                .frame(maxWidth: .infinity)
+                                .frame(height: 54, alignment: .center)
+                                .foregroundColor(Color.white)
+                                .background(Color(#colorLiteral(red: 0.6196078431, green: 0.1098039216, blue: 0.2509803922, alpha: 1)))
+                                .font(Font.system(size: 23, weight: .semibold))
+                        }).buttonStyle(PlainButtonStyle())
+                    }
+                    
+                }
+                .frame(maxWidth: 300)
+                .border(Color.white, width: 2)
+                .background(Color(#colorLiteral(red: 0.737254902, green: 0.1294117647, blue: 0.2941176471, alpha: 1)))
+            }
+        }
+    }
+    func deleteProfile(instructor: Instructor) {
+        let db = Firestore.firestore()
+        db.collection("InstructorProfiles").document(instructor.id).delete()
+        if instructor.student != ""{
+            db.collection("RiderProfiles").document(instructor.student).updateData(["Instructor": "", "Instructor Name": ""])
+        }
+    }
+    func deleteImage(instructor: Instructor) {
+        let storage = Storage.storage()
+        // Create a reference to the file to delete
+        let desertRef = storage.reference().child("\(instructor.id)/\(instructor.id)")
 
         // Delete the file
         desertRef.delete { error in

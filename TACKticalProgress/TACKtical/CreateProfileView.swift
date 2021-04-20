@@ -11,6 +11,7 @@ struct CreateProfileView: View {
     var body: some View {
         var horseID = UUID().uuidString
         var riderID = UUID().uuidString
+        var instructorID = UUID().uuidString
         VStack() {
             NavigationLink(destination: CreateHorseProfileView(id: horseID)) {
                 Text("Create a Horse Profile")
@@ -18,7 +19,7 @@ struct CreateProfileView: View {
             NavigationLink(destination: CreateRiderProfileView(id: riderID)) {
                 Text("Create a Rider Profile")
             }
-            NavigationLink(destination: CreateHorseProfileView(id: horseID)) {
+            NavigationLink(destination: CreateInstructorProfileView(id: horseID)) {
                 Text("Create an Instructor Profile")
             }
         }
@@ -39,6 +40,8 @@ struct CreateHorseProfileView: View {
     @State var arrival = Date()
     @State var feed : Int = 0
     @State var ownerName: String = ""
+    @State var prevInstructor: String = ""
+    @State var prevHorse: String = ""
     var genderChoices = ["Male", "Female"]
     var colorChoices = ["Bay", "Chestnut", "Gray", "Dun"]
     var heightChoices = ["10", "11", "12", "13", "14", "15", "16"]
@@ -127,7 +130,7 @@ struct CreateHorseProfileView: View {
                 }
                 
                 ZStack(alignment: .top) {
-                    CustomRiderSearchBar(riders: self.$viewModel2.riders, rider: $owner, riderName: $ownerName, txt: "").padding(.top)
+                    CustomRiderSearchBar(riders: self.$viewModel2.riders, rider: $owner, riderName: $ownerName, prevInstructor: $prevInstructor, prevHorse: $prevHorse, txt: "").padding(.top)
                 }.onAppear() {
                     self.viewModel2.fetchAllData()
                 }
@@ -176,6 +179,10 @@ struct CreateHorseProfileView: View {
         
         db.collection("HorseProfiles").document(id).setData(["Arrival Date": formatter1.string(from: arrival), "Color": color, "Date of Birth": formatter1.string(from: birth), "Feed": feed, "Gender": gender, "Height": height, "ID": id, "Owner": owner, "name":name, "Owner Name":ownerName], merge:true)
         if owner != ""{
+            if prevHorse != ""{
+                print(prevHorse)
+                db.collection("HorseProfiles").document(prevHorse).updateData(["Owner": "", "Owner Name": ""])
+            }
             db.collection("RiderProfiles").document(owner).updateData(["Owned Horse": id, "Horse Name": name])
         }
     }
@@ -201,6 +208,7 @@ struct CreateHorseProfileView: View {
 struct CreateRiderProfileView: View {
     @ObservedObject private var viewModel = RiderViewModel()
     @ObservedObject private var viewModel2 = HorseViewModel()
+    @ObservedObject private var viewModel3 = InstructorViewModel()
     var id: String
     @State var name: String = ""
     @State var joinedDate = Date()
@@ -211,7 +219,10 @@ struct CreateRiderProfileView: View {
     @State var email: String = ""
     @State var phone: String = ""
     @State var horseName: String = ""
+    @State var instructor: String = ""
+    @State var instructorName: String = ""
     @State var prevOwner: String = ""
+    @State var prevStudent: String = ""
     var genderChoices = ["Male", "Female"]
     var heightChoices = ["6.1", "6.2", "6.3", "6.4", "6.5", "6.6", "6.7", "6.8", "6.9", "6.10", "6.11", "7.0"]
     var ageChoices = ["5", "10", "15", "20", "25", "30"]
@@ -306,6 +317,12 @@ struct CreateRiderProfileView: View {
                     self.viewModel2.fetchAllData()
                 }
                 
+                ZStack(alignment: .top) {
+                    CustomInstructorSearchBar(instructors: self.$viewModel3.instructors, instructor: $instructor, instructorName: $instructorName, prevStudent: $prevStudent, txt: "").padding(.top)
+                }.onAppear() {
+                    self.viewModel3.fetchAllData()
+                }
+                
             }
         }
         VStack {
@@ -351,14 +368,206 @@ struct CreateRiderProfileView: View {
         let formatter1 = DateFormatter()
         formatter1.dateStyle = .medium
         
-        db.collection("RiderProfiles").document(id).setData(["Age": age, "Email": email, "Gender": gender, "Height": height, "ID": id, "Joined Date": formatter1.string(from: joinedDate), "Owned Horse": horse, "Phone": phone, "name":name, "Horse Name": horseName], merge:true)
+        db.collection("RiderProfiles").document(id).setData(["Age": age, "Email": email, "Gender": gender, "Height": height, "ID": id, "Joined Date": formatter1.string(from: joinedDate), "Owned Horse": horse, "Phone": phone, "name":name, "Horse Name": horseName, "Instructor": instructor, "Instructor Name": instructorName], merge:true)
         if horse != ""{
             //db.collection("RiderProfiles").document(id).collection("Horses").document(horse).setData(["Horse Name": horseName], merge: true)
             if prevOwner != ""{
                 print(prevOwner)
                 db.collection("RiderProfiles").document(prevOwner).updateData(["Owned Horse": "", "Horse Name": ""])
             }
+            
             db.collection("HorseProfiles").document(horse).updateData(["Owner": id, "Owner Name": name])
+        }
+        
+        if instructor != ""{
+            if prevStudent != ""{
+                print(prevStudent)
+                db.collection("RiderProfiles").document(prevStudent).updateData(["Instructor": "", "Instructor Name": ""])
+            }
+            
+            db.collection("InstructorProfiles").document(instructor).updateData(["Student": id, "Student Name": name])
+        }
+    }
+    
+    func uploadImage(image: UIImage) {
+        if let imageData = image.jpegData(compressionQuality: 1) {
+            let storage = Storage.storage()
+            storage.reference().child("\(id)/\(id)").putData(imageData, metadata: nil){
+                (_, err) in
+                if let err = err {
+                    print("an error has occured - \(err.localizedDescription)")
+                } else {
+                    print("image uploaded successfully")
+                }
+            }
+            
+        } else {
+            print("couldn't unwrap/case image to data")
+        }
+    }
+    
+}
+
+struct CreateInstructorProfileView: View {
+    @ObservedObject private var viewModel = InstructorViewModel()
+    @ObservedObject private var viewModel2 = RiderViewModel()
+    var id: String
+    @State var name: String = ""
+    @State var joinedDate = Date()
+    @State var gender: Int = 0
+    @State var height: Int = 0
+    @State var age: Int = 0
+    @State var student: String = ""
+    @State var email: String = ""
+    @State var phone: String = ""
+    @State var studentName: String = ""
+    @State var prevInstructor: String = ""
+    @State var prevHorse: String = ""
+    var genderChoices = ["Male", "Female"]
+    var heightChoices = ["6.1", "6.2", "6.3", "6.4", "6.5", "6.6", "6.7", "6.8", "6.9", "6.10", "6.11", "7.0"]
+    var ageChoices = ["5", "10", "15", "20", "25", "30"]
+    
+    @State var showActionSheet = false
+    @State var showImagePicker = false
+        
+    @State var sourceType:UIImagePickerController.SourceType = .camera
+        
+    @State var upload_image:UIImage?
+    
+    var body: some View {
+        Form {
+            Section {
+                
+                HStack() {
+                    Text("Picture").foregroundColor(.black)
+                    if upload_image != nil {
+                        Image(uiImage: upload_image!)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width:30, height:30)
+                    } else {
+                        Image(systemName: "timelapse")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width:30, height:30)
+                    }
+                    Button(action: {self.showActionSheet = true}) {
+                        Text("Choose Image")
+                    }.actionSheet(isPresented: $showActionSheet){
+                    ActionSheet(title: Text("Add a picture to the profile"), message: nil, buttons: [
+                    //Button1
+                    .default(Text("Camera"), action: {
+                        self.showImagePicker = true
+                        self.sourceType = .camera
+                    }),
+                    //Button2
+                    .default(Text("Photo Library"), action: {
+                        self.showImagePicker = true
+                        self.sourceType = .photoLibrary
+                    }),
+                                        
+                    //Button3
+                    .cancel()
+                                        
+                    ])
+                    }.sheet(isPresented: $showImagePicker){
+                        imagePicker(image: self.$upload_image, showImagePicker: self.$showImagePicker, sourceType: self.sourceType)
+                                    
+                    }
+                }
+                HStack() {
+                    Text("Name ").foregroundColor(.black)
+                    Spacer()
+                    TextField("Enter name", text: $name)
+                }
+                Picker(selection: $gender, label: Text("Gender")) {
+                    ForEach(0 ..< genderChoices.count) {
+                        Text(self.genderChoices[$0])
+                    }
+                }
+                Picker(selection: $age, label: Text("Age")) {
+                    ForEach(0 ..< ageChoices.count) {
+                        Text(self.ageChoices[$0])
+                    }
+                }
+                Picker(selection: $height, label: Text("Height")) {
+                    ForEach(0 ..< heightChoices.count) {
+                        Text(self.heightChoices[$0])
+                    }
+                }
+                
+                HStack() {
+                    Text("Email ").foregroundColor(.black)
+                    TextField("Enter email address", text: $email)
+                }
+                
+                HStack() {
+                    Text("Phone ").foregroundColor(.black)
+                    TextField("Enter phone number", text: $phone)
+                }
+                
+                DatePicker(selection: $joinedDate, in: ...Date(), displayedComponents: .date) {
+                    Text("Joined Date")
+                }
+                
+                
+                ZStack(alignment: .top) {
+                    CustomRiderSearchBar(riders: self.$viewModel2.riders, rider: $student, riderName: $studentName, prevInstructor: $prevInstructor, prevHorse: $prevHorse, txt: "").padding(.top)
+                }.onAppear() {
+                    self.viewModel2.fetchAllData()
+                }
+                
+            }
+        }
+        VStack {
+            Button(action: {
+                if let thisImage = self.upload_image {
+                    uploadImage(image: thisImage)
+                }else{
+                    print("couldn't upload image - no image present")
+                }}) {
+                Text("Upload Image").font(.system(size:UIScreen.main.bounds.height*0.025))
+            }.frame(width:UIScreen.main.bounds.width*0.3, height:UIScreen.main.bounds.height*0.035, alignment:.center).foregroundColor(.black).background(Color(UIColor.lightGray)).opacity(0.7).cornerRadius(16).padding(UIScreen.main.bounds.height*0.005)
+            
+            Button(action: {
+                    let storage = Storage.storage()
+                    storage.reference().child(id).listAll{ (result, error) in
+                        if let error = error {
+                            print("an error has occured - \(error.localizedDescription)")
+                        }
+                        print(result.items)
+                        if result.items == [] {
+                            uploadImage(image: UIImage(imageLiteralResourceName: "ClintonAnderson"))
+                        }
+                    }
+                    upload()}){
+                Text("Upload").font(.system(size:UIScreen.main.bounds.height*0.025))
+            }.frame(width:UIScreen.main.bounds.width*0.3, height:UIScreen.main.bounds.height*0.035, alignment:.center).foregroundColor(.black).background(Color(UIColor.lightGray)).opacity(0.7).cornerRadius(16).padding(UIScreen.main.bounds.height*0.005)
+            
+//            VStack{
+//                Button(action: {upload()}){
+//                    Text("Upload").font(.system(size:UIScreen.main.bounds.height*0.025))
+//                }.frame(width:UIScreen.main.bounds.width*0.3, height:UIScreen.main.bounds.height*0.035, alignment:.center).foregroundColor(.black).background(Color(UIColor.lightGray)).opacity(0.7).cornerRadius(16).padding(UIScreen.main.bounds.height*0.005)
+//            }
+            NavigationLink(destination: NewInstructorProfileView(id: id)) {
+                Text("New Profile").font(.system(size:UIScreen.main.bounds.height*0.025))
+            }.frame(width:UIScreen.main.bounds.width*0.3, height:UIScreen.main.bounds.height*0.035, alignment:.center).foregroundColor(.black).background(Color(UIColor.lightGray)).opacity(0.7).cornerRadius(16).padding(UIScreen.main.bounds.height*0.005)
+        }.padding(EdgeInsets(top: 0, leading: UIScreen.main.bounds.width*0.15, bottom: 0, trailing: UIScreen.main.bounds.width*0.15)).navigationBarTitle("Create Profile", displayMode: .inline)
+    }
+    func upload() {
+        let db = Firestore.firestore()
+        print(id)
+        let formatter1 = DateFormatter()
+        formatter1.dateStyle = .medium
+        
+        db.collection("InstructorProfiles").document(id).setData(["Age": age, "Email": email, "Gender": gender, "Height": height, "ID": id, "Joined Date": formatter1.string(from: joinedDate), "Student": student, "Phone": phone, "name":name, "Student Name": studentName], merge:true)
+        if student != ""{
+            //db.collection("RiderProfiles").document(id).collection("Horses").document(horse).setData(["Horse Name": horseName], merge: true)
+            if prevInstructor != ""{
+                print(prevInstructor)
+                db.collection("InstructorProfiles").document(prevInstructor).updateData(["Student": "", "Student Name": ""])
+            }
+            db.collection("RiderProfiles").document(student).updateData(["Instructor": id, "Instructor Name": name])
         }
     }
     
@@ -434,14 +643,16 @@ struct CustomRiderSearchBar: View {
     @Binding var riders: [Rider]
     @Binding var rider: String
     @Binding var riderName: String
+    @Binding var prevInstructor: String
+    @Binding var prevHorse: String
     @State var txt: String
     
     var body: some View{
         
         VStack{
             HStack{
-                Text("Owner")
-                TextField("Search for owners", text:self.$txt)
+                Text("Rider")
+                TextField("Search for Riders", text:self.$txt)
                 
                 if self.txt != ""{
                     Button(action: {
@@ -459,6 +670,50 @@ struct CustomRiderSearchBar: View {
                     Button(action: {
                         rider = i.id
                         riderName = i.name
+                        prevInstructor = i.instructor
+                        prevHorse = i.horse
+                        self.txt = i.name
+                    }) {
+                        Text(i.name)
+                    }
+                }
+            }
+        }
+    }
+}
+
+struct CustomInstructorSearchBar: View {
+    
+    @Binding var instructors: [Instructor]
+    @Binding var instructor: String
+    @Binding var instructorName: String
+    @Binding var prevStudent: String
+    @State var txt: String
+    
+    var body: some View{
+        
+        VStack{
+            HStack{
+                Text("Instructor")
+                TextField("Search for Instructors", text:self.$txt)
+                
+                if self.txt != ""{
+                    Button(action: {
+                        self.txt = ""
+                    }){
+                        Text("Cancel")
+                    }
+                    .foregroundColor(.black)
+                }
+                
+            }
+            
+            if self.txt != ""{
+                List(self.instructors.filter{$0.name.lowercased().contains(self.txt.lowercased())}){ i in
+                    Button(action: {
+                        instructor = i.id
+                        instructorName = i.name
+                        prevStudent = i.student
                         self.txt = i.name
                     }) {
                         Text(i.name)
