@@ -7,27 +7,26 @@
 
 import SwiftUI
 
-struct ContentView: View {
-    
-    @State var riderProfile = false
-    @State var horseProfile = false
-    @State var editProfile = false
-    
-    var body: some View {
-        if riderProfile {
-            RiderView(horseProfile: $horseProfile, riderProfile: $riderProfile, editProfile: $editProfile)
-        }
-        else if horseProfile{
-            HorseView(riderProfile: $riderProfile, horseProfile: $horseProfile, editProfile: $editProfile)
-        }
-        else if editProfile{
-            editView(horseProfile: $horseProfile, editProfile: $editProfile)
-        }
-        else{
-            HorseView(riderProfile: $riderProfile, horseProfile: $horseProfile, editProfile: $editProfile)
-        }
-    }
-}
+
+//    @State var riderProfile = false
+//    @State var horseProfile = false
+//    @State var editProfile = false
+//
+//    var body: some View {
+//        if riderProfile {
+//            RiderView(horseProfile: $horseProfile, riderProfile: $riderProfile, editProfile: $editProfile)
+//        }
+//        else if horseProfile{
+//            HorseView(riderProfile: $riderProfile, horseProfile: $horseProfile, editProfile: $editProfile)
+//        }
+//        else if editProfile{
+//            editView(horseProfile: $horseProfile, editProfile: $editProfile)
+//        }
+//        else{
+//            HorseView(riderProfile: $riderProfile, horseProfile: $horseProfile, editProfile: $editProfile)
+//        }
+//    }
+
 
 
 
@@ -174,14 +173,6 @@ struct editView: View {
                 }.padding(UIScreen.main.bounds.height*0.005)
             }
             .padding(EdgeInsets(top: 0, leading: UIScreen.main.bounds.width*0.092, bottom: 0, trailing: UIScreen.main.bounds.width*0.092))
-        }
-    }
-}
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        Group {
-            ContentView()
         }
     }
 }
