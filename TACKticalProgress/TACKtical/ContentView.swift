@@ -45,7 +45,7 @@ struct ContentView: View {
                         Text("\tStable cleaning").font(.system(size:UIScreen.main.bounds.height*0.025)).frame(width: UIScreen.main.bounds.width * 0.7, alignment: .leading)
                     }
                 }.padding(EdgeInsets(top: 0, leading: UIScreen.main.bounds.width*0.15, bottom: UIScreen.main.bounds.height*0.01, trailing: UIScreen.main.bounds.width*0.15)).frame(width: UIScreen.main.bounds.width * 0.8, height: UIScreen.main.bounds.height * 0.5).background(Color(red: 240/255, green: 248/255, blue: 255/255, opacity: 1.0))
-                
+                /*
                 HStack(spacing: UIScreen.main.bounds.width*0.1) {
                     NavigationLink(destination: BarnDataView()) {
                         Text("Barn Data")
@@ -58,8 +58,7 @@ struct ContentView: View {
                                         .foregroundColor(Color.white)
                                         .background(Color(red: 102/255, green: 172/255, blue: 189/255, opacity: 1.0)).clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
                 }
-                
-                
+                */
             }
             .padding(EdgeInsets(top: 0, leading: UIScreen.main.bounds.width*0.092, bottom: 0, trailing: UIScreen.main.bounds.width*0.092)).navigationBarTitle("TACKtical", displayMode: .inline)
         }.onAppear() {

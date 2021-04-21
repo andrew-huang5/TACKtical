@@ -16,6 +16,7 @@
 		494E1C31261062200077BD2D /* TACKticalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494E1C30261062200077BD2D /* TACKticalTests.swift */; };
 		494E1C3C261062210077BD2D /* TACKticalUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494E1C3B261062210077BD2D /* TACKticalUITests.swift */; };
 		49697C48261918B600052F8F /* RiderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49697C47261918B600052F8F /* RiderView.swift */; };
+		49C1A2562630A6190093F067 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C1A2552630A6190093F067 /* MenuView.swift */; };
 		67E21A07261170E100E73DB7 /* DatabaseExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67E21A06261170E100E73DB7 /* DatabaseExample.swift */; };
 		AB673B002613447600A4BE17 /* NewProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB673AFF2613447600A4BE17 /* NewProfileView.swift */; };
 		AB72B15E26257CE700D3A121 /* DeleteProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB72B15D26257CE700D3A121 /* DeleteProfileView.swift */; };
@@ -70,6 +71,7 @@
 		494E1C3B261062210077BD2D /* TACKticalUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TACKticalUITests.swift; sourceTree = "<group>"; };
 		494E1C3D261062210077BD2D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		49697C47261918B600052F8F /* RiderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiderView.swift; sourceTree = "<group>"; };
+		49C1A2552630A6190093F067 /* MenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		55F1B55EC5A6AE3C4698B068 /* Pods_TACKtical.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TACKtical.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		67E21A06261170E100E73DB7 /* DatabaseExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseExample.swift; sourceTree = "<group>"; };
 		872F4F50459AB78AA432F298 /* Pods_TACKticalTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TACKticalTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -175,6 +177,7 @@
 				ABBACB302612655A00818408 /* HorseViewModel.swift */,
 				67E21A06261170E100E73DB7 /* DatabaseExample.swift */,
 				49697C47261918B600052F8F /* RiderView.swift */,
+				49C1A2552630A6190093F067 /* MenuView.swift */,
 				494E1C22261062200077BD2D /* Assets.xcassets */,
 				ABBACB052612583300818408 /* GoogleService-Info.plist */,
 				494E1C27261062200077BD2D /* Info.plist */,
@@ -481,6 +484,7 @@
 				ABBACB3E2613046A00818408 /* editProfile.swift in Sources */,
 				AB8D88D4262B68F1001D1C62 /* CalendarView.swift in Sources */,
 				494E1C1F2610621F0077BD2D /* TACKticalApp.swift in Sources */,
+				49C1A2562630A6190093F067 /* MenuView.swift in Sources */,
 				AB986646261868CC006F66EA /* BarnDataView.swift in Sources */,
 				AB72B1632625E27600D3A121 /* ImagePicker.swift in Sources */,
 				AB673B002613447600A4BE17 /* NewProfileView.swift in Sources */,
