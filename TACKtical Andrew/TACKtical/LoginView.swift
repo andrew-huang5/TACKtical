@@ -23,11 +23,13 @@ struct ContentView: View {
                     
                     Text("Logged In As \(Auth.auth().currentUser?.email ?? "")")
                     
-                    Button(action: {}, label: {
+                    Button(action: model.logOut, label: {
                         Text("LogOut")
                             .fontWeight(.bold)
                     })
                 }
+                
+                
             }
             else{
                 
