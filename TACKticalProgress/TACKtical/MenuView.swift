@@ -20,7 +20,7 @@ struct MenuView: View {
 
 struct GoHome: View {
     var body: some View{
-        NavigationLink(destination: ContentView()) {
+        NavigationLink(destination: HomeView()) {
             Image("Home").resizable().aspectRatio(contentMode: .fill)
         }.frame(width:UIScreen.main.bounds.width*0.06, height:UIScreen.main.bounds.height*0.06, alignment:.center)
     }
