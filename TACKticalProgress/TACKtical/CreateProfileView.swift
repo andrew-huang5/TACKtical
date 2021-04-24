@@ -543,14 +543,6 @@ struct CreateInstructorProfileView: View {
             }
         }
         VStack {
-//            Button(action: {
-//                if let thisImage = self.upload_image {
-//                    uploadImage(image: thisImage)
-//                }else{
-//                    print("couldn't upload image - no image present")
-//                }}) {
-//                Text("Upload Image").font(.system(size:UIScreen.main.bounds.height*0.025))
-//            }.frame(width:UIScreen.main.bounds.width*0.3, height:UIScreen.main.bounds.height*0.035, alignment:.center).foregroundColor(.black).background(Color(UIColor.lightGray)).opacity(0.7).cornerRadius(16).padding(UIScreen.main.bounds.height*0.005)
             
             Button(action: {
                     let storage = Storage.storage()
