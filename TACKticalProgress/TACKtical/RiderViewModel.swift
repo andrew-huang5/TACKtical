@@ -71,6 +71,7 @@ class RiderViewModel: ObservableObject {
                     let joinedDate = formatter1.date(from: joinedDate_string)!
                     
                     self.rider = Rider(id: id, joinedDate: joinedDate, height: height, gender: gender, age: age, horse: horse, name: name, email: email, phone: phone, horseName: horseName, instructor: instructor, instructorName: instructorName)
+                    print(self.rider)
                     
                 }
             }

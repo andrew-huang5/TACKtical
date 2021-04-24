@@ -36,9 +36,12 @@ struct GoHorse: View {
 }
 
 struct GoData: View {
+    @ObservedObject private var viewModel = RiderViewModel()
     var body: some View{
-        NavigationLink(destination: BarnDataView()) {
+        NavigationLink(destination: BarnDataView(horseId:viewModel.rider.horse, instructorId:viewModel.rider.instructor)) {
             Image("Data").resizable().aspectRatio(contentMode: .fill)
+        }.onAppear{
+            self.viewModel.fetchData(id: Auth.auth().currentUser!.uid)
         }.frame(width:UIScreen.main.bounds.width*0.05, height:UIScreen.main.bounds.height*0.05, alignment:.center)
     }
 }

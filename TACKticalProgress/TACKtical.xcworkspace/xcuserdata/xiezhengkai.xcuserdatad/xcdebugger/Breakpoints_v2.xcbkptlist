@@ -20,7 +20,7 @@
             landmarkType = "24">
             <Locations>
                <Location
-                  uuid = "AEE39723-C2BA-4FA4-84EC-BE3C185D428E - 430798d7832fcd81"
+                  uuid = "AEE39723-C2BA-4FA4-84EC-BE3C185D428E - 430798d7832fcd62"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -30,12 +30,12 @@
                   urlString = "file:///Users/xiezhengkai/Downloads/CS4278-group3-hw4/TACKticalProgress/TACKtical/CreateProfileView.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "164"
-                  endingLineNumber = "164"
-                  offsetFromSymbolStart = "1563">
+                  startingLineNumber = "165"
+                  endingLineNumber = "165"
+                  offsetFromSymbolStart = "1362">
                </Location>
                <Location
-                  uuid = "AEE39723-C2BA-4FA4-84EC-BE3C185D428E - 9210e378fed1039f"
+                  uuid = "AEE39723-C2BA-4FA4-84EC-BE3C185D428E - 9210e378fed1037c"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -45,8 +45,8 @@
                   urlString = "file:///Users/xiezhengkai/Downloads/CS4278-group3-hw4/TACKticalProgress/TACKtical/CreateProfileView.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "164"
-                  endingLineNumber = "164"
+                  startingLineNumber = "165"
+                  endingLineNumber = "165"
                   offsetFromSymbolStart = "1416">
                </Location>
             </Locations>
@@ -98,6 +98,22 @@
                   offsetFromSymbolStart = "81">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "5AD0E472-3E85-4C26-AE87-1A917F4BD437"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TACKtical/RiderViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "57"
+            endingLineNumber = "57"
+            landmarkName = "fetchData(id:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
