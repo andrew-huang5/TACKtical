@@ -425,6 +425,18 @@ class ModelData : ObservableObject {
                 return
             }
             
+            let user = Auth.auth().currentUser
+            let db = Firestore.firestore()
+            if let user = user {
+                let uid = user.uid
+                let email = user.email
+                let date = Date()
+                let formatter1 = DateFormatter()
+                formatter1.dateStyle = .medium
+                db.collection("RiderProfiles").document(uid).setData(["Age": 0, "Email": email ?? "", "Gender": 0, "Height": 0, "ID": uid, "Joined Date": formatter1.string(from: date), "Owned Horse": "", "Phone": "", "name": "User", "Horse Name": "", "Instructor": "", "Instructor Name": ""], merge:true)
+                self.uploadImage(image: UIImage(imageLiteralResourceName: "Lebron"), id: uid)
+            }
+            
             // sending Verifcation Link....
             
             result?.user.sendEmailVerification(completion: { (err) in
@@ -440,6 +452,23 @@ class ModelData : ObservableObject {
                 self.alertMsg = "Email Verification Has Been Sent !!! Verify Your Email ID !!!"
                 self.alert.toggle()
             })
+        }
+    }
+    
+    func uploadImage(image: UIImage, id: String) {
+        if let imageData = image.jpegData(compressionQuality: 1) {
+            let storage = Storage.storage()
+            storage.reference().child("\(id)/\(id)").putData(imageData, metadata: nil){
+                (_, err) in
+                if let err = err {
+                    print("an error has occured - \(err.localizedDescription)")
+                } else {
+                    print("image uploaded successfully")
+                }
+            }
+            
+        } else {
+            print("couldn't unwrap/case image to data")
         }
     }
     

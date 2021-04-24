@@ -32,9 +32,9 @@ struct RiderView: View {
                     }) {
                         Text("Upcoming Training Rides").font(.system(size:UIScreen.main.bounds.height*0.025))
                     }.frame(width:UIScreen.main.bounds.width*0.6, height:UIScreen.main.bounds.height*0.008, alignment:.center).foregroundColor(.white).padding(UIScreen.main.bounds.height*0.02).background(Color(red: 102/255, green: 172/255, blue: 189/255, opacity: 1.0)).cornerRadius(16)
-                    NavigationLink(destination: NewProfileView(id: "Horse1")) {
-                        Text("Horse Profile").font(.system(size:UIScreen.main.bounds.height*0.025))
-                    }.frame(width:UIScreen.main.bounds.width*0.6, height:UIScreen.main.bounds.height*0.008, alignment:.center).foregroundColor(.white).padding(UIScreen.main.bounds.height*0.02).background(Color(red: 102/255, green: 172/255, blue: 189/255, opacity: 1.0)).cornerRadius(16)
+//                    NavigationLink(destination: NewProfileView(id: "Horse1", showup: false)) {
+//                        Text("Horse Profile").font(.system(size:UIScreen.main.bounds.height*0.025))
+//                    }.frame(width:UIScreen.main.bounds.width*0.6, height:UIScreen.main.bounds.height*0.008, alignment:.center).foregroundColor(.white).padding(UIScreen.main.bounds.height*0.02).background(Color(red: 102/255, green: 172/255, blue: 189/255, opacity: 1.0)).cornerRadius(16)
                 }.padding(UIScreen.main.bounds.height*0.005)
             }
             .padding(EdgeInsets(top: 0.05, leading: UIScreen.main.bounds.width*0.155, bottom: 0.05, trailing: UIScreen.main.bounds.width*0.155)).navigationBarTitle("Rider Profile", displayMode: .inline)

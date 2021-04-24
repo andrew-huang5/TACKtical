@@ -29,6 +29,7 @@
 		AB8D88E4262B77ED001D1C62 /* DayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8D88E3262B77ED001D1C62 /* DayView.swift */; };
 		AB8D88E9262E7A27001D1C62 /* InstructorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8D88E8262E7A27001D1C62 /* InstructorViewModel.swift */; };
 		AB8D88F12633623C001D1C62 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8D88F02633623C001D1C62 /* HomeView.swift */; };
+		AB8D88F92633EC0C001D1C62 /* NameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8D88F82633EC0C001D1C62 /* NameViewModel.swift */; };
 		AB986646261868CC006F66EA /* BarnDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB986645261868CC006F66EA /* BarnDataView.swift */; };
 		AB98664B2618FA79006F66EA /* CreateProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB98664A2618FA79006F66EA /* CreateProfileView.swift */; };
 		ABBACB062612583300818408 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ABBACB052612583300818408 /* GoogleService-Info.plist */; };
@@ -87,6 +88,7 @@
 		AB8D88E3262B77ED001D1C62 /* DayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayView.swift; sourceTree = "<group>"; };
 		AB8D88E8262E7A27001D1C62 /* InstructorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructorViewModel.swift; sourceTree = "<group>"; };
 		AB8D88F02633623C001D1C62 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		AB8D88F82633EC0C001D1C62 /* NameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameViewModel.swift; sourceTree = "<group>"; };
 		AB986645261868CC006F66EA /* BarnDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarnDataView.swift; sourceTree = "<group>"; };
 		AB98664A2618FA79006F66EA /* CreateProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProfileView.swift; sourceTree = "<group>"; };
 		ABBACB052612583300818408 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "TACKtical/GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
@@ -166,6 +168,7 @@
 				ABBACB2B2612602D00818408 /* Horse.swift */,
 				AB8D88E8262E7A27001D1C62 /* InstructorViewModel.swift */,
 				AB8D88DE262B7620001D1C62 /* RiderViewModel.swift */,
+				AB8D88F82633EC0C001D1C62 /* NameViewModel.swift */,
 				494E1C202610621F0077BD2D /* ContentView.swift */,
 				ABBACB3D2613046A00818408 /* editProfile.swift */,
 				AB986645261868CC006F66EA /* BarnDataView.swift */,
@@ -481,6 +484,7 @@
 				ABBACB312612655A00818408 /* HorseViewModel.swift in Sources */,
 				49697C48261918B600052F8F /* RiderView.swift in Sources */,
 				AB98664B2618FA79006F66EA /* CreateProfileView.swift in Sources */,
+				AB8D88F92633EC0C001D1C62 /* NameViewModel.swift in Sources */,
 				AB8D88CF262B68AF001D1C62 /* AddEventView.swift in Sources */,
 				AB72B15E26257CE700D3A121 /* DeleteProfileView.swift in Sources */,
 				AB8D88E9262E7A27001D1C62 /* InstructorViewModel.swift in Sources */,

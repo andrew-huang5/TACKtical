@@ -6,6 +6,7 @@
 //.toolbar { ToolbarItem(placement: .bottomBar) {MenuView()}}
 
 import SwiftUI
+import Firebase
 
 struct MenuView: View {
     var body: some View {
@@ -28,7 +29,7 @@ struct GoHome: View {
 
 struct GoHorse: View {
     var body: some View{
-        NavigationLink(destination: RiderView()) {
+        NavigationLink(destination: NewRiderProfileView(id: Auth.auth().currentUser!.uid)) {
             Image("HorseMenu").resizable().aspectRatio(contentMode: .fill)
         }.frame(width:UIScreen.main.bounds.width*0.05, height:UIScreen.main.bounds.height*0.05, alignment:.center)
     }

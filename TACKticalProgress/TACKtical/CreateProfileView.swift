@@ -9,17 +9,14 @@ import Firebase
 struct CreateProfileView: View {
     
     var body: some View {
-        var horseID = UUID().uuidString
-        var riderID = UUID().uuidString
-        var instructorID = UUID().uuidString
         VStack() {
-            NavigationLink(destination: CreateHorseProfileView(id: horseID)) {
+            NavigationLink(destination: CreateHorseProfileView()) {
                 Text("Create a Horse Profile")
             }
-            NavigationLink(destination: CreateRiderProfileView(id: riderID)) {
+            NavigationLink(destination: CreateRiderProfileView()) {
                 Text("Create a Rider Profile")
             }
-            NavigationLink(destination: CreateInstructorProfileView(id: horseID)) {
+            NavigationLink(destination: CreateInstructorProfileView()) {
                 Text("Create an Instructor Profile")
             }
         }
@@ -30,7 +27,8 @@ struct CreateProfileView: View {
 struct CreateHorseProfileView: View {
     @ObservedObject private var viewModel = HorseViewModel()
     @ObservedObject private var viewModel2 = RiderViewModel()
-    var id: String
+    let id: String = UUID().uuidString
+    @State var newid: String = ""
     @State var name: String = ""
     @State var birth = Date()
     @State var gender: Int = 0
@@ -171,7 +169,7 @@ struct CreateHorseProfileView: View {
 //                    Text("Upload").font(.system(size:UIScreen.main.bounds.height*0.025))
 //                }.frame(width:UIScreen.main.bounds.width*0.3, height:UIScreen.main.bounds.height*0.035, alignment:.center).foregroundColor(.black).background(Color(UIColor.lightGray)).opacity(0.7).cornerRadius(16).padding(UIScreen.main.bounds.height*0.005)
 //            }
-            NavigationLink(destination: NewProfileView(id: id)) {
+            NavigationLink(destination: NewProfileView(id: newid)) {
                 Text("New Profile").font(.system(size:UIScreen.main.bounds.height*0.025))
             }.frame(width:UIScreen.main.bounds.width*0.3, height:UIScreen.main.bounds.height*0.035, alignment:.center).foregroundColor(.black).background(Color(UIColor.lightGray)).opacity(0.7).cornerRadius(16).padding(UIScreen.main.bounds.height*0.005)
         }.padding(EdgeInsets(top: 0, leading: UIScreen.main.bounds.width*0.15, bottom: 0, trailing: UIScreen.main.bounds.width*0.15)).navigationBarTitle("Create Profile", displayMode: .inline)
@@ -183,6 +181,7 @@ struct CreateHorseProfileView: View {
         formatter1.dateStyle = .medium
         
         db.collection("HorseProfiles").document(id).setData(["Arrival Date": formatter1.string(from: arrival), "Color": color, "Date of Birth": formatter1.string(from: birth), "Feed": feed, "Gender": gender, "Height": height, "ID": id, "Owner": owner, "name":name, "Owner Name":ownerName], merge:true)
+        self.newid = id
         if owner != ""{
             if prevHorse != ""{
                 print(prevHorse)
@@ -214,7 +213,8 @@ struct CreateRiderProfileView: View {
     @ObservedObject private var viewModel = RiderViewModel()
     @ObservedObject private var viewModel2 = HorseViewModel()
     @ObservedObject private var viewModel3 = InstructorViewModel()
-    var id: String
+    let id: String = UUID().uuidString
+    @State var newid: String = ""
     @State var name: String = ""
     @State var joinedDate = Date()
     @State var gender: Int = 0
@@ -370,7 +370,7 @@ struct CreateRiderProfileView: View {
 //                    Text("Upload").font(.system(size:UIScreen.main.bounds.height*0.025))
 //                }.frame(width:UIScreen.main.bounds.width*0.3, height:UIScreen.main.bounds.height*0.035, alignment:.center).foregroundColor(.black).background(Color(UIColor.lightGray)).opacity(0.7).cornerRadius(16).padding(UIScreen.main.bounds.height*0.005)
 //            }
-            NavigationLink(destination: NewRiderProfileView(id: id)) {
+            NavigationLink(destination: NewRiderProfileView(id: newid)) {
                 Text("New Profile").font(.system(size:UIScreen.main.bounds.height*0.025))
             }.frame(width:UIScreen.main.bounds.width*0.3, height:UIScreen.main.bounds.height*0.035, alignment:.center).foregroundColor(.black).background(Color(UIColor.lightGray)).opacity(0.7).cornerRadius(16).padding(UIScreen.main.bounds.height*0.005)
         }.padding(EdgeInsets(top: 0, leading: UIScreen.main.bounds.width*0.15, bottom: 0, trailing: UIScreen.main.bounds.width*0.15)).navigationBarTitle("Create Profile", displayMode: .inline)
@@ -382,6 +382,7 @@ struct CreateRiderProfileView: View {
         formatter1.dateStyle = .medium
         
         db.collection("RiderProfiles").document(id).setData(["Age": age, "Email": email, "Gender": gender, "Height": height, "ID": id, "Joined Date": formatter1.string(from: joinedDate), "Owned Horse": horse, "Phone": phone, "name":name, "Horse Name": horseName, "Instructor": instructor, "Instructor Name": instructorName], merge:true)
+        self.newid = id
         if horse != ""{
             //db.collection("RiderProfiles").document(id).collection("Horses").document(horse).setData(["Horse Name": horseName], merge: true)
             if prevOwner != ""{
@@ -424,7 +425,8 @@ struct CreateRiderProfileView: View {
 struct CreateInstructorProfileView: View {
     @ObservedObject private var viewModel = InstructorViewModel()
     @ObservedObject private var viewModel2 = RiderViewModel()
-    var id: String
+    let id: String = UUID().uuidString
+    @State var newid: String = ""
     @State var name: String = ""
     @State var joinedDate = Date()
     @State var gender: Int = 0
@@ -570,7 +572,7 @@ struct CreateInstructorProfileView: View {
 //                    Text("Upload").font(.system(size:UIScreen.main.bounds.height*0.025))
 //                }.frame(width:UIScreen.main.bounds.width*0.3, height:UIScreen.main.bounds.height*0.035, alignment:.center).foregroundColor(.black).background(Color(UIColor.lightGray)).opacity(0.7).cornerRadius(16).padding(UIScreen.main.bounds.height*0.005)
 //            }
-            NavigationLink(destination: NewInstructorProfileView(id: id)) {
+            NavigationLink(destination: NewInstructorProfileView(id: newid)) {
                 Text("New Profile").font(.system(size:UIScreen.main.bounds.height*0.025))
             }.frame(width:UIScreen.main.bounds.width*0.3, height:UIScreen.main.bounds.height*0.035, alignment:.center).foregroundColor(.black).background(Color(UIColor.lightGray)).opacity(0.7).cornerRadius(16).padding(UIScreen.main.bounds.height*0.005)
         }.padding(EdgeInsets(top: 0, leading: UIScreen.main.bounds.width*0.15, bottom: 0, trailing: UIScreen.main.bounds.width*0.15)).navigationBarTitle("Create Profile", displayMode: .inline)
@@ -582,6 +584,7 @@ struct CreateInstructorProfileView: View {
         formatter1.dateStyle = .medium
         
         db.collection("InstructorProfiles").document(id).setData(["Age": age, "Email": email, "Gender": gender, "Height": height, "ID": id, "Joined Date": formatter1.string(from: joinedDate), "Student": student, "Phone": phone, "name":name, "Student Name": studentName], merge:true)
+        self.newid = id
         if student != ""{
             //db.collection("RiderProfiles").document(id).collection("Horses").document(horse).setData(["Horse Name": horseName], merge: true)
             if prevInstructor != ""{

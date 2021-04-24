@@ -47,3 +47,9 @@ struct Instructor: Identifiable & Hashable {
     var phone: String
     var studentName: String
 }
+  
+struct ObjectName: Identifiable & Hashable {
+    var id: String
+    var name: String
+    var type: String
+}
