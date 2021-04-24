@@ -180,11 +180,11 @@
 				67E21A06261170E100E73DB7 /* DatabaseExample.swift */,
 				49697C47261918B600052F8F /* RiderView.swift */,
 				49C1A2552630A6190093F067 /* MenuView.swift */,
+				AB8D88F02633623C001D1C62 /* HomeView.swift */,
 				494E1C22261062200077BD2D /* Assets.xcassets */,
 				ABBACB052612583300818408 /* GoogleService-Info.plist */,
 				494E1C27261062200077BD2D /* Info.plist */,
 				494E1C24261062200077BD2D /* Preview Content */,
-				AB8D88F02633623C001D1C62 /* HomeView.swift */,
 			);
 			path = TACKtical;
 			sourceTree = "<group>";
