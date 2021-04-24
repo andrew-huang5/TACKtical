@@ -71,8 +71,8 @@ struct CreateHorseProfileView: View {
                         .scaledToFit()
                         .frame(width:30, height:30)
                     }
-                    Button(action: {self.showActionSheet = true}) {
-                        Text("Choose Image")
+                    Text("Choose").foregroundColor(.blue).onTapGesture {
+                        self.showActionSheet = true
                     }.actionSheet(isPresented: $showActionSheet){
                     ActionSheet(title: Text("Add a picture to the profile"), message: nil, buttons: [
                     //Button1
@@ -94,6 +94,19 @@ struct CreateHorseProfileView: View {
                         imagePicker(image: self.$upload_image, showImagePicker: self.$showImagePicker, sourceType: self.sourceType)
                                     
                     }
+                    
+                    Text("Upload").foregroundColor(.blue).onTapGesture{
+                        if let thisImage = self.upload_image {
+                            uploadImage(image: thisImage)
+                        }else{
+                            print("couldn't upload image - no image present")
+                        }
+                    }
+                    
+//                    Button(action: {
+//                        }) {
+//
+//                    }.frame(width:UIScreen.main.bounds.width*0.3, height:UIScreen.main.bounds.height*0.035, alignment:.center).foregroundColor(.black).background(Color(UIColor.lightGray)).opacity(0.7).cornerRadius(16).padding(UIScreen.main.bounds.height*0.005)
                 }
                 HStack() {
                     Text("Name ").foregroundColor(.black)
@@ -137,14 +150,6 @@ struct CreateHorseProfileView: View {
             }
         }
         VStack {
-            Button(action: {
-                if let thisImage = self.upload_image {
-                    uploadImage(image: thisImage)
-                }else{
-                    print("couldn't upload image - no image present")
-                }}) {
-                Text("Upload Image").font(.system(size:UIScreen.main.bounds.height*0.025))
-            }.frame(width:UIScreen.main.bounds.width*0.3, height:UIScreen.main.bounds.height*0.035, alignment:.center).foregroundColor(.black).background(Color(UIColor.lightGray)).opacity(0.7).cornerRadius(16).padding(UIScreen.main.bounds.height*0.005)
             
             Button(action: {
                     let storage = Storage.storage()
@@ -251,8 +256,8 @@ struct CreateRiderProfileView: View {
                         .scaledToFit()
                         .frame(width:30, height:30)
                     }
-                    Button(action: {self.showActionSheet = true}) {
-                        Text("Choose Image")
+                    Text("Choose").foregroundColor(.blue).onTapGesture {
+                        self.showActionSheet = true
                     }.actionSheet(isPresented: $showActionSheet){
                     ActionSheet(title: Text("Add a picture to the profile"), message: nil, buttons: [
                     //Button1
@@ -273,6 +278,14 @@ struct CreateRiderProfileView: View {
                     }.sheet(isPresented: $showImagePicker){
                         imagePicker(image: self.$upload_image, showImagePicker: self.$showImagePicker, sourceType: self.sourceType)
                                     
+                    }
+                    
+                    Text("Upload").foregroundColor(.blue).onTapGesture{
+                        if let thisImage = self.upload_image {
+                            uploadImage(image: thisImage)
+                        }else{
+                            print("couldn't upload image - no image present")
+                        }
                     }
                 }
                 HStack() {
@@ -326,14 +339,14 @@ struct CreateRiderProfileView: View {
             }
         }
         VStack {
-            Button(action: {
-                if let thisImage = self.upload_image {
-                    uploadImage(image: thisImage)
-                }else{
-                    print("couldn't upload image - no image present")
-                }}) {
-                Text("Upload Image").font(.system(size:UIScreen.main.bounds.height*0.025))
-            }.frame(width:UIScreen.main.bounds.width*0.3, height:UIScreen.main.bounds.height*0.035, alignment:.center).foregroundColor(.black).background(Color(UIColor.lightGray)).opacity(0.7).cornerRadius(16).padding(UIScreen.main.bounds.height*0.005)
+//            Button(action: {
+//                if let thisImage = self.upload_image {
+//                    uploadImage(image: thisImage)
+//                }else{
+//                    print("couldn't upload image - no image present")
+//                }}) {
+//                Text("Upload Image").font(.system(size:UIScreen.main.bounds.height*0.025))
+//            }.frame(width:UIScreen.main.bounds.width*0.3, height:UIScreen.main.bounds.height*0.035, alignment:.center).foregroundColor(.black).background(Color(UIColor.lightGray)).opacity(0.7).cornerRadius(16).padding(UIScreen.main.bounds.height*0.005)
             
             Button(action: {
                     let storage = Storage.storage()
@@ -451,8 +464,8 @@ struct CreateInstructorProfileView: View {
                         .scaledToFit()
                         .frame(width:30, height:30)
                     }
-                    Button(action: {self.showActionSheet = true}) {
-                        Text("Choose Image")
+                    Text("Choose").foregroundColor(.blue).onTapGesture {
+                        self.showActionSheet = true
                     }.actionSheet(isPresented: $showActionSheet){
                     ActionSheet(title: Text("Add a picture to the profile"), message: nil, buttons: [
                     //Button1
@@ -473,6 +486,14 @@ struct CreateInstructorProfileView: View {
                     }.sheet(isPresented: $showImagePicker){
                         imagePicker(image: self.$upload_image, showImagePicker: self.$showImagePicker, sourceType: self.sourceType)
                                     
+                    }
+                    
+                    Text("Upload").foregroundColor(.blue).onTapGesture{
+                        if let thisImage = self.upload_image {
+                            uploadImage(image: thisImage)
+                        }else{
+                            print("couldn't upload image - no image present")
+                        }
                     }
                 }
                 HStack() {
@@ -515,19 +536,19 @@ struct CreateInstructorProfileView: View {
                     CustomRiderSearchBar(riders: self.$viewModel2.riders, rider: $student, riderName: $studentName, prevInstructor: $prevInstructor, prevHorse: $prevHorse, txt: "").padding(.top)
                 }.onAppear() {
                     self.viewModel2.fetchAllData()
-                }
+                }.frame(maxHeight: .infinity)
                 
             }
         }
         VStack {
-            Button(action: {
-                if let thisImage = self.upload_image {
-                    uploadImage(image: thisImage)
-                }else{
-                    print("couldn't upload image - no image present")
-                }}) {
-                Text("Upload Image").font(.system(size:UIScreen.main.bounds.height*0.025))
-            }.frame(width:UIScreen.main.bounds.width*0.3, height:UIScreen.main.bounds.height*0.035, alignment:.center).foregroundColor(.black).background(Color(UIColor.lightGray)).opacity(0.7).cornerRadius(16).padding(UIScreen.main.bounds.height*0.005)
+//            Button(action: {
+//                if let thisImage = self.upload_image {
+//                    uploadImage(image: thisImage)
+//                }else{
+//                    print("couldn't upload image - no image present")
+//                }}) {
+//                Text("Upload Image").font(.system(size:UIScreen.main.bounds.height*0.025))
+//            }.frame(width:UIScreen.main.bounds.width*0.3, height:UIScreen.main.bounds.height*0.035, alignment:.center).foregroundColor(.black).background(Color(UIColor.lightGray)).opacity(0.7).cornerRadius(16).padding(UIScreen.main.bounds.height*0.005)
             
             Button(action: {
                     let storage = Storage.storage()
@@ -624,13 +645,11 @@ struct CustomHorseSearchBar: View {
             
             if self.txt != ""{
                 List(self.horses.filter{$0.name.lowercased().contains(self.txt.lowercased())}){ i in
-                    Button(action: {
+                    (Text(i.name).bold() + Text("(Horse)")).onTapGesture {
                         horse = i.id
                         horseName = i.name
                         prevOwner = i.owner
                         self.txt = i.name
-                    }) {
-                        Text(i.name)
                     }
                 }
             }
@@ -667,14 +686,12 @@ struct CustomRiderSearchBar: View {
             
             if self.txt != ""{
                 List(self.riders.filter{$0.name.lowercased().contains(self.txt.lowercased())}){ i in
-                    Button(action: {
+                    (Text(i.name).bold() + Text("(Rider)")).onTapGesture {
                         rider = i.id
                         riderName = i.name
                         prevInstructor = i.instructor
                         prevHorse = i.horse
                         self.txt = i.name
-                    }) {
-                        Text(i.name)
                     }
                 }
             }
@@ -710,13 +727,11 @@ struct CustomInstructorSearchBar: View {
             
             if self.txt != ""{
                 List(self.instructors.filter{$0.name.lowercased().contains(self.txt.lowercased())}){ i in
-                    Button(action: {
+                    (Text(i.name).bold() + Text("(Instructor)")).onTapGesture {
                         instructor = i.id
                         instructorName = i.name
                         prevStudent = i.student
                         self.txt = i.name
-                    }) {
-                        Text(i.name)
                     }
                 }
             }

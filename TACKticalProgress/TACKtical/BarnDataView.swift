@@ -28,28 +28,28 @@ struct BarnDataView: View {
                     Text("Search by:").font(.system(size:UIScreen.main.bounds.height*0.03)).frame(width: UIScreen.main.bounds.width*0.7, alignment: .leading).padding(EdgeInsets(top: UIScreen.main.bounds.height*0.02, leading: UIScreen.main.bounds.width*0.15, bottom: UIScreen.main.bounds.height*0.005, trailing: UIScreen.main.bounds.width*0.15))
                 }
                 
-                ZStack {
-                    VStack {
-                        Text("Horse Profiles:").font(.system(size:UIScreen.main.bounds.height*0.02)).frame(width: UIScreen.main.bounds.width*0.7, alignment: .leading).padding(EdgeInsets(top: UIScreen.main.bounds.height*0.005, leading: UIScreen.main.bounds.width*0.15, bottom: UIScreen.main.bounds.height*0.03, trailing: UIScreen.main.bounds.width*0.15))
-                        
-                        Text("Rider Profiles:").font(.system(size:UIScreen.main.bounds.height*0.02)).frame(width: UIScreen.main.bounds.width*0.7, alignment: .leading).padding(EdgeInsets(top: UIScreen.main.bounds.height*0.03, leading: UIScreen.main.bounds.width*0.15, bottom: UIScreen.main.bounds.height*0.03, trailing: UIScreen.main.bounds.width*0.15))
-                        
-                        Text("Instructor Profiles:").font(.system(size:UIScreen.main.bounds.height*0.02)).frame(width: UIScreen.main.bounds.width*0.7, alignment: .leading).padding(EdgeInsets(top: UIScreen.main.bounds.height*0.03, leading: UIScreen.main.bounds.width*0.15, bottom: UIScreen.main.bounds.height*0.002, trailing: UIScreen.main.bounds.width*0.15))
-                    }
-                    
-                    HStack {
-                        Dropdown1()
-                    }.padding(EdgeInsets(top: 0, leading: UIScreen.main.bounds.width*0.15, bottom: UIScreen.main.bounds.height*0.1, trailing: UIScreen.main.bounds.width*0.15)).zIndex(10)
-                    
-                    HStack {
-                        Dropdown2()
-                    }.padding(EdgeInsets(top: UIScreen.main.bounds.height*0.1, leading: UIScreen.main.bounds.width*0.15, bottom: 0, trailing: UIScreen.main.bounds.width*0.15)).zIndex(10)
-                    
-                    HStack {
-                        Dropdown3()
-                    }.padding(EdgeInsets(top: UIScreen.main.bounds.height*0.3, leading: UIScreen.main.bounds.width*0.15, bottom: 0, trailing: UIScreen.main.bounds.width*0.15))
-                    
-                }
+//                ZStack {
+//                    VStack {
+//                        Text("Horse Profiles:").font(.system(size:UIScreen.main.bounds.height*0.02)).frame(width: UIScreen.main.bounds.width*0.7, alignment: .leading).padding(EdgeInsets(top: UIScreen.main.bounds.height*0.005, leading: UIScreen.main.bounds.width*0.15, bottom: UIScreen.main.bounds.height*0.03, trailing: UIScreen.main.bounds.width*0.15))
+//
+//                        Text("Rider Profiles:").font(.system(size:UIScreen.main.bounds.height*0.02)).frame(width: UIScreen.main.bounds.width*0.7, alignment: .leading).padding(EdgeInsets(top: UIScreen.main.bounds.height*0.03, leading: UIScreen.main.bounds.width*0.15, bottom: UIScreen.main.bounds.height*0.03, trailing: UIScreen.main.bounds.width*0.15))
+//
+//                        Text("Instructor Profiles:").font(.system(size:UIScreen.main.bounds.height*0.02)).frame(width: UIScreen.main.bounds.width*0.7, alignment: .leading).padding(EdgeInsets(top: UIScreen.main.bounds.height*0.03, leading: UIScreen.main.bounds.width*0.15, bottom: UIScreen.main.bounds.height*0.002, trailing: UIScreen.main.bounds.width*0.15))
+//                    }
+//
+//                    HStack {
+//                        Dropdown1()
+//                    }.padding(EdgeInsets(top: 0, leading: UIScreen.main.bounds.width*0.15, bottom: UIScreen.main.bounds.height*0.1, trailing: UIScreen.main.bounds.width*0.15)).zIndex(10)
+//
+//                    HStack {
+//                        Dropdown2()
+//                    }.padding(EdgeInsets(top: UIScreen.main.bounds.height*0.1, leading: UIScreen.main.bounds.width*0.15, bottom: 0, trailing: UIScreen.main.bounds.width*0.15)).zIndex(10)
+//
+//                    HStack {
+//                        Dropdown3()
+//                    }.padding(EdgeInsets(top: UIScreen.main.bounds.height*0.3, leading: UIScreen.main.bounds.width*0.15, bottom: 0, trailing: UIScreen.main.bounds.width*0.15))
+//
+//                }
             }.padding(EdgeInsets(top: 0, leading: UIScreen.main.bounds.width*0.15, bottom: UIScreen.main.bounds.height*0.01, trailing: UIScreen.main.bounds.width*0.15)).frame(width: UIScreen.main.bounds.width * 0.8, height: UIScreen.main.bounds.height * 0.7).background(Color(red: 240/255, green: 248/255, blue: 255/255, opacity: 1.0))
             
             HStack(spacing: UIScreen.main.bounds.width*0.15) {

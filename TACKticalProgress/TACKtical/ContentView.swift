@@ -8,13 +8,6 @@ import SwiftUI
 
 
 struct ContentView: View {
-//    @State private var editProfile = false
-//    var horse = Horse(DOB: "2021", height: 16, horseID: 1, name: "Haha", weight: 200)
-    
-    @ObservedObject private var viewModel = HorseViewModel()
-    //var horse = viewModel.horses[0]
-    
-    
     var body: some View {
         NavigationView{
             HomeView()
