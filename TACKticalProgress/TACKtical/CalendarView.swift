@@ -48,7 +48,7 @@ struct CalendarView: View {
                 }) { Image(systemName: "arrow.left") }
                     .frame(width: 35, height: 35, alignment: .leading)
             
-                NavigationLink(destination: AddEventView(start: Date(), end: Date().addingTimeInterval(3600))) {
+                NavigationLink(destination: ChooseEventView()) {
                     Text("+").font(.system(size: 25))
                 }.frame(width: UIScreen.main.bounds.width*0.1, height:UIScreen.main.bounds.width*0.1)
                 .foregroundColor(Color.white)
