@@ -673,6 +673,8 @@ struct CustomRiderSearchBar: View {
                         prevInstructor = i.instructor
                         prevHorse = i.horse
                         self.txt = i.name
+                    }.onAppear() {
+                        print(riders)
                     }
                 }
             }

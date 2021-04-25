@@ -102,7 +102,7 @@ struct BarnDataView: View {
                                 if let error = error {
                                     print("an error has occured - \(error.localizedDescription)")
                                 }
-                                if result.items == [] {
+                                if result.items == [] && horseId != ""{
                                     storage.child("Default_Pictures/Horse.png").downloadURL { (url, err) in
                                         if err != nil{
 
@@ -112,7 +112,7 @@ struct BarnDataView: View {
 
                                         self.url1 = "\(url!)"
                                     }
-                                } else {
+                                } else{
                                     storage.child("\(horseId)/\(horseId)").downloadURL { (url, err) in
                                         if err != nil{
 
@@ -151,7 +151,7 @@ struct BarnDataView: View {
                                 if let error = error {
                                     print("an error has occured - \(error.localizedDescription)")
                                 }
-                                if result.items == [] {
+                                if result.items == [] && instructorId != "" {
                                     storage.child("Default_Pictures/Instructor.png").downloadURL { (url, err) in
                                         if err != nil{
 
@@ -161,7 +161,8 @@ struct BarnDataView: View {
 
                                         self.url2 = "\(url!)"
                                     }
-                                } else {
+                                } else{
+                                    print(instructorId + "11111")
                                     storage.child("\(instructorId)/\(instructorId)").downloadURL { (url, err) in
                                         if err != nil{
 
