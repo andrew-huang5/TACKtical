@@ -18,6 +18,7 @@ class CalendarData: ObservableObject{
 struct CalendarView: View {
     
     @ObservedObject private var calendarData = CalendarData()
+    @ObservedObject private var eventViewModel = EventViewModel()
     
     var strDateSelected: String {
         
@@ -48,7 +49,7 @@ struct CalendarView: View {
                 }) { Image(systemName: "arrow.left") }
                     .frame(width: 35, height: 35, alignment: .leading)
             
-                NavigationLink(destination: AddEventView(start: Date(), end: Date().addingTimeInterval(3600))) {
+                NavigationLink(destination: ChooseEventView()) {
                     Text("+").font(.system(size: 25))
                 }.frame(width: UIScreen.main.bounds.width*0.1, height:UIScreen.main.bounds.width*0.1)
                 .foregroundColor(Color.white)
@@ -69,9 +70,30 @@ struct CalendarView: View {
                         .foregroundColor(.white)
                         .shadow(color: Color.black.opacity(0.2), radius: 10.0, x: 0.0, y: 0.0)
                 )
-                .frame(height: UIScreen.main.bounds.height * 0.75)
-                .padding(15)
+                .frame(width: UIScreen.main.bounds.width * 0.95, height: UIScreen.main.bounds.height * 0.5)
+            
+            VStack {
+                Text(strDateSelected)
+                if getEvent(date: calendarData.selectedDate) != nil {
+                    Text("There is an event on " + strDateSelected)
+                } else {
+                    Text("No events on " + strDateSelected)
+                }
+                    
+            }
         }.navigationBarTitle("Schedule")
+    }
+    
+    func getEvent(date: Date) -> Event! {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        eventViewModel.fetchAllData()
+        for event in eventViewModel.events {
+            if formatter.string(from: event.start) == strDateSelected {
+                return event
+            }
+        }
+        return nil
     }
 }
 

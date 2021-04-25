@@ -47,3 +47,14 @@ struct Instructor: Identifiable & Hashable {
     var phone: String
     var studentName: String
 }
+
+  struct Event: Identifiable & Hashable {
+    var id: String
+    var horseID: String
+    var riderID: String
+    var instructorID: String
+    var type: String
+    var title: String
+    var start: Date
+    var end: Date
+  }
