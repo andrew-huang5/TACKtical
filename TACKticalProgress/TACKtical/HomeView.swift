@@ -11,8 +11,10 @@ struct HomeView: View {
     @StateObject var model = ModelData()
     
     var body: some View {
+        
         VStack(){
-            Text("Hello User,\nHere is a preview of your day:").font(.system(size:UIScreen.main.bounds.height*0.03)).frame(width: UIScreen.main.bounds.width * 0.8, height: UIScreen.main.bounds.height * 0.1).background(Color(red: 173/255, green: 216/255, blue: 230/255, opacity: 1.0))
+            Text("Hello User,\nHere is a preview of your day:").font(.system(size:UIScreen.main.bounds.height*0.03)).frame(width: UIScreen.main.bounds.width * 0.8, height: UIScreen.main.bounds.height * 0.1).background(Color("top").opacity(0.2))
+            //background(Color(red: 173/255, green: 216/255, blue: 230/255, opacity: 1.0))
             VStack(spacing: UIScreen.main.bounds.height*0.02) {
                 VStack(alignment: .leading){
                     Text("9:00 am ").font(.system(size:UIScreen.main.bounds.height*0.025))

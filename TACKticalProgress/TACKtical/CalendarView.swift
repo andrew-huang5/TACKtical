@@ -52,7 +52,7 @@ struct CalendarView: View {
                     Text("+").font(.system(size: 25))
                 }.frame(width: UIScreen.main.bounds.width*0.1, height:UIScreen.main.bounds.width*0.1)
                 .foregroundColor(Color.white)
-                .background(Color(red: 102/255, green: 172/255, blue: 189/255, opacity: 1.0))
+                .background(Color("top"))
                 
                 Button(action: {
                     
