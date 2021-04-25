@@ -105,7 +105,7 @@ struct EditProfileView: View {
                 }
                 
                 ZStack(alignment: .top) {
-                    CustomRiderSearchBar(riders: self.$viewModel2.riders, rider: $horse.owner, riderName: $horse.ownerName, prevInstructor: $prevInstructor, prevHorse: $prevHorse, txt: horse.ownerName).padding(.top)
+                    CustomRiderSearchBar(riders: self.viewModel2.riders, rider: $horse.owner, riderName: $horse.ownerName, prevInstructor: $prevInstructor, prevHorse: $prevHorse, txt: horse.ownerName).padding(.top)
                 }.onAppear() {
                     self.viewModel2.fetchAllData()
                 }
@@ -445,7 +445,7 @@ struct EditInstructorProfileView: View {
                 
                 
                 ZStack(alignment: .top) {
-                    CustomRiderSearchBar(riders: self.$viewModel2.riders, rider: $instructor.student, riderName: $instructor.studentName, prevInstructor: $prevInstructor, prevHorse: $prevHorse, txt: instructor.studentName).padding(.top)
+                    CustomRiderSearchBar(riders: self.viewModel2.riders, rider: $instructor.student, riderName: $instructor.studentName, prevInstructor: $prevInstructor, prevHorse: $prevHorse, txt: instructor.studentName).padding(.top)
                 }.onAppear() {
                     self.viewModel2.fetchAllData()
                 }

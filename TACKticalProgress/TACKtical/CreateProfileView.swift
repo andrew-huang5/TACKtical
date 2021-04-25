@@ -129,7 +129,7 @@ struct CreateHorseProfileView: View {
                 }
                 
                 ZStack(alignment: .top) {
-                    CustomRiderSearchBar(riders: self.$viewModel2.riders, rider: $owner, riderName: $ownerName, prevInstructor: $prevInstructor, prevHorse: $prevHorse, txt: "").padding(.top)
+                    CustomRiderSearchBar(riders: self.viewModel2.riders, rider: $owner, riderName: $ownerName, prevInstructor: $prevInstructor, prevHorse: $prevHorse, txt: "").padding(.top)
                 }.onAppear() {
                     self.viewModel2.fetchAllData()
                 }
@@ -525,7 +525,7 @@ struct CreateInstructorProfileView: View {
                 
                 
                 ZStack(alignment: .top) {
-                    CustomRiderSearchBar(riders: self.$viewModel2.riders, rider: $student, riderName: $studentName, prevInstructor: $prevInstructor, prevHorse: $prevHorse, txt: "").padding(.top)
+                    CustomRiderSearchBar(riders: self.viewModel2.riders, rider: $student, riderName: $studentName, prevInstructor: $prevInstructor, prevHorse: $prevHorse, txt: "").padding(.top)
                 }.onAppear() {
                     self.viewModel2.fetchAllData()
                 }.frame(maxHeight: .infinity)
@@ -640,7 +640,7 @@ struct CustomHorseSearchBar: View {
 
 struct CustomRiderSearchBar: View {
     
-    @Binding var riders: [Rider]
+    let riders: [Rider]
     @Binding var rider: String
     @Binding var riderName: String
     @Binding var prevInstructor: String
@@ -673,8 +673,6 @@ struct CustomRiderSearchBar: View {
                         prevInstructor = i.instructor
                         prevHorse = i.horse
                         self.txt = i.name
-                    }.onAppear() {
-                        print(riders)
                     }
                 }
             }
