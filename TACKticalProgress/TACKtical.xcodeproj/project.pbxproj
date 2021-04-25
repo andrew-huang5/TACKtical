@@ -28,6 +28,10 @@
 		AB8D88E9262E7A27001D1C62 /* InstructorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8D88E8262E7A27001D1C62 /* InstructorViewModel.swift */; };
 		AB8D88F12633623C001D1C62 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8D88F02633623C001D1C62 /* HomeView.swift */; };
 		AB8D88F92633EC0C001D1C62 /* NameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8D88F82633EC0C001D1C62 /* NameViewModel.swift */; };
+		AB8D890426354A57001D1C62 /* AsyncImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8D890326354A57001D1C62 /* AsyncImage.swift */; };
+		AB8D890B26354A69001D1C62 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8D890826354A68001D1C62 /* ImageCache.swift */; };
+		AB8D890C26354A69001D1C62 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8D890926354A69001D1C62 /* ImageLoader.swift */; };
+		AB8D890D26354A69001D1C62 /* EnvironmentValues+ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8D890A26354A69001D1C62 /* EnvironmentValues+ImageCache.swift */; };
 		AB986646261868CC006F66EA /* BarnDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB986645261868CC006F66EA /* BarnDataView.swift */; };
 		AB98664B2618FA79006F66EA /* CreateProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB98664A2618FA79006F66EA /* CreateProfileView.swift */; };
 		ABBACB062612583300818408 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ABBACB052612583300818408 /* GoogleService-Info.plist */; };
@@ -85,6 +89,10 @@
 		AB8D88E8262E7A27001D1C62 /* InstructorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructorViewModel.swift; sourceTree = "<group>"; };
 		AB8D88F02633623C001D1C62 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		AB8D88F82633EC0C001D1C62 /* NameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameViewModel.swift; sourceTree = "<group>"; };
+		AB8D890326354A57001D1C62 /* AsyncImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncImage.swift; sourceTree = "<group>"; };
+		AB8D890826354A68001D1C62 /* ImageCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
+		AB8D890926354A69001D1C62 /* ImageLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
+		AB8D890A26354A69001D1C62 /* EnvironmentValues+ImageCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "EnvironmentValues+ImageCache.swift"; sourceTree = "<group>"; };
 		AB986645261868CC006F66EA /* BarnDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarnDataView.swift; sourceTree = "<group>"; };
 		AB98664A2618FA79006F66EA /* CreateProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProfileView.swift; sourceTree = "<group>"; };
 		ABBACB052612583300818408 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "TACKtical/GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
@@ -160,6 +168,10 @@
 		494E1C1D2610621F0077BD2D /* TACKtical */ = {
 			isa = PBXGroup;
 			children = (
+				AB8D890326354A57001D1C62 /* AsyncImage.swift */,
+				AB8D890A26354A69001D1C62 /* EnvironmentValues+ImageCache.swift */,
+				AB8D890826354A68001D1C62 /* ImageCache.swift */,
+				AB8D890926354A69001D1C62 /* ImageLoader.swift */,
 				494E1C1E2610621F0077BD2D /* TACKticalApp.swift */,
 				ABBACB2B2612602D00818408 /* Horse.swift */,
 				AB8D88E8262E7A27001D1C62 /* InstructorViewModel.swift */,
@@ -481,13 +493,17 @@
 				AB72B15E26257CE700D3A121 /* DeleteProfileView.swift in Sources */,
 				AB8D88E9262E7A27001D1C62 /* InstructorViewModel.swift in Sources */,
 				ABBACB3E2613046A00818408 /* editProfile.swift in Sources */,
+				AB8D890B26354A69001D1C62 /* ImageCache.swift in Sources */,
 				AB8D88D4262B68F1001D1C62 /* CalendarView.swift in Sources */,
 				494E1C1F2610621F0077BD2D /* TACKticalApp.swift in Sources */,
 				49C1A2562630A6190093F067 /* MenuView.swift in Sources */,
+				AB8D890C26354A69001D1C62 /* ImageLoader.swift in Sources */,
 				AB986646261868CC006F66EA /* BarnDataView.swift in Sources */,
 				AB72B1632625E27600D3A121 /* ImagePicker.swift in Sources */,
+				AB8D890426354A57001D1C62 /* AsyncImage.swift in Sources */,
 				AB673B002613447600A4BE17 /* NewProfileView.swift in Sources */,
 				ABBACB2C2612602D00818408 /* Horse.swift in Sources */,
+				AB8D890D26354A69001D1C62 /* EnvironmentValues+ImageCache.swift in Sources */,
 				AB8D88F12633623C001D1C62 /* HomeView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -271,7 +271,7 @@ struct EditRiderProfileView: View {
                 }
                 
                 ZStack(alignment: .top) {
-                    CustomInstructorSearchBar(instructors: self.$viewModel3.instructors, instructor: $rider.instructor, instructorName: $rider.instructorName, prevStudent: $prevStudent, txt: rider.instructor).padding(.top)
+                    CustomInstructorSearchBar(instructors: self.$viewModel3.instructors, instructor: $rider.instructor, instructorName: $rider.instructorName, prevStudent: $prevStudent, txt: rider.instructorName).padding(.top)
                 }.onAppear() {
                     self.viewModel3.fetchAllData()
                 }
@@ -482,7 +482,7 @@ struct EditInstructorProfileView: View {
 //                    Text("Upload").font(.system(size:UIScreen.main.bounds.height*0.025))
 //                }.frame(width:UIScreen.main.bounds.width*0.3, height:UIScreen.main.bounds.height*0.035, alignment:.center).foregroundColor(.black).background(Color(UIColor.lightGray)).opacity(0.7).cornerRadius(16).padding(UIScreen.main.bounds.height*0.005)
 //            }
-        }.padding(EdgeInsets(top: 0, leading: UIScreen.main.bounds.width*0.15, bottom: 0, trailing: UIScreen.main.bounds.width*0.15)).navigationBarTitle("Create Profile", displayMode: .inline)
+        }.padding(EdgeInsets(top: 0, leading: UIScreen.main.bounds.width*0.15, bottom: 0, trailing: UIScreen.main.bounds.width*0.15)).navigationBarTitle("Edit Profile", displayMode: .inline)
     }
     func upload() {
         let db = Firestore.firestore()

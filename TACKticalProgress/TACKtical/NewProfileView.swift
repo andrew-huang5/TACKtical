@@ -6,6 +6,11 @@
 import SwiftUI
 import SDWebImageSwiftUI
 import Firebase
+import Combine
+
+let posters = [
+    "https://image.tmdb.org/t/p/original/pThyQovXQrw2m0s9x82twj48Jq4.jpg"
+].map { URL(string: $0)! }
 
 struct NewProfileView: View {
 //    @State private var editProfile = false
@@ -25,31 +30,59 @@ struct NewProfileView: View {
     
     
     var body: some View {
-        GeometryReader{ geometry in
+        ScrollView {
             ZStack {
                 VStack(){
                     VStack {
                         if url != ""{
-                            
-                            AnimatedImage(url:URL(string: url)!).resizable().clipShape(Circle()).shadow(radius:10).overlay(Circle().stroke(Color(red: 102/255, green: 172/255, blue: 189/255, opacity: 1.0), lineWidth: 5)).frame(width:UIScreen.main.bounds.height * 0.2, height:UIScreen.main.bounds.height*0.2).padding(UIScreen.main.bounds.height*0.005)
+                            AsyncImage(
+                               url: URL(string: url)!,
+                                placeholder: { Color.black},
+                               image: { Image(uiImage: $0).resizable() }
+                            ).clipShape(Circle()).shadow(radius:10).overlay(Circle().stroke(Color(red: 102/255, green: 172/255, blue: 189/255, opacity: 1.0), lineWidth: 5)).frame(width:UIScreen.main.bounds.height * 0.2, height:UIScreen.main.bounds.height*0.2).padding(UIScreen.main.bounds.height*0.005)
+                        } else {
+                            Image(systemName: "photo")
                         }
-                        else{
-                            
-                            Loader()
-                        }
+                        
+
+//                            //AnimatedImage(url:URL(string: url)!).resizable().clipShape(Circle()).shadow(radius:10).overlay(Circle().stroke(Color(red: 102/255, green: 172/255, blue: 189/255, opacity: 1.0), lineWidth: 5)).frame(width:UIScreen.main.bounds.height * 0.2, height:UIScreen.main.bounds.height*0.2).padding(UIScreen.main.bounds.height*0.005)
+//                        }
+//                        else{
+//
+//                            Loader()
+//                        }
                     }
                     .onAppear() {
                         let storage = Storage.storage().reference()
-                        storage.child("\(id)/\(id)").downloadURL { (url, err) in
-                            
-                            if err != nil{
-                                
-                                print((err?.localizedDescription)!)
-                                return
+                        storage.child(id).listAll{ (result, error) in
+                            if let error = error {
+                                print("an error has occured - \(error.localizedDescription)")
                             }
-                            
-                            self.url = "\(url!)"
+                            if result.items == [] {
+                                storage.child("Default_Pictures/Horse.png").downloadURL { (url, err) in
+                                    if err != nil{
+
+                                        print((err?.localizedDescription)!)
+                                        return
+                                    }
+
+                                    self.url = "\(url!)"
+                                    print(self.url)
+                                }
+                            } else {
+                                storage.child("\(id)/\(id)").downloadURL { (url, err) in
+                                    if err != nil{
+
+                                        print((err?.localizedDescription)!)
+                                        return
+                                    }
+
+                                    self.url = "\(url!)"
+                                    print(self.url)
+                                }
+                            }
                         }
+                        
                     }
                     Text(viewModel.horse.name).fontWeight(.semibold).multilineTextAlignment(.center).font(.system(size:UIScreen.main.bounds.height*0.045)).frame(height: UIScreen.main.bounds.height * 0.035).padding(UIScreen.main.bounds.height*0.005)
                     
@@ -94,6 +127,7 @@ struct NewProfileView: View {
         }.onAppear() {
             self.viewModel.fetchData(id: id)
         }
+        MenuView()
     }
     
     func date_to_string(d:Date) -> String {
@@ -111,37 +145,65 @@ struct NewRiderProfileView: View {
     @ObservedObject private var viewModel = RiderViewModel()
     var genderChoices = ["Male", "Female"]
     var heightChoices = ["6.1", "6.2", "6.3", "6.4", "6.5", "6.6", "6.7", "6.8", "6.9", "6.10", "6.11", "7.0"]
-    var ageChoices = [5, 10, 15, 20, 25, 30]
+    var ageChoices = ["5", "10", "15", "20", "25", "30"]
     //var horse = viewModel.horses[0]
     //let formatter1 = DateFormatter()
     @State var url = ""
     @State private var showPopUp: Bool = false
     
     var body: some View {
-        GeometryReader{ geometry in
+        ScrollView{
             ZStack {
                 VStack(){
                     VStack {
                         if url != ""{
-                            
-                            AnimatedImage(url:URL(string: url)!).resizable().clipShape(Circle()).shadow(radius:10).overlay(Circle().stroke(Color(red: 102/255, green: 172/255, blue: 189/255, opacity: 1.0), lineWidth: 5)).frame(width:UIScreen.main.bounds.height * 0.2, height:UIScreen.main.bounds.height*0.2).padding(UIScreen.main.bounds.height*0.005)
+                            AsyncImage(
+                               url: URL(string: url)!,
+                                placeholder: { Color.black},
+                               image: { Image(uiImage: $0).resizable() }
+                            ).clipShape(Circle()).shadow(radius:10).overlay(Circle().stroke(Color(red: 102/255, green: 172/255, blue: 189/255, opacity: 1.0), lineWidth: 5)).frame(width:UIScreen.main.bounds.height * 0.2, height:UIScreen.main.bounds.height*0.2).padding(UIScreen.main.bounds.height*0.005)
+                        } else {
+                            Image(systemName: "photo")
                         }
-                        else{
-                            
-                            Loader()
-                        }
+                        
+//                        if url != ""{
+//
+//                            AnimatedImage(url:URL(string: url)!).resizable().clipShape(Circle()).shadow(radius:10).overlay(Circle().stroke(Color(red: 102/255, green: 172/255, blue: 189/255, opacity: 1.0), lineWidth: 5)).frame(width:UIScreen.main.bounds.height * 0.2, height:UIScreen.main.bounds.height*0.2).padding(UIScreen.main.bounds.height*0.005)
+//                        }
+//                        else{
+//
+//                            Loader()
+//                        }
                     }
                     .onAppear() {
                         let storage = Storage.storage().reference()
-                        storage.child("\(id)/\(id)").downloadURL { (url, err) in
-                            
-                            if err != nil{
-                                
-                                print((err?.localizedDescription)!)
-                                return
+                        storage.child(id).listAll{ (result, error) in
+                            if let error = error {
+                                print("an error has occured - \(error.localizedDescription)")
                             }
-                            
-                            self.url = "\(url!)"
+                            if result.items == [] {
+                                storage.child("Default_Pictures/Rider.png").downloadURL { (url, err) in
+                                    if err != nil{
+
+                                        print((err?.localizedDescription)!)
+                                        return
+                                    }
+
+                                    self.url = "\(url!)"
+                                    print(self.url)
+                                }
+                            } else {
+                                storage.child("\(id)/\(id)").downloadURL { (url, err) in
+                                    if err != nil{
+
+                                        print((err?.localizedDescription)!)
+                                        return
+                                    }
+
+                                    self.url = "\(url!)"
+                                    print(self.url)
+                                }
+                            }
                         }
                     }
                     Text(viewModel.rider.name).fontWeight(.semibold).multilineTextAlignment(.center).font(.system(size:UIScreen.main.bounds.height*0.045)).frame(height: UIScreen.main.bounds.height * 0.035).padding(UIScreen.main.bounds.height*0.005)
@@ -162,6 +224,7 @@ struct NewRiderProfileView: View {
                 
                     VStack(alignment: .center, spacing: UIScreen.main.bounds.height*0.01){
                         Text("Joined Date: " + date_to_string(d: viewModel.rider.joinedDate)).font(.system(size:UIScreen.main.bounds.height*0.025))
+                        Text("Age: " + ageChoices[viewModel.rider.age]).font(.system(size:UIScreen.main.bounds.height*0.025))
                         Text("Gender: " + genderChoices[viewModel.rider.gender]).font(.system(size:UIScreen.main.bounds.height*0.025))
                         Text("Height: " + heightChoices[viewModel.rider.height]).font(.system(size:UIScreen.main.bounds.height*0.025))
                         Text("Owned Horse: " + viewModel.rider.horseName).font(.system(size:UIScreen.main.bounds.height*0.025))
@@ -190,6 +253,7 @@ struct NewRiderProfileView: View {
         }.onAppear() {
             self.viewModel.fetchData(id: id)
         }
+        MenuView()
     }
     
     func date_to_string(d:Date) -> String {
@@ -207,37 +271,65 @@ struct NewInstructorProfileView: View {
     @ObservedObject private var viewModel = InstructorViewModel()
     var genderChoices = ["Male", "Female"]
     var heightChoices = ["6.1", "6.2", "6.3", "6.4", "6.5", "6.6", "6.7", "6.8", "6.9", "6.10", "6.11", "7.0"]
-    var ageChoices = [5, 10, 15, 20, 25, 30]
+    var ageChoices = ["5", "10", "15", "20", "25", "30"]
     //var horse = viewModel.horses[0]
     //let formatter1 = DateFormatter()
     @State var url = ""
     @State private var showPopUp: Bool = false
     
     var body: some View {
-        GeometryReader{ geometry in
+        ScrollView{
             ZStack {
                 VStack(){
                     VStack {
                         if url != ""{
-                            
-                            AnimatedImage(url:URL(string: url)!).resizable().clipShape(Circle()).shadow(radius:10).overlay(Circle().stroke(Color(red: 102/255, green: 172/255, blue: 189/255, opacity: 1.0), lineWidth: 5)).frame(width:UIScreen.main.bounds.height * 0.2, height:UIScreen.main.bounds.height*0.2).padding(UIScreen.main.bounds.height*0.005)
+                            AsyncImage(
+                               url: URL(string: url)!,
+                                placeholder: { Color.black},
+                               image: { Image(uiImage: $0).resizable() }
+                            ).clipShape(Circle()).shadow(radius:10).overlay(Circle().stroke(Color(red: 102/255, green: 172/255, blue: 189/255, opacity: 1.0), lineWidth: 5)).frame(width:UIScreen.main.bounds.height * 0.2, height:UIScreen.main.bounds.height*0.2).padding(UIScreen.main.bounds.height*0.005)
+                        } else {
+                            Image(systemName: "photo")
                         }
-                        else{
-                            
-                            Loader()
-                        }
+                        
+//                        if url != ""{
+//
+//                            AnimatedImage(url:URL(string: url)!).resizable().clipShape(Circle()).shadow(radius:10).overlay(Circle().stroke(Color(red: 102/255, green: 172/255, blue: 189/255, opacity: 1.0), lineWidth: 5)).frame(width:UIScreen.main.bounds.height * 0.2, height:UIScreen.main.bounds.height*0.2).padding(UIScreen.main.bounds.height*0.005)
+//                        }
+//                        else{
+//                            
+//                            Loader()
+//                        }
                     }
                     .onAppear() {
                         let storage = Storage.storage().reference()
-                        storage.child("\(id)/\(id)").downloadURL { (url, err) in
-                            
-                            if err != nil{
-                                
-                                print((err?.localizedDescription)!)
-                                return
+                        storage.child(id).listAll{ (result, error) in
+                            if let error = error {
+                                print("an error has occured - \(error.localizedDescription)")
                             }
-                            
-                            self.url = "\(url!)"
+                            if result.items == [] {
+                                storage.child("Default_Pictures/Instructor.png").downloadURL { (url, err) in
+                                    if err != nil{
+
+                                        print((err?.localizedDescription)!)
+                                        return
+                                    }
+
+                                    self.url = "\(url!)"
+                                    print(self.url)
+                                }
+                            } else {
+                                storage.child("\(id)/\(id)").downloadURL { (url, err) in
+                                    if err != nil{
+
+                                        print((err?.localizedDescription)!)
+                                        return
+                                    }
+
+                                    self.url = "\(url!)"
+                                    print(self.url)
+                                }
+                            }
                         }
                     }
                     Text(viewModel.instructor.name).fontWeight(.semibold).multilineTextAlignment(.center).font(.system(size:UIScreen.main.bounds.height*0.045)).frame(height: UIScreen.main.bounds.height * 0.035).padding(UIScreen.main.bounds.height*0.005)
@@ -257,6 +349,7 @@ struct NewInstructorProfileView: View {
                 
                     VStack(alignment: .center, spacing: UIScreen.main.bounds.height*0.01){
                         Text("Joined Date: " + date_to_string(d: viewModel.instructor.joinedDate)).font(.system(size:UIScreen.main.bounds.height*0.025))
+                        Text("Age: " + ageChoices[viewModel.instructor.age]).font(.system(size:UIScreen.main.bounds.height*0.025))
                         Text("Gender: " + genderChoices[viewModel.instructor.gender]).font(.system(size:UIScreen.main.bounds.height*0.025))
                         Text("Height: " + heightChoices[viewModel.instructor.height]).font(.system(size:UIScreen.main.bounds.height*0.025))
                         Text("Student: " + viewModel.instructor.studentName).font(.system(size:UIScreen.main.bounds.height*0.025))
@@ -281,6 +374,7 @@ struct NewInstructorProfileView: View {
         }.onAppear() {
             self.viewModel.fetchData(id: id)
         }
+        MenuView()
     }
     
     func date_to_string(d:Date) -> String {
@@ -302,6 +396,8 @@ struct Loader: UIViewRepresentable {
         
     }
 }
+
+
 
 //struct NewProfileView_Previews: PreviewProvider {
 //    @State var showup: Bool = false

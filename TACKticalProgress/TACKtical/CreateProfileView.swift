@@ -6,28 +6,10 @@
 import SwiftUI
 import Firebase
 
-struct CreateProfileView: View {
-    
-    var body: some View {
-        VStack() {
-            NavigationLink(destination: CreateHorseProfileView()) {
-                Text("Create a Horse Profile")
-            }
-            NavigationLink(destination: CreateRiderProfileView()) {
-                Text("Create a Rider Profile")
-            }
-            NavigationLink(destination: CreateInstructorProfileView()) {
-                Text("Create an Instructor Profile")
-            }
-        }
-    }
-    
-}
-
 struct CreateHorseProfileView: View {
     @ObservedObject private var viewModel = HorseViewModel()
     @ObservedObject private var viewModel2 = RiderViewModel()
-    let id: String = UUID().uuidString
+    let id: String
     @State var newid: String = ""
     @State var name: String = ""
     @State var birth = Date()
@@ -51,6 +33,9 @@ struct CreateHorseProfileView: View {
     @State var sourceType:UIImagePickerController.SourceType = .camera
         
     @State var upload_image:UIImage?
+    @State private var showNewProfileButton: Bool = false
+    @State private var uploadedOtherData: Bool = false
+    @State private var uploadedImage: Bool = true
     
     var body: some View {
         Form {
@@ -70,6 +55,7 @@ struct CreateHorseProfileView: View {
                         .frame(width:30, height:30)
                     }
                     Text("Choose").foregroundColor(.blue).onTapGesture {
+                        self.newid = id
                         self.showActionSheet = true
                     }.actionSheet(isPresented: $showActionSheet){
                     ActionSheet(title: Text("Add a picture to the profile"), message: nil, buttons: [
@@ -95,6 +81,8 @@ struct CreateHorseProfileView: View {
                     
                     Text("Upload").foregroundColor(.blue).onTapGesture{
                         if let thisImage = self.upload_image {
+                            self.showNewProfileButton = false
+                            self.uploadedImage = false
                             uploadImage(image: thisImage)
                         }else{
                             print("couldn't upload image - no image present")
@@ -150,17 +138,12 @@ struct CreateHorseProfileView: View {
         VStack {
             
             Button(action: {
-                    let storage = Storage.storage()
-                    storage.reference().child(id).listAll{ (result, error) in
-                        if let error = error {
-                            print("an error has occured - \(error.localizedDescription)")
-                        }
-                        print(result.items)
-                        if result.items == [] {
-                            uploadImage(image: UIImage(imageLiteralResourceName: "Horse"))
-                        }
-                    }
-                    upload()}){
+                upload()
+                if uploadedImage {
+                    self.showNewProfileButton = true
+                }
+                self.uploadedOtherData = true
+            }){
                 Text("Upload").font(.system(size:UIScreen.main.bounds.height*0.025))
             }.frame(width:UIScreen.main.bounds.width*0.3, height:UIScreen.main.bounds.height*0.035, alignment:.center).foregroundColor(.black).background(Color(UIColor.lightGray)).opacity(0.7).cornerRadius(16).padding(UIScreen.main.bounds.height*0.005)
             
@@ -169,19 +152,20 @@ struct CreateHorseProfileView: View {
 //                    Text("Upload").font(.system(size:UIScreen.main.bounds.height*0.025))
 //                }.frame(width:UIScreen.main.bounds.width*0.3, height:UIScreen.main.bounds.height*0.035, alignment:.center).foregroundColor(.black).background(Color(UIColor.lightGray)).opacity(0.7).cornerRadius(16).padding(UIScreen.main.bounds.height*0.005)
 //            }
-            NavigationLink(destination: NewProfileView(id: newid)) {
-                Text("New Profile").font(.system(size:UIScreen.main.bounds.height*0.025))
-            }.frame(width:UIScreen.main.bounds.width*0.3, height:UIScreen.main.bounds.height*0.035, alignment:.center).foregroundColor(.black).background(Color(UIColor.lightGray)).opacity(0.7).cornerRadius(16).padding(UIScreen.main.bounds.height*0.005)
+            if showNewProfileButton {
+                NavigationLink(destination: NewProfileView(id: id)) {
+                    Text("New Profile").font(.system(size:UIScreen.main.bounds.height*0.025))
+                }.simultaneousGesture(TapGesture().onEnded{print(id+"777777")}).frame(width:UIScreen.main.bounds.width*0.3, height:UIScreen.main.bounds.height*0.035, alignment:.center).foregroundColor(.black).background(Color(UIColor.lightGray)).opacity(0.7).cornerRadius(16).padding(UIScreen.main.bounds.height*0.005)
+            }
         }.padding(EdgeInsets(top: 0, leading: UIScreen.main.bounds.width*0.15, bottom: 0, trailing: UIScreen.main.bounds.width*0.15)).navigationBarTitle("Create Profile", displayMode: .inline)
     }
     func upload() {
         let db = Firestore.firestore()
-        print(id)
+        print(id + "9999")
         let formatter1 = DateFormatter()
         formatter1.dateStyle = .medium
         
         db.collection("HorseProfiles").document(id).setData(["Arrival Date": formatter1.string(from: arrival), "Color": color, "Date of Birth": formatter1.string(from: birth), "Feed": feed, "Gender": gender, "Height": height, "ID": id, "Owner": owner, "name":name, "Owner Name":ownerName], merge:true)
-        self.newid = id
         if owner != ""{
             if prevHorse != ""{
                 print(prevHorse)
@@ -194,12 +178,17 @@ struct CreateHorseProfileView: View {
     func uploadImage(image: UIImage) {
         if let imageData = image.jpegData(compressionQuality: 1) {
             let storage = Storage.storage()
+            print(id + "9999")
             storage.reference().child("\(id)/\(id)").putData(imageData, metadata: nil){
                 (_, err) in
                 if let err = err {
                     print("an error has occured - \(err.localizedDescription)")
                 } else {
                     print("image uploaded successfully")
+                    if self.uploadedOtherData {
+                        self.showNewProfileButton = true
+                    }
+                    self.uploadedImage = true
                 }
             }
             
@@ -213,8 +202,7 @@ struct CreateRiderProfileView: View {
     @ObservedObject private var viewModel = RiderViewModel()
     @ObservedObject private var viewModel2 = HorseViewModel()
     @ObservedObject private var viewModel3 = InstructorViewModel()
-    let id: String = UUID().uuidString
-    @State var newid: String = ""
+    let id: String
     @State var name: String = ""
     @State var joinedDate = Date()
     @State var gender: Int = 0
@@ -238,6 +226,9 @@ struct CreateRiderProfileView: View {
     @State var sourceType:UIImagePickerController.SourceType = .camera
         
     @State var upload_image:UIImage?
+    @State private var showNewProfileButton: Bool = false
+    @State private var uploadedOtherData: Bool = false
+    @State private var uploadedImage: Bool = true
     
     var body: some View {
         Form {
@@ -282,6 +273,8 @@ struct CreateRiderProfileView: View {
                     
                     Text("Upload").foregroundColor(.blue).onTapGesture{
                         if let thisImage = self.upload_image {
+                            self.showNewProfileButton = false
+                            self.uploadedImage = false
                             uploadImage(image: thisImage)
                         }else{
                             print("couldn't upload image - no image present")
@@ -339,29 +332,14 @@ struct CreateRiderProfileView: View {
             }
         }
         VStack {
-//            Button(action: {
-//                if let thisImage = self.upload_image {
-//                    uploadImage(image: thisImage)
-//                }else{
-//                    print("couldn't upload image - no image present")
-//                }}) {
-//                Text("Upload Image").font(.system(size:UIScreen.main.bounds.height*0.025))
-//            }.frame(width:UIScreen.main.bounds.width*0.3, height:UIScreen.main.bounds.height*0.035, alignment:.center).foregroundColor(.black).background(Color(UIColor.lightGray)).opacity(0.7).cornerRadius(16).padding(UIScreen.main.bounds.height*0.005)
             
             Button(action: {
-                    let storage = Storage.storage()
-                    storage.reference().child(id).listAll{ (result, error) in
-                        if let error = error {
-                            print("an error has occured - \(error.localizedDescription)")
-                        }
-                        print(result.items)
-                        if result.items == [] {
-                            uploadImage(image: UIImage(imageLiteralResourceName: "Lebron"))
-                        }
-                    }
-                    print(horse)
-                    print(prevOwner)
-                    upload()}){
+                upload()
+                if uploadedImage {
+                    self.showNewProfileButton = true
+                }
+                self.uploadedOtherData = true
+            }){
                 Text("Upload").font(.system(size:UIScreen.main.bounds.height*0.025))
             }.frame(width:UIScreen.main.bounds.width*0.3, height:UIScreen.main.bounds.height*0.035, alignment:.center).foregroundColor(.black).background(Color(UIColor.lightGray)).opacity(0.7).cornerRadius(16).padding(UIScreen.main.bounds.height*0.005)
             
@@ -370,9 +348,12 @@ struct CreateRiderProfileView: View {
 //                    Text("Upload").font(.system(size:UIScreen.main.bounds.height*0.025))
 //                }.frame(width:UIScreen.main.bounds.width*0.3, height:UIScreen.main.bounds.height*0.035, alignment:.center).foregroundColor(.black).background(Color(UIColor.lightGray)).opacity(0.7).cornerRadius(16).padding(UIScreen.main.bounds.height*0.005)
 //            }
-            NavigationLink(destination: NewRiderProfileView(id: newid)) {
-                Text("New Profile").font(.system(size:UIScreen.main.bounds.height*0.025))
-            }.frame(width:UIScreen.main.bounds.width*0.3, height:UIScreen.main.bounds.height*0.035, alignment:.center).foregroundColor(.black).background(Color(UIColor.lightGray)).opacity(0.7).cornerRadius(16).padding(UIScreen.main.bounds.height*0.005)
+            if showNewProfileButton{
+                NavigationLink(destination: NewRiderProfileView(id: id)) {
+                    Text("New Profile").font(.system(size:UIScreen.main.bounds.height*0.025))
+                }.frame(width:UIScreen.main.bounds.width*0.3, height:UIScreen.main.bounds.height*0.035, alignment:.center).foregroundColor(.black).background(Color(UIColor.lightGray)).opacity(0.7).cornerRadius(16).padding(UIScreen.main.bounds.height*0.005)
+            }
+            
         }.padding(EdgeInsets(top: 0, leading: UIScreen.main.bounds.width*0.15, bottom: 0, trailing: UIScreen.main.bounds.width*0.15)).navigationBarTitle("Create Profile", displayMode: .inline)
     }
     func upload() {
@@ -382,7 +363,6 @@ struct CreateRiderProfileView: View {
         formatter1.dateStyle = .medium
         
         db.collection("RiderProfiles").document(id).setData(["Age": age, "Email": email, "Gender": gender, "Height": height, "ID": id, "Joined Date": formatter1.string(from: joinedDate), "Owned Horse": horse, "Phone": phone, "name":name, "Horse Name": horseName, "Instructor": instructor, "Instructor Name": instructorName], merge:true)
-        self.newid = id
         if horse != ""{
             //db.collection("RiderProfiles").document(id).collection("Horses").document(horse).setData(["Horse Name": horseName], merge: true)
             if prevOwner != ""{
@@ -412,6 +392,10 @@ struct CreateRiderProfileView: View {
                     print("an error has occured - \(err.localizedDescription)")
                 } else {
                     print("image uploaded successfully")
+                    if self.uploadedOtherData {
+                        self.showNewProfileButton = true
+                    }
+                    self.uploadedImage = true
                 }
             }
             
@@ -425,7 +409,7 @@ struct CreateRiderProfileView: View {
 struct CreateInstructorProfileView: View {
     @ObservedObject private var viewModel = InstructorViewModel()
     @ObservedObject private var viewModel2 = RiderViewModel()
-    let id: String = UUID().uuidString
+    let id: String
     @State var newid: String = ""
     @State var name: String = ""
     @State var joinedDate = Date()
@@ -448,6 +432,10 @@ struct CreateInstructorProfileView: View {
     @State var sourceType:UIImagePickerController.SourceType = .camera
         
     @State var upload_image:UIImage?
+    @State private var showNewProfileButton: Bool = false
+    @State private var uploadedOtherData: Bool = false
+    @State private var uploadedImage: Bool = true
+    
     
     var body: some View {
         Form {
@@ -492,6 +480,8 @@ struct CreateInstructorProfileView: View {
                     
                     Text("Upload").foregroundColor(.blue).onTapGesture{
                         if let thisImage = self.upload_image {
+                            self.showNewProfileButton = false
+                            self.uploadedImage = false
                             uploadImage(image: thisImage)
                         }else{
                             print("couldn't upload image - no image present")
@@ -545,17 +535,12 @@ struct CreateInstructorProfileView: View {
         VStack {
             
             Button(action: {
-                    let storage = Storage.storage()
-                    storage.reference().child(id).listAll{ (result, error) in
-                        if let error = error {
-                            print("an error has occured - \(error.localizedDescription)")
-                        }
-                        print(result.items)
-                        if result.items == [] {
-                            uploadImage(image: UIImage(imageLiteralResourceName: "ClintonAnderson"))
-                        }
-                    }
-                    upload()}){
+                upload()
+                if uploadedImage {
+                    self.showNewProfileButton = true
+                }
+                self.uploadedOtherData = true
+            }){
                 Text("Upload").font(.system(size:UIScreen.main.bounds.height*0.025))
             }.frame(width:UIScreen.main.bounds.width*0.3, height:UIScreen.main.bounds.height*0.035, alignment:.center).foregroundColor(.black).background(Color(UIColor.lightGray)).opacity(0.7).cornerRadius(16).padding(UIScreen.main.bounds.height*0.005)
             
@@ -564,9 +549,12 @@ struct CreateInstructorProfileView: View {
 //                    Text("Upload").font(.system(size:UIScreen.main.bounds.height*0.025))
 //                }.frame(width:UIScreen.main.bounds.width*0.3, height:UIScreen.main.bounds.height*0.035, alignment:.center).foregroundColor(.black).background(Color(UIColor.lightGray)).opacity(0.7).cornerRadius(16).padding(UIScreen.main.bounds.height*0.005)
 //            }
-            NavigationLink(destination: NewInstructorProfileView(id: newid)) {
-                Text("New Profile").font(.system(size:UIScreen.main.bounds.height*0.025))
-            }.frame(width:UIScreen.main.bounds.width*0.3, height:UIScreen.main.bounds.height*0.035, alignment:.center).foregroundColor(.black).background(Color(UIColor.lightGray)).opacity(0.7).cornerRadius(16).padding(UIScreen.main.bounds.height*0.005)
+            if self.showNewProfileButton {
+                NavigationLink(destination: NewInstructorProfileView(id: newid)) {
+                    Text("New Profile").font(.system(size:UIScreen.main.bounds.height*0.025))
+                }.frame(width:UIScreen.main.bounds.width*0.3, height:UIScreen.main.bounds.height*0.035, alignment:.center).foregroundColor(.black).background(Color(UIColor.lightGray)).opacity(0.7).cornerRadius(16).padding(UIScreen.main.bounds.height*0.005)
+            }
+            
         }.padding(EdgeInsets(top: 0, leading: UIScreen.main.bounds.width*0.15, bottom: 0, trailing: UIScreen.main.bounds.width*0.15)).navigationBarTitle("Create Profile", displayMode: .inline)
     }
     func upload() {
@@ -596,6 +584,10 @@ struct CreateInstructorProfileView: View {
                     print("an error has occured - \(err.localizedDescription)")
                 } else {
                     print("image uploaded successfully")
+                    if self.uploadedOtherData {
+                        self.showNewProfileButton = true
+                    }
+                    self.uploadedImage = true
                 }
             }
             
@@ -604,12 +596,6 @@ struct CreateInstructorProfileView: View {
         }
     }
     
-}
-
-struct CreateProfileView_Previews: PreviewProvider {
-    static var previews: some View {
-        CreateProfileView()
-    }
 }
 
 struct CustomHorseSearchBar: View {

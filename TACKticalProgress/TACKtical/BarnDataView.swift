@@ -16,10 +16,13 @@ struct BarnDataView: View {
     @State var id: String = Auth.auth().currentUser!.uid
     @State var horseId: String
     @State var instructorId: String
+    let idforHorse: String = UUID().uuidString
+    let idforRider: String = UUID().uuidString
+    let idforInstructor: String = UUID().uuidString
     
     
     var body: some View {
-        VStack {
+        ScrollView{
             ZStack(alignment: .top) {
                 
                 
@@ -31,7 +34,11 @@ struct BarnDataView: View {
                                 
                                 
                                 NavigationLink(destination: NewRiderProfileView(id: id)){
-                                    AnimatedImage(url:URL(string: url)!).resizable().clipShape(Circle()).frame(width:UIScreen.main.bounds.width * 0.2, height:UIScreen.main.bounds.width*0.2)
+                                    AsyncImage(
+                                       url: URL(string: url)!,
+                                        placeholder: { Color.black},
+                                       image: { Image(uiImage: $0).resizable() }
+                                    ).clipShape(Circle()).frame(width:UIScreen.main.bounds.width * 0.2, height:UIScreen.main.bounds.width*0.2).clipShape(Circle()).frame(width:UIScreen.main.bounds.width * 0.2, height:UIScreen.main.bounds.width*0.2)
                                 }
                             }
                             else{
@@ -41,15 +48,33 @@ struct BarnDataView: View {
                         }
                         .onAppear() {
                             let storage = Storage.storage().reference()
-                            storage.child("\(self.id)/\(self.id)").downloadURL { (url, err) in
-                                
-                                if err != nil{
-                                    
-                                    print((err?.localizedDescription)!)
-                                    return
+                            storage.child(id).listAll{ (result, error) in
+                                if let error = error {
+                                    print("an error has occured - \(error.localizedDescription)")
                                 }
-                                
-                                self.url = "\(url!)"
+                                if result.items == [] {
+                                    storage.child("Default_Pictures/Rider.png").downloadURL { (url, err) in
+                                        if err != nil{
+
+                                            print((err?.localizedDescription)!)
+                                            return
+                                        }
+
+                                        self.url = "\(url!)"
+                                        print(self.url)
+                                    }
+                                } else {
+                                    storage.child("\(id)/\(id)").downloadURL { (url, err) in
+                                        if err != nil{
+
+                                            print((err?.localizedDescription)!)
+                                            return
+                                        }
+
+                                        self.url = "\(url!)"
+                                        print(self.url)
+                                    }
+                                }
                             }
                         }
                         
@@ -58,7 +83,11 @@ struct BarnDataView: View {
                                 
                                 
                                 NavigationLink(destination: NewProfileView(id: self.horseId)){
-                                    AnimatedImage(url:URL(string: url1)!).resizable().clipShape(Circle()).frame(width:UIScreen.main.bounds.width * 0.2, height:UIScreen.main.bounds.width*0.2)
+                                    AsyncImage(
+                                       url: URL(string: url1)!,
+                                        placeholder: { Color.black},
+                                       image: { Image(uiImage: $0).resizable() }
+                                    ).clipShape(Circle()).frame(width:UIScreen.main.bounds.width * 0.2, height:UIScreen.main.bounds.width*0.2)
                                 }
                             }
                             else{
@@ -69,17 +98,31 @@ struct BarnDataView: View {
                         }
                         .onAppear() {
                             let storage = Storage.storage().reference()
-                            print(74)
-                            print(self.horseId)
-                            storage.child("\(self.horseId)/\(self.horseId)").downloadURL { (url, err) in
-                                
-                                if err != nil{
-                                    
-                                    print((err?.localizedDescription)!)
-                                    return
+                            storage.child(horseId).listAll{ (result, error) in
+                                if let error = error {
+                                    print("an error has occured - \(error.localizedDescription)")
                                 }
-                                
-                                self.url1 = "\(url!)"
+                                if result.items == [] {
+                                    storage.child("Default_Pictures/Horse.png").downloadURL { (url, err) in
+                                        if err != nil{
+
+                                            print((err?.localizedDescription)!)
+                                            return
+                                        }
+
+                                        self.url1 = "\(url!)"
+                                    }
+                                } else {
+                                    storage.child("\(horseId)/\(horseId)").downloadURL { (url, err) in
+                                        if err != nil{
+
+                                            print((err?.localizedDescription)!)
+                                            return
+                                        }
+
+                                        self.url1 = "\(url!)"
+                                    }
+                                }
                             }
                             
                         }
@@ -89,7 +132,11 @@ struct BarnDataView: View {
                                 
                                 
                                 NavigationLink(destination: NewInstructorProfileView(id: self.instructorId)){
-                                    AnimatedImage(url:URL(string: url2)!).resizable().clipShape(Circle()).frame(width:UIScreen.main.bounds.width * 0.2, height:UIScreen.main.bounds.width*0.2)
+                                    AsyncImage(
+                                       url: URL(string: url2)!,
+                                        placeholder: { Color.black},
+                                       image: { Image(uiImage: $0).resizable() }
+                                    ).clipShape(Circle()).frame(width:UIScreen.main.bounds.width * 0.2, height:UIScreen.main.bounds.width*0.2).clipShape(Circle()).frame(width:UIScreen.main.bounds.width * 0.2, height:UIScreen.main.bounds.width*0.2)
                                 }
                             }
                             else{
@@ -100,17 +147,31 @@ struct BarnDataView: View {
                         }
                         .onAppear() {
                             let storage = Storage.storage().reference()
-                            print(74)
-                            print(self.instructorId)
-                            storage.child("\(self.instructorId)/\(self.instructorId)").downloadURL { (url, err) in
-                                
-                                if err != nil{
-                                    
-                                    print((err?.localizedDescription)!)
-                                    return
+                            storage.child(instructorId).listAll{ (result, error) in
+                                if let error = error {
+                                    print("an error has occured - \(error.localizedDescription)")
                                 }
-                                
-                                self.url2 = "\(url!)"
+                                if result.items == [] {
+                                    storage.child("Default_Pictures/Instructor.png").downloadURL { (url, err) in
+                                        if err != nil{
+
+                                            print((err?.localizedDescription)!)
+                                            return
+                                        }
+
+                                        self.url2 = "\(url!)"
+                                    }
+                                } else {
+                                    storage.child("\(instructorId)/\(instructorId)").downloadURL { (url, err) in
+                                        if err != nil{
+
+                                            print((err?.localizedDescription)!)
+                                            return
+                                        }
+
+                                        self.url2 = "\(url!)"
+                                    }
+                                }
                             }
                             
                         }
@@ -121,17 +182,17 @@ struct BarnDataView: View {
                     
                     HStack(spacing: UIScreen.main.bounds.width*0.07) {
                         NavigationLink(
-                            destination: CreateHorseProfileView()) {
+                            destination: CreateHorseProfileView(id: idforHorse)) {
                             Text("Horse \nProfile").font(.system(size:UIScreen.main.bounds.height*0.025)).foregroundColor(.black)
                         }.frame(width:UIScreen.main.bounds.width*0.2, height:UIScreen.main.bounds.height*0.09).font(.system(size:UIScreen.main.bounds.height*0.03)).background(Color(red: 211/255, green: 211/255, blue: 211/255, opacity: 1.0))
                         
                         NavigationLink(
-                            destination: CreateRiderProfileView()) {
+                            destination: CreateRiderProfileView(id: idforRider)) {
                             Text("Rider \nProfile").font(.system(size:UIScreen.main.bounds.height*0.025)).foregroundColor(Color.black)
                         }.frame(width:UIScreen.main.bounds.width*0.2, height:UIScreen.main.bounds.height*0.09).background(Color(red: 211/255, green: 211/255, blue: 211/255, opacity: 1.0))
                         
                         NavigationLink(
-                            destination: CreateInstructorProfileView()) {
+                            destination: CreateInstructorProfileView(id: idforInstructor)) {
                             Text("Instructor \nProfile").font(.system(size:UIScreen.main.bounds.height*0.025)).foregroundColor(Color.black)
                         }.frame(width:UIScreen.main.bounds.width*0.2, height:UIScreen.main.bounds.height*0.09).background(Color(red: 211/255, green: 211/255, blue: 211/255, opacity: 1.0))
                     }.padding()
@@ -144,8 +205,8 @@ struct BarnDataView: View {
             }.padding(EdgeInsets(top: 0, leading: UIScreen.main.bounds.width*0.15, bottom: UIScreen.main.bounds.height*0.01, trailing: UIScreen.main.bounds.width*0.15)).frame(width: UIScreen.main.bounds.width * 0.8, height: UIScreen.main.bounds.height * 0.6).background(Color(red: 240/255, green: 248/255, blue: 255/255, opacity: 1.0))
             
             MenuView()
-            
-        }.padding(EdgeInsets(top: 0, leading: UIScreen.main.bounds.width*0.092, bottom: 0, trailing: UIScreen.main.bounds.width*0.092)).navigationBarTitle("Barn Data", displayMode: .inline)
+        }.padding(EdgeInsets(top: UIScreen.main.bounds.height*0.092, leading: UIScreen.main.bounds.width*0.092, bottom: 0, trailing: UIScreen.main.bounds.width*0.092)).navigationBarTitle("Barn Data", displayMode: .inline).ignoresSafeArea(.keyboard)
+        
     }
 }
 

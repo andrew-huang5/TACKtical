@@ -6,13 +6,17 @@
 //
 
 import SwiftUI
+import Firebase
 
 struct HomeView: View {
     @StateObject var model = ModelData()
+    @ObservedObject var viewModel = RiderViewModel()
     
     var body: some View {
         VStack(){
-            Text("Hello User,\nHere is a preview of your day:").font(.system(size:UIScreen.main.bounds.height*0.03)).frame(width: UIScreen.main.bounds.width * 0.8, height: UIScreen.main.bounds.height * 0.1).background(Color(red: 173/255, green: 216/255, blue: 230/255, opacity: 1.0))
+            Text("Hello \(viewModel.rider.name),\nHere is a preview of your day:").font(.system(size:UIScreen.main.bounds.height*0.025)).frame(width: UIScreen.main.bounds.width * 0.8, height: UIScreen.main.bounds.height * 0.1).background(Color(red: 173/255, green: 216/255, blue: 230/255, opacity: 1.0)).onAppear(){
+                viewModel.fetchData(id: Auth.auth().currentUser!.uid)
+            }
             VStack(spacing: UIScreen.main.bounds.height*0.02) {
                 VStack(alignment: .leading){
                     Text("9:00 am ").font(.system(size:UIScreen.main.bounds.height*0.025))

@@ -27,7 +27,6 @@ class NameViewModel: ObservableObject {
                 
                 return ObjectName(id: id, name: name, type: "Horse")
             }
-            print(self.ObjectNames)
         }
         db.collection("RiderProfiles").addSnapshotListener { (querySnapshot, error) in
             guard let documents = querySnapshot?.documents else {
