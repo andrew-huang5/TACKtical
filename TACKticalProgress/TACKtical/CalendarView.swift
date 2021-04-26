@@ -18,6 +18,9 @@ class CalendarData: ObservableObject{
 struct CalendarView: View {
     
     @ObservedObject private var calendarData = CalendarData()
+    @ObservedObject private var eventViewModel = EventViewModel()
+    let timeFormatter = DateFormatter()
+    let uuid = UUID().uuidString
     
     var strDateSelected: String {
         
@@ -36,43 +39,77 @@ struct CalendarView: View {
         return dateFormatter.string(from: calendarData.titleOfMonth)
     }
     
+    
+    
     var body: some View {
-        VStack {
-            
-            HStack(spacing: 60) {
+            VStack {
                 
-                Button(action: {
-                                    
-                    self.calendarData.crntPage = Calendar.current.date(byAdding: .month, value: -1, to: self.calendarData.crntPage)!
+                HStack(spacing: 60) {
                     
-                }) { Image(systemName: "arrow.left") }
-                    .frame(width: 35, height: 35, alignment: .leading)
-            
-                NavigationLink(destination: AddEventView(start: Date(), end: Date().addingTimeInterval(3600))) {
-                    Text("+").font(.system(size: 25))
-                }.frame(width: UIScreen.main.bounds.width*0.1, height:UIScreen.main.bounds.width*0.1)
-                .foregroundColor(Color.white)
-                .background(Color(red: 102/255, green: 172/255, blue: 189/255, opacity: 1.0))
+                    Button(action: {
+                                        
+                        self.calendarData.crntPage = Calendar.current.date(byAdding: .month, value: -1, to: self.calendarData.crntPage)!
+                        
+                    }) { Image(systemName: "arrow.left") }
+                        .frame(width: 35, height: 35, alignment: .leading)
                 
-                Button(action: {
+                    NavigationLink(destination: ChooseEventView(date: calendarData.selectedDate)) {
+                        Text("+").font(.system(size: 25))
+                    }.frame(width: UIScreen.main.bounds.width*0.1, height:UIScreen.main.bounds.width*0.1)
+                    .foregroundColor(Color.white)
+                    .background(Color(red: 102/255, green: 172/255, blue: 189/255, opacity: 1.0))
                     
-                    self.calendarData.crntPage = Calendar.current.date(byAdding: .month, value: 1, to: self.calendarData.crntPage)!
-                    
-                }) { Image(systemName: "arrow.right") }
-                .frame(width: 35, height: 35, alignment: .trailing)
-            }
-            
-            CustomCalendar(dateSelected: $calendarData.selectedDate, mnthNm: $calendarData.titleOfMonth, pageCurrent: $calendarData.crntPage)
-                .padding()
-                .background(
-                    RoundedRectangle(cornerRadius: 25.0)
-                        .foregroundColor(.white)
-                        .shadow(color: Color.black.opacity(0.2), radius: 10.0, x: 0.0, y: 0.0)
-                )
-                .frame(height: UIScreen.main.bounds.height * 0.75)
-                .padding(15)
-        }.navigationBarTitle("Schedule")
-    }
+                    Button(action: {
+                        
+                        self.calendarData.crntPage = Calendar.current.date(byAdding: .month, value: 1, to: self.calendarData.crntPage)!
+                        
+                    }) { Image(systemName: "arrow.right") }
+                    .frame(width: 35, height: 35, alignment: .trailing)
+                }
+                
+                
+                
+                CustomCalendar(dateSelected: $calendarData.selectedDate, mnthNm: $calendarData.titleOfMonth, pageCurrent: $calendarData.crntPage)
+                    .padding()
+                    .background(
+                        RoundedRectangle(cornerRadius: 25.0)
+                            .foregroundColor(.white)
+                            .shadow(color: Color.black.opacity(0.2), radius: 10.0, x: 0.0, y: 0.0)
+                    )
+                    .frame(height: UIScreen.main.bounds.height * 0.5)
+                    .padding(15)
+                
+                ScrollView {
+                    VStack(spacing: UIScreen.main.bounds.height*0.02) {
+                        ForEach (eventViewModel.events, id: \.self) { i in
+                            if (i.id.starts(with: strDateSelected)) {
+                                VStack(alignment: .leading) {
+                                    HStack {
+                                        Text(i.startTimeString+"  ~").onAppear(){
+                                            timeFormatter.timeStyle = .short
+                                        }.font(.system(size:UIScreen.main.bounds.height*0.025))
+                                        Text(i.endTimeString).onAppear(){
+                                            timeFormatter.timeStyle = .short
+                                        }.font(.system(size:UIScreen.main.bounds.height*0.025))
+                                        NavigationLink(destination: EditEventView(type: i.type, eventID: i.id, start: i.startTime, end: i.endTime, date: i.date, title: i.title, horseName: i.horseName, riderName: i.riderName)) {
+                                            Text("Edit")
+                                        }
+                                        
+                                    }
+                                    if i.type == "Lesson" || i.type == "Training" || i.type == "Custom" {
+                                        (Text(i.title) + Text(" with " + i.horseName + " (Horse) and ") + Text(i.riderName + " (Rider)")).font(.system(size:UIScreen.main.bounds.height*0.022))
+                                    } else {
+                                        (Text(i.title) + Text(" with " + i.horseName + " (Horse)")).font(.system(size:UIScreen.main.bounds.height*0.022))
+                                    }
+   
+                                }.frame(width: UIScreen.main.bounds.width * 0.7, alignment: .leading)
+                            }
+                        }
+                    }.onAppear(){eventViewModel.fetchAllData()}.frame(width: UIScreen.main.bounds.width * 0.8).padding().background(Color(red: 240/255, green: 248/255, blue: 255/255, opacity: 1.0))
+                }
+                MenuView()
+            }.navigationBarTitle("Schedule")
+        }
 }
 
 struct CalendarView_Previews: PreviewProvider {

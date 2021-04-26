@@ -14,8 +14,7 @@ struct BarnDataView: View {
     @State var url1 = ""
     @State var url2 = ""
     @State var id: String = Auth.auth().currentUser!.uid
-    @State var horseId: String
-    @State var instructorId: String
+    @State var studentId: String
     let idforHorse: String = UUID().uuidString
     let idforRider: String = UUID().uuidString
     let idforInstructor: String = UUID().uuidString
@@ -33,7 +32,7 @@ struct BarnDataView: View {
                             if url != ""{
                                 
                                 
-                                NavigationLink(destination: NewRiderProfileView(id: id)){
+                                NavigationLink(destination: NewInstructorProfileView(id: id)){
                                     AsyncImage(
                                        url: URL(string: url)!,
                                         placeholder: { Color.black},
@@ -82,7 +81,7 @@ struct BarnDataView: View {
                             if url1 != ""{
                                 
                                 
-                                NavigationLink(destination: NewProfileView(id: self.horseId)){
+                                NavigationLink(destination: NewRiderProfileView(id: self.studentId)){
                                     AsyncImage(
                                        url: URL(string: url1)!,
                                         placeholder: { Color.black},
@@ -98,12 +97,12 @@ struct BarnDataView: View {
                         }
                         .onAppear() {
                             let storage = Storage.storage().reference()
-                            storage.child(horseId).listAll{ (result, error) in
+                            storage.child(studentId).listAll{ (result, error) in
                                 if let error = error {
                                     print("an error has occured - \(error.localizedDescription)")
                                 }
-                                if result.items == [] && horseId != ""{
-                                    storage.child("Default_Pictures/Horse.png").downloadURL { (url, err) in
+                                if result.items == [] && studentId != ""{
+                                    storage.child("Default_Pictures/Rider.png").downloadURL { (url, err) in
                                         if err != nil{
 
                                             print((err?.localizedDescription)!)
@@ -113,7 +112,7 @@ struct BarnDataView: View {
                                         self.url1 = "\(url!)"
                                     }
                                 } else{
-                                    storage.child("\(horseId)/\(horseId)").downloadURL { (url, err) in
+                                    storage.child("\(studentId)/\(studentId)").downloadURL { (url, err) in
                                         if err != nil{
 
                                             print((err?.localizedDescription)!)
@@ -127,55 +126,55 @@ struct BarnDataView: View {
                             
                         }
                         
-                        VStack {
-                            if url2 != ""{
-                                
-                                
-                                NavigationLink(destination: NewInstructorProfileView(id: self.instructorId)){
-                                    AsyncImage(
-                                       url: URL(string: url2)!,
-                                        placeholder: { Color.black},
-                                       image: { Image(uiImage: $0).resizable() }
-                                    ).clipShape(Circle()).frame(width:UIScreen.main.bounds.width * 0.2, height:UIScreen.main.bounds.width*0.2).clipShape(Circle()).frame(width:UIScreen.main.bounds.width * 0.2, height:UIScreen.main.bounds.width*0.2)
-                                }
-                            }
-                            else{
-                                Text("Image").frame(width: UIScreen.main.bounds.width*0.2, height: UIScreen.main.bounds.width*0.2)
-                                .foregroundColor(Color.white)
-                                .background(Color(red: 211/255, green: 211/255, blue: 211/255, opacity: 1.0)).clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
-                            }
-                        }
-                        .onAppear() {
-                            let storage = Storage.storage().reference()
-                            storage.child(instructorId).listAll{ (result, error) in
-                                if let error = error {
-                                    print("an error has occured - \(error.localizedDescription)")
-                                }
-                                if result.items == [] && instructorId != "" {
-                                    storage.child("Default_Pictures/Instructor.png").downloadURL { (url, err) in
-                                        if err != nil{
-
-                                            print((err?.localizedDescription)!)
-                                            return
-                                        }
-
-                                        self.url2 = "\(url!)"
-                                    }
-                                } else{
-                                    print(instructorId + "11111")
-                                    storage.child("\(instructorId)/\(instructorId)").downloadURL { (url, err) in
-                                        if err != nil{
-
-                                            print((err?.localizedDescription)!)
-                                            return
-                                        }
-
-                                        self.url2 = "\(url!)"
-                                    }
-                                }
-                            }
-                            
-                        }
+//                        VStack {
+//                            if url2 != ""{
+//
+//
+//                                NavigationLink(destination: NewInstructorProfileView(id: self.instructorId)){
+//                                    AsyncImage(
+//                                       url: URL(string: url2)!,
+//                                        placeholder: { Color.black},
+//                                       image: { Image(uiImage: $0).resizable() }
+//                                    ).clipShape(Circle()).frame(width:UIScreen.main.bounds.width * 0.2, height:UIScreen.main.bounds.width*0.2).clipShape(Circle()).frame(width:UIScreen.main.bounds.width * 0.2, height:UIScreen.main.bounds.width*0.2)
+//                                }
+//                            }
+//                            else{
+//                                Text("Image").frame(width: UIScreen.main.bounds.width*0.2, height: UIScreen.main.bounds.width*0.2)
+//                                .foregroundColor(Color.white)
+//                                .background(Color(red: 211/255, green: 211/255, blue: 211/255, opacity: 1.0)).clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
+//                            }
+//                        }
+//                        .onAppear() {
+//                            let storage = Storage.storage().reference()
+//                            storage.child(instructorId).listAll{ (result, error) in
+//                                if let error = error {
+//                                    print("an error has occured - \(error.localizedDescription)")
+//                                }
+//                                if result.items == [] && instructorId != "" {
+//                                    storage.child("Default_Pictures/Instructor.png").downloadURL { (url, err) in
+//                                        if err != nil{
+//
+//                                            print((err?.localizedDescription)!)
+//                                            return
+//                                        }
+//
+//                                        self.url2 = "\(url!)"
+//                                    }
+//                                } else{
+//                                    print(instructorId + "11111")
+//                                    storage.child("\(instructorId)/\(instructorId)").downloadURL { (url, err) in
+//                                        if err != nil{
+//
+//                                            print((err?.localizedDescription)!)
+//                                            return
+//                                        }
+//
+//                                        self.url2 = "\(url!)"
+//                                    }
+//                                }
+//                            }
+//
+//                        }
                         
                     }
                     
@@ -213,7 +212,7 @@ struct BarnDataView: View {
 
 struct BarnDataView_Previews: PreviewProvider {
     static var previews: some View {
-        BarnDataView(horseId: "", instructorId: "")
+        BarnDataView(studentId: "")
     }
 }
 

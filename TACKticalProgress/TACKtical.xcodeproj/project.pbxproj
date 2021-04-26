@@ -32,6 +32,8 @@
 		AB8D890B26354A69001D1C62 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8D890826354A68001D1C62 /* ImageCache.swift */; };
 		AB8D890C26354A69001D1C62 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8D890926354A69001D1C62 /* ImageLoader.swift */; };
 		AB8D890D26354A69001D1C62 /* EnvironmentValues+ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8D890A26354A69001D1C62 /* EnvironmentValues+ImageCache.swift */; };
+		AB8D8912263673FD001D1C62 /* EditEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8D8911263673FD001D1C62 /* EditEventView.swift */; };
+		AB8D89172636746A001D1C62 /* EventViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8D89162636746A001D1C62 /* EventViewModel.swift */; };
 		AB986646261868CC006F66EA /* BarnDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB986645261868CC006F66EA /* BarnDataView.swift */; };
 		AB98664B2618FA79006F66EA /* CreateProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB98664A2618FA79006F66EA /* CreateProfileView.swift */; };
 		ABBACB062612583300818408 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ABBACB052612583300818408 /* GoogleService-Info.plist */; };
@@ -93,6 +95,8 @@
 		AB8D890826354A68001D1C62 /* ImageCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 		AB8D890926354A69001D1C62 /* ImageLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
 		AB8D890A26354A69001D1C62 /* EnvironmentValues+ImageCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "EnvironmentValues+ImageCache.swift"; sourceTree = "<group>"; };
+		AB8D8911263673FD001D1C62 /* EditEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditEventView.swift; sourceTree = "<group>"; };
+		AB8D89162636746A001D1C62 /* EventViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventViewModel.swift; sourceTree = "<group>"; };
 		AB986645261868CC006F66EA /* BarnDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarnDataView.swift; sourceTree = "<group>"; };
 		AB98664A2618FA79006F66EA /* CreateProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProfileView.swift; sourceTree = "<group>"; };
 		ABBACB052612583300818408 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "TACKtical/GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
@@ -184,12 +188,14 @@
 				AB72B15D26257CE700D3A121 /* DeleteProfileView.swift */,
 				AB98664A2618FA79006F66EA /* CreateProfileView.swift */,
 				AB8D88CE262B68AF001D1C62 /* AddEventView.swift */,
+				AB8D8911263673FD001D1C62 /* EditEventView.swift */,
 				AB8D88D3262B68F1001D1C62 /* CalendarView.swift */,
 				AB8D88E3262B77ED001D1C62 /* DayView.swift */,
 				AB673AFF2613447600A4BE17 /* NewProfileView.swift */,
 				ABBACB302612655A00818408 /* HorseViewModel.swift */,
 				49C1A2552630A6190093F067 /* MenuView.swift */,
 				AB8D88F02633623C001D1C62 /* HomeView.swift */,
+				AB8D89162636746A001D1C62 /* EventViewModel.swift */,
 				494E1C22261062200077BD2D /* Assets.xcassets */,
 				ABBACB052612583300818408 /* GoogleService-Info.plist */,
 				494E1C27261062200077BD2D /* Info.plist */,
@@ -496,6 +502,7 @@
 				AB8D890B26354A69001D1C62 /* ImageCache.swift in Sources */,
 				AB8D88D4262B68F1001D1C62 /* CalendarView.swift in Sources */,
 				494E1C1F2610621F0077BD2D /* TACKticalApp.swift in Sources */,
+				AB8D89172636746A001D1C62 /* EventViewModel.swift in Sources */,
 				49C1A2562630A6190093F067 /* MenuView.swift in Sources */,
 				AB8D890C26354A69001D1C62 /* ImageLoader.swift in Sources */,
 				AB986646261868CC006F66EA /* BarnDataView.swift in Sources */,
@@ -505,6 +512,7 @@
 				ABBACB2C2612602D00818408 /* Horse.swift in Sources */,
 				AB8D890D26354A69001D1C62 /* EnvironmentValues+ImageCache.swift in Sources */,
 				AB8D88F12633623C001D1C62 /* HomeView.swift in Sources */,
+				AB8D8912263673FD001D1C62 /* EditEventView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

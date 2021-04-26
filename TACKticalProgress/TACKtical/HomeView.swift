@@ -10,44 +10,57 @@ import Firebase
 
 struct HomeView: View {
     @StateObject var model = ModelData()
-    @ObservedObject var viewModel = RiderViewModel()
+    @ObservedObject var viewModel = InstructorViewModel()
+    @ObservedObject var eventViewModel = EventViewModel()
+    let timeFormatter = DateFormatter()
+    
+    var strDateSelected: String {
+            
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .medium
+        dateFormatter.timeStyle = .none
+        dateFormatter.locale = Locale.current
+        return dateFormatter.string(from: Date())
+    }
     
     var body: some View {
         VStack(){
-            Text("Hello \(viewModel.rider.name),\nHere is a preview of your day:").font(.system(size:UIScreen.main.bounds.height*0.025)).frame(width: UIScreen.main.bounds.width * 0.8, height: UIScreen.main.bounds.height * 0.1).background(Color(red: 173/255, green: 216/255, blue: 230/255, opacity: 1.0)).onAppear(){
+            Text("Hello \(viewModel.instructor.name),\nHere is a preview of your day:").font(.system(size:UIScreen.main.bounds.height*0.03)).frame(width: UIScreen.main.bounds.width * 0.8, height: UIScreen.main.bounds.height * 0.1).padding().background(Color(red: 173/255, green: 216/255, blue: 230/255, opacity: 1.0)).onAppear(){
                 viewModel.fetchData(id: Auth.auth().currentUser!.uid)
             }
-            VStack(spacing: UIScreen.main.bounds.height*0.02) {
-                VStack(alignment: .leading){
-                    Text("9:00 am ").font(.system(size:UIScreen.main.bounds.height*0.025))
-                    Text("\tRise and shine").font(.system(size:UIScreen.main.bounds.height*0.025)).frame(width: UIScreen.main.bounds.width * 0.7, alignment: .leading)
+            ScrollView {
+                VStack(spacing: UIScreen.main.bounds.height*0.02) {
+                    ForEach (eventViewModel.events, id: \.self) { i in
+                        if (i.id.starts(with: strDateSelected)) {
+                            VStack(alignment: .leading) {
+                                HStack {
+                                    Text(i.startTimeString+"  ~").onAppear(){
+                                        timeFormatter.timeStyle = .short
+                                    }.font(.system(size:UIScreen.main.bounds.height*0.025))
+                                    Text(i.endTimeString).onAppear(){
+                                        timeFormatter.timeStyle = .short
+                                    }.font(.system(size:UIScreen.main.bounds.height*0.025))
+                                }
+                                if i.type == "Lesson" || i.type == "Training" || i.type == "Custom" {
+                                    (Text(i.title) + Text(" with " + i.horseName + " (Horse) and ") + Text(i.riderName + " (Rider)")).font(.system(size:UIScreen.main.bounds.height*0.022))
+                                } else {
+                                    (Text(i.title) + Text(" with " + i.horseName + " (Horse)")).font(.system(size:UIScreen.main.bounds.height*0.022))
+                                }
+
+                            }.frame(width: UIScreen.main.bounds.width * 0.7, alignment: .leading)
+                        }
+                    }
+                }.frame(width: UIScreen.main.bounds.width * 0.8).padding().background(Color(red: 240/255, green: 248/255, blue: 255/255, opacity: 1.0)).onAppear() {
+                    self.eventViewModel.fetchAllData()
                 }
-                VStack(alignment: .leading){
-                    Text("10:00 am ").font(.system(size:UIScreen.main.bounds.height*0.025))
-                    Text("\tLesson with Bob").font(.system(size:UIScreen.main.bounds.height*0.025)).frame(width: UIScreen.main.bounds.width * 0.7, alignment: .leading)
-                }
-                VStack(alignment: .leading){
-                    Text("11:00 am ").font(.system(size:UIScreen.main.bounds.height*0.025))
-                    Text("\tPrepare lunch for meeting").font(.system(size:UIScreen.main.bounds.height*0.025)).frame(width: UIScreen.main.bounds.width * 0.7, alignment: .leading)
-                }
-                VStack(alignment: .leading){
-                    Text("12:00 pm ").font(.system(size:UIScreen.main.bounds.height*0.025))
-                    Text("\tLunch meeting with partners").font(.system(size:UIScreen.main.bounds.height*0.025)).frame(width: UIScreen.main.bounds.width * 0.7, alignment: .leading)
-                }
-                VStack(alignment: .leading){
-                    Text("1:00 pm ").font(.system(size:UIScreen.main.bounds.height*0.025))
-                    Text("\tFix the broken gate").font(.system(size:UIScreen.main.bounds.height*0.025)).frame(width: UIScreen.main.bounds.width * 0.7, alignment: .leading)
-                }
-                VStack(alignment: .leading){
-                    Text("2:00 pm ").font(.system(size:UIScreen.main.bounds.height*0.025))
-                    Text("\tStable cleaning").font(.system(size:UIScreen.main.bounds.height*0.025)).frame(width: UIScreen.main.bounds.width * 0.7, alignment: .leading)
-                }
-            }.padding(EdgeInsets(top: 0, leading: UIScreen.main.bounds.width*0.15, bottom: UIScreen.main.bounds.height*0.01, trailing: UIScreen.main.bounds.width*0.15)).frame(width: UIScreen.main.bounds.width * 0.8, height: UIScreen.main.bounds.height * 0.5).background(Color(red: 240/255, green: 248/255, blue: 255/255, opacity: 1.0))
-            MenuView()
+            }
             Button(action: model.logOut, label: {
                 Text("LogOut")
-                    .fontWeight(.bold)
-            })
+                    .fontWeight(.bold).foregroundColor(Color(.white))
+            }).frame(width:UIScreen.main.bounds.width*0.3, height:UIScreen.main.bounds.height*0.008, alignment:.center).foregroundColor(.white).padding(UIScreen.main.bounds.height*0.02).background(Color(.red)).cornerRadius(16)
+            
+            MenuView()
+            
         }.padding(EdgeInsets(top: 0, leading: UIScreen.main.bounds.width*0.092, bottom: 0, trailing: UIScreen.main.bounds.width*0.092)).navigationBarTitle("TACKtical", displayMode: .inline)
         
     }

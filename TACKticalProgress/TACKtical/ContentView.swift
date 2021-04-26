@@ -216,6 +216,10 @@ struct SignUpView: View {
                 .padding(.top)
                 
                 VStack(spacing: 20){
+                    CustomTextField(image: "person", placeHolder: "Name", txt: $model.name_SignUp)
+                    
+                    CustomTextField(image: "person", placeHolder: "Phone", txt: $model.phone_SignUp)
+                    
                     CustomTextField(image: "person", placeHolder: "Email", txt: $model.email_SignUp)
                     
                     CustomTextField(image: "lock", placeHolder: "Password", txt: $model.password_SignUp)
@@ -279,6 +283,8 @@ class ModelData : ObservableObject {
     @Published var password = ""
     @Published var isSignUp = false
     @Published var email_SignUp = ""
+    @Published var name_SignUp = ""
+    @Published var phone_SignUp = ""
     @Published var password_SignUp = ""
     @Published var reEnterPassword = ""
     @Published var resetEmail = ""
@@ -425,15 +431,26 @@ class ModelData : ObservableObject {
                 return
             }
             
+            //upload display name and phone number to their user profile
+            let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
+            changeRequest?.displayName = self.name_SignUp
+            
+            changeRequest?.commitChanges { (error) in
+              // ...
+            }
+            
             let user = Auth.auth().currentUser
             let db = Firestore.firestore()
             if let user = user {
                 let uid = user.uid
+                let name = self.name_SignUp
+                let phone = self.phone_SignUp
                 let email = user.email
                 let date = Date()
                 let formatter1 = DateFormatter()
                 formatter1.dateStyle = .medium
-                db.collection("RiderProfiles").document(uid).setData(["Age": 0, "Email": email ?? "", "Gender": 0, "Height": 0, "ID": uid, "Joined Date": formatter1.string(from: date), "Owned Horse": "", "Phone": "", "name": "User", "Horse Name": "", "Instructor": "", "Instructor Name": ""], merge:true)
+                db.collection("InstructorProfiles").document(uid).setData(["Age": 0, "Email": email ?? "", "Gender": 0, "Height": 0, "ID": uid, "Joined Date": formatter1.string(from: date), "Student": "", "Phone": phone, "name":name, "Student Name": ""], merge:true)
+                
                 self.uploadImage(image: UIImage(imageLiteralResourceName: "Lebron"), id: uid)
             }
             
