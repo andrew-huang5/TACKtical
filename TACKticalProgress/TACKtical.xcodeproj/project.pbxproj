@@ -16,14 +16,12 @@
 		494E1C31261062200077BD2D /* TACKticalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494E1C30261062200077BD2D /* TACKticalTests.swift */; };
 		494E1C3C261062210077BD2D /* TACKticalUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494E1C3B261062210077BD2D /* TACKticalUITests.swift */; };
 		49C1A2562630A6190093F067 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C1A2552630A6190093F067 /* MenuView.swift */; };
-		AB673B002613447600A4BE17 /* NewProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB673AFF2613447600A4BE17 /* NewProfileView.swift */; };
 		AB72B15E26257CE700D3A121 /* DeleteProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB72B15D26257CE700D3A121 /* DeleteProfileView.swift */; };
 		AB72B1632625E27600D3A121 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB72B1622625E27600D3A121 /* ImagePicker.swift */; };
 		AB72B19D262A9D1400D3A121 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = AB72B19C262A9D1400D3A121 /* SDWebImageSwiftUI */; };
 		AB8D88CF262B68AF001D1C62 /* AddEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8D88CE262B68AF001D1C62 /* AddEventView.swift */; };
 		AB8D88D4262B68F1001D1C62 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8D88D3262B68F1001D1C62 /* CalendarView.swift */; };
 		AB8D88DA262B6C1E001D1C62 /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = AB8D88D9262B6C1E001D1C62 /* FSCalendar */; };
-		AB8D88DF262B7620001D1C62 /* RiderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8D88DE262B7620001D1C62 /* RiderViewModel.swift */; };
 		AB8D88E4262B77ED001D1C62 /* DayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8D88E3262B77ED001D1C62 /* DayView.swift */; };
 		AB8D88E9262E7A27001D1C62 /* InstructorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8D88E8262E7A27001D1C62 /* InstructorViewModel.swift */; };
 		AB8D88F12633623C001D1C62 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8D88F02633623C001D1C62 /* HomeView.swift */; };
@@ -34,6 +32,8 @@
 		AB8D890D26354A69001D1C62 /* EnvironmentValues+ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8D890A26354A69001D1C62 /* EnvironmentValues+ImageCache.swift */; };
 		AB8D8912263673FD001D1C62 /* EditEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8D8911263673FD001D1C62 /* EditEventView.swift */; };
 		AB8D89172636746A001D1C62 /* EventViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8D89162636746A001D1C62 /* EventViewModel.swift */; };
+		AB8D892A2636A2A1001D1C62 /* RiderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8D89292636A2A1001D1C62 /* RiderViewModel.swift */; };
+		AB8D89352636A2F6001D1C62 /* NewProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8D89342636A2F6001D1C62 /* NewProfileView.swift */; };
 		AB986646261868CC006F66EA /* BarnDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB986645261868CC006F66EA /* BarnDataView.swift */; };
 		AB98664B2618FA79006F66EA /* CreateProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB98664A2618FA79006F66EA /* CreateProfileView.swift */; };
 		ABBACB062612583300818408 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ABBACB052612583300818408 /* GoogleService-Info.plist */; };
@@ -81,12 +81,10 @@
 		872F4F50459AB78AA432F298 /* Pods_TACKticalTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TACKticalTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		90F489FA07064A61778C10FA /* Pods-TACKtical-TACKticalUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TACKtical-TACKticalUITests.release.xcconfig"; path = "Target Support Files/Pods-TACKtical-TACKticalUITests/Pods-TACKtical-TACKticalUITests.release.xcconfig"; sourceTree = "<group>"; };
 		A6A221A94B3451F8034D5B78 /* Pods-TACKticalTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TACKticalTests.release.xcconfig"; path = "Target Support Files/Pods-TACKticalTests/Pods-TACKticalTests.release.xcconfig"; sourceTree = "<group>"; };
-		AB673AFF2613447600A4BE17 /* NewProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileView.swift; sourceTree = "<group>"; };
 		AB72B15D26257CE700D3A121 /* DeleteProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteProfileView.swift; sourceTree = "<group>"; };
 		AB72B1622625E27600D3A121 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		AB8D88CE262B68AF001D1C62 /* AddEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEventView.swift; sourceTree = "<group>"; };
 		AB8D88D3262B68F1001D1C62 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
-		AB8D88DE262B7620001D1C62 /* RiderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiderViewModel.swift; sourceTree = "<group>"; };
 		AB8D88E3262B77ED001D1C62 /* DayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayView.swift; sourceTree = "<group>"; };
 		AB8D88E8262E7A27001D1C62 /* InstructorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructorViewModel.swift; sourceTree = "<group>"; };
 		AB8D88F02633623C001D1C62 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -97,6 +95,8 @@
 		AB8D890A26354A69001D1C62 /* EnvironmentValues+ImageCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "EnvironmentValues+ImageCache.swift"; sourceTree = "<group>"; };
 		AB8D8911263673FD001D1C62 /* EditEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditEventView.swift; sourceTree = "<group>"; };
 		AB8D89162636746A001D1C62 /* EventViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventViewModel.swift; sourceTree = "<group>"; };
+		AB8D89292636A2A1001D1C62 /* RiderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiderViewModel.swift; sourceTree = "<group>"; };
+		AB8D89342636A2F6001D1C62 /* NewProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileView.swift; sourceTree = "<group>"; };
 		AB986645261868CC006F66EA /* BarnDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarnDataView.swift; sourceTree = "<group>"; };
 		AB98664A2618FA79006F66EA /* CreateProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProfileView.swift; sourceTree = "<group>"; };
 		ABBACB052612583300818408 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "TACKtical/GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
@@ -179,19 +179,19 @@
 				494E1C1E2610621F0077BD2D /* TACKticalApp.swift */,
 				ABBACB2B2612602D00818408 /* Horse.swift */,
 				AB8D88E8262E7A27001D1C62 /* InstructorViewModel.swift */,
-				AB8D88DE262B7620001D1C62 /* RiderViewModel.swift */,
 				AB8D88F82633EC0C001D1C62 /* NameViewModel.swift */,
 				494E1C202610621F0077BD2D /* ContentView.swift */,
 				ABBACB3D2613046A00818408 /* editProfile.swift */,
 				AB986645261868CC006F66EA /* BarnDataView.swift */,
 				AB72B1622625E27600D3A121 /* ImagePicker.swift */,
+				AB8D89292636A2A1001D1C62 /* RiderViewModel.swift */,
 				AB72B15D26257CE700D3A121 /* DeleteProfileView.swift */,
 				AB98664A2618FA79006F66EA /* CreateProfileView.swift */,
 				AB8D88CE262B68AF001D1C62 /* AddEventView.swift */,
 				AB8D8911263673FD001D1C62 /* EditEventView.swift */,
+				AB8D89342636A2F6001D1C62 /* NewProfileView.swift */,
 				AB8D88D3262B68F1001D1C62 /* CalendarView.swift */,
 				AB8D88E3262B77ED001D1C62 /* DayView.swift */,
-				AB673AFF2613447600A4BE17 /* NewProfileView.swift */,
 				ABBACB302612655A00818408 /* HorseViewModel.swift */,
 				49C1A2552630A6190093F067 /* MenuView.swift */,
 				AB8D88F02633623C001D1C62 /* HomeView.swift */,
@@ -489,7 +489,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AB8D88DF262B7620001D1C62 /* RiderViewModel.swift in Sources */,
 				AB8D88E4262B77ED001D1C62 /* DayView.swift in Sources */,
 				494E1C212610621F0077BD2D /* ContentView.swift in Sources */,
 				ABBACB312612655A00818408 /* HorseViewModel.swift in Sources */,
@@ -499,16 +498,17 @@
 				AB72B15E26257CE700D3A121 /* DeleteProfileView.swift in Sources */,
 				AB8D88E9262E7A27001D1C62 /* InstructorViewModel.swift in Sources */,
 				ABBACB3E2613046A00818408 /* editProfile.swift in Sources */,
+				AB8D892A2636A2A1001D1C62 /* RiderViewModel.swift in Sources */,
 				AB8D890B26354A69001D1C62 /* ImageCache.swift in Sources */,
 				AB8D88D4262B68F1001D1C62 /* CalendarView.swift in Sources */,
 				494E1C1F2610621F0077BD2D /* TACKticalApp.swift in Sources */,
+				AB8D89352636A2F6001D1C62 /* NewProfileView.swift in Sources */,
 				AB8D89172636746A001D1C62 /* EventViewModel.swift in Sources */,
 				49C1A2562630A6190093F067 /* MenuView.swift in Sources */,
 				AB8D890C26354A69001D1C62 /* ImageLoader.swift in Sources */,
 				AB986646261868CC006F66EA /* BarnDataView.swift in Sources */,
 				AB72B1632625E27600D3A121 /* ImagePicker.swift in Sources */,
 				AB8D890426354A57001D1C62 /* AsyncImage.swift in Sources */,
-				AB673B002613447600A4BE17 /* NewProfileView.swift in Sources */,
 				ABBACB2C2612602D00818408 /* Horse.swift in Sources */,
 				AB8D890D26354A69001D1C62 /* EnvironmentValues+ImageCache.swift in Sources */,
 				AB8D88F12633623C001D1C62 /* HomeView.swift in Sources */,

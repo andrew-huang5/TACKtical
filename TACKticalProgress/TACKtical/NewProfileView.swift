@@ -6,7 +6,6 @@
 import SwiftUI
 import SDWebImageSwiftUI
 import Firebase
-import Combine
 
 let posters = [
     "https://image.tmdb.org/t/p/original/pThyQovXQrw2m0s9x82twj48Jq4.jpg"
@@ -16,15 +15,13 @@ struct NewProfileView: View {
 //    @State private var editProfile = false
 //    var horse = Horse(DOB: "2021", height: 16, horseID: 1, name: "Haha", weight: 200)
     var id: String
-    @Environment(\.presentationMode) var presentationMode
+    //@Environment(\.presentationMode) var presentationMode
     
     @ObservedObject private var viewModel = HorseViewModel()
     var colorChoices = ["Bay", "Chestnut", "Gray", "Dun"]
     var genderChoices = ["Male", "Female"]
     var heightChoices = ["10", "11", "12", "13", "14", "15", "16"]
     var feedChoices = ["Pasture Grass", "Hay", "Grains", "Salt & Minerals", "Bran", "Garden Refuse", "Fruit & Veggie"]
-    //var horse = viewModel.horses[0]
-    //let formatter1 = DateFormatter()
     @State var url = ""
     @State private var showPopUp: Bool = false
     
@@ -44,13 +41,6 @@ struct NewProfileView: View {
                             Image(systemName: "photo")
                         }
                         
-
-//                            //AnimatedImage(url:URL(string: url)!).resizable().clipShape(Circle()).shadow(radius:10).overlay(Circle().stroke(Color(red: 102/255, green: 172/255, blue: 189/255, opacity: 1.0), lineWidth: 5)).frame(width:UIScreen.main.bounds.height * 0.2, height:UIScreen.main.bounds.height*0.2).padding(UIScreen.main.bounds.height*0.005)
-//                        }
-//                        else{
-//
-//                            Loader()
-//                        }
                     }
                     .onAppear() {
                         let storage = Storage.storage().reference()
@@ -110,11 +100,6 @@ struct NewProfileView: View {
                     }.padding(UIScreen.main.bounds.height*0.005)
                 
                     VStack(alignment: .center, spacing: UIScreen.main.bounds.height*0.01){
-                        Button(action: {
-                            print("Going to upcoming Training Rides")
-                        }) {
-                            Text("Upcoming Training Rides").font(.system(size:UIScreen.main.bounds.height*0.025))
-                        }.frame(width:UIScreen.main.bounds.width*0.6, height:UIScreen.main.bounds.height*0.008, alignment:.center).foregroundColor(.white).padding(UIScreen.main.bounds.height*0.02).background(Color(red: 102/255, green: 172/255, blue: 189/255, opacity: 1.0)).cornerRadius(16)
                         NavigationLink(destination: NewRiderProfileView(id:viewModel.horse.owner)) {
                             Text("Rider Profiles").font(.system(size:UIScreen.main.bounds.height*0.025))
                         }.disabled(viewModel.horse.owner == "").frame(width:UIScreen.main.bounds.width*0.6, height:UIScreen.main.bounds.height*0.008, alignment:.center).foregroundColor(.white).padding(UIScreen.main.bounds.height*0.02).background(Color(red: 102/255, green: 172/255, blue: 189/255, opacity: 1.0)).cornerRadius(16)
@@ -166,14 +151,6 @@ struct NewRiderProfileView: View {
                             Image(systemName: "photo")
                         }
                         
-//                        if url != ""{
-//
-//                            AnimatedImage(url:URL(string: url)!).resizable().clipShape(Circle()).shadow(radius:10).overlay(Circle().stroke(Color(red: 102/255, green: 172/255, blue: 189/255, opacity: 1.0), lineWidth: 5)).frame(width:UIScreen.main.bounds.height * 0.2, height:UIScreen.main.bounds.height*0.2).padding(UIScreen.main.bounds.height*0.005)
-//                        }
-//                        else{
-//
-//                            Loader()
-//                        }
                     }
                     .onAppear() {
                         let storage = Storage.storage().reference()
@@ -214,7 +191,6 @@ struct NewRiderProfileView: View {
                         }.frame(width:UIScreen.main.bounds.width*0.3, height:UIScreen.main.bounds.height*0.035, alignment:.center).foregroundColor(.black).background(Color(.lightGray)).opacity(0.7).cornerRadius(16)
                     
                         Button(action:{
-                            //presentationMode.wrappedValue.dismiss()
                             showPopUp.toggle()
                         }) {
                             Text("Delete Profile").font(.system(size:UIScreen.main.bounds.height*0.025)).foregroundColor(.white)
@@ -234,11 +210,6 @@ struct NewRiderProfileView: View {
                     }.padding(UIScreen.main.bounds.height*0.005)
                 
                     VStack(alignment: .center, spacing: UIScreen.main.bounds.height*0.01){
-                        Button(action: {
-                            print("Going to upcoming Training Rides")
-                        }) {
-                            Text("Upcoming Training Rides").font(.system(size:UIScreen.main.bounds.height*0.025))
-                        }.frame(width:UIScreen.main.bounds.width*0.6, height:UIScreen.main.bounds.height*0.008, alignment:.center).foregroundColor(.white).padding(UIScreen.main.bounds.height*0.02).background(Color(red: 102/255, green: 172/255, blue: 189/255, opacity: 1.0)).cornerRadius(16)
                         NavigationLink(destination: NewProfileView(id: viewModel.rider.horse)) {
                             Text("Horse Profile").font(.system(size:UIScreen.main.bounds.height*0.025))
                         }.disabled(viewModel.rider.horse == "").frame(width:UIScreen.main.bounds.width*0.6, height:UIScreen.main.bounds.height*0.008, alignment:.center).foregroundColor(.white).padding(UIScreen.main.bounds.height*0.02).background(Color(red: 102/255, green: 172/255, blue: 189/255, opacity: 1.0)).cornerRadius(16)
@@ -292,14 +263,6 @@ struct NewInstructorProfileView: View {
                             Image(systemName: "photo")
                         }
                         
-//                        if url != ""{
-//
-//                            AnimatedImage(url:URL(string: url)!).resizable().clipShape(Circle()).shadow(radius:10).overlay(Circle().stroke(Color(red: 102/255, green: 172/255, blue: 189/255, opacity: 1.0), lineWidth: 5)).frame(width:UIScreen.main.bounds.height * 0.2, height:UIScreen.main.bounds.height*0.2).padding(UIScreen.main.bounds.height*0.005)
-//                        }
-//                        else{
-//                            
-//                            Loader()
-//                        }
                     }
                     .onAppear() {
                         let storage = Storage.storage().reference()
@@ -358,11 +321,6 @@ struct NewInstructorProfileView: View {
                     }.padding(UIScreen.main.bounds.height*0.005)
                 
                     VStack(alignment: .center, spacing: UIScreen.main.bounds.height*0.01){
-                        Button(action: {
-                            print("Going to upcoming Training Rides")
-                        }) {
-                            Text("Upcoming Training Rides").font(.system(size:UIScreen.main.bounds.height*0.025))
-                        }.frame(width:UIScreen.main.bounds.width*0.6, height:UIScreen.main.bounds.height*0.008, alignment:.center).foregroundColor(.white).padding(UIScreen.main.bounds.height*0.02).background(Color(red: 102/255, green: 172/255, blue: 189/255, opacity: 1.0)).cornerRadius(16)
                         NavigationLink(destination: NewRiderProfileView(id: viewModel.instructor.student)) {
                             Text("Student Profile").font(.system(size:UIScreen.main.bounds.height*0.025))
                         }.disabled(viewModel.instructor.student == "").frame(width:UIScreen.main.bounds.width*0.6, height:UIScreen.main.bounds.height*0.008, alignment:.center).foregroundColor(.white).padding(UIScreen.main.bounds.height*0.02).background(Color(red: 102/255, green: 172/255, blue: 189/255, opacity: 1.0)).cornerRadius(16)

@@ -11,24 +11,30 @@ import Firebase
 struct ChooseEventView: View {
     @State var date: Date
     var body: some View {
-        VStack {
-            NavigationLink(destination: AddEventView(type: "Lesson", start: date, end: date.addingTimeInterval(3600))) {
-                Text("Lesson")
-            }.frame(width:UIScreen.main.bounds.width*0.6, height:UIScreen.main.bounds.height*0.008, alignment:.center).foregroundColor(.white).padding(UIScreen.main.bounds.height*0.02).background(Color(red: 102/255, green: 172/255, blue: 189/255, opacity: 1.0)).cornerRadius(16)
-            NavigationLink(destination: AddEventView(type: "Training", start: date, end: date.addingTimeInterval(3600))) {
-                Text("Training Ride")
-            }.frame(width:UIScreen.main.bounds.width*0.6, height:UIScreen.main.bounds.height*0.008, alignment:.center).foregroundColor(.white).padding(UIScreen.main.bounds.height*0.02).background(Color(red: 102/255, green: 172/255, blue: 189/255, opacity: 1.0)).cornerRadius(16)
-            NavigationLink(destination: AddEventView(type: "Vet", start: date, end: date.addingTimeInterval(3600))) {
-                Text("Vet")
-            }.frame(width:UIScreen.main.bounds.width*0.6, height:UIScreen.main.bounds.height*0.008, alignment:.center).foregroundColor(.white).padding(UIScreen.main.bounds.height*0.02).background(Color(red: 102/255, green: 172/255, blue: 189/255, opacity: 1.0)).cornerRadius(16)
-            NavigationLink(destination: AddEventView(type: "Farrier", start: date, end: date.addingTimeInterval(3600))) {
-                Text("Farrier")
-            }.frame(width:UIScreen.main.bounds.width*0.6, height:UIScreen.main.bounds.height*0.008, alignment:.center).foregroundColor(.white).padding(UIScreen.main.bounds.height*0.02).background(Color(red: 102/255, green: 172/255, blue: 189/255, opacity: 1.0)).cornerRadius(16)
-            NavigationLink(destination: AddEventView(type: "Custom", start: date,
-                                                     end: date.addingTimeInterval(3600))) {
-                Text("Custom")
-            }.frame(width:UIScreen.main.bounds.width*0.6, height:UIScreen.main.bounds.height*0.008, alignment:.center).foregroundColor(.white).padding(UIScreen.main.bounds.height*0.02).background(Color(red: 102/255, green: 172/255, blue: 189/255, opacity: 1.0)).cornerRadius(16)
-        }.navigationBarTitle("Choose Event Type")
+        Group{
+            VStack(spacing: UIScreen.main.bounds.height*0.05) {
+                NavigationLink(destination: AddEventView(type: "Lesson", start: date, end: date.addingTimeInterval(3600))) {
+                    Text("Lesson")
+                }.frame(width:UIScreen.main.bounds.width*0.6, height:UIScreen.main.bounds.height*0.008, alignment:.center).foregroundColor(.white).padding(UIScreen.main.bounds.height*0.02).background(Color(red: 102/255, green: 172/255, blue: 189/255, opacity: 1.0)).cornerRadius(16)
+                NavigationLink(destination: AddEventView(type: "Training", start: date, end: date.addingTimeInterval(3600))) {
+                    Text("Training Ride")
+                }.frame(width:UIScreen.main.bounds.width*0.6, height:UIScreen.main.bounds.height*0.008, alignment:.center).foregroundColor(.white).padding(UIScreen.main.bounds.height*0.02).background(Color(red: 102/255, green: 172/255, blue: 189/255, opacity: 1.0)).cornerRadius(16)
+                NavigationLink(destination: AddEventView(type: "Vet", start: date, end: date.addingTimeInterval(3600))) {
+                    Text("Vet")
+                }.frame(width:UIScreen.main.bounds.width*0.6, height:UIScreen.main.bounds.height*0.008, alignment:.center).foregroundColor(.white).padding(UIScreen.main.bounds.height*0.02).background(Color(red: 102/255, green: 172/255, blue: 189/255, opacity: 1.0)).cornerRadius(16)
+                NavigationLink(destination: AddEventView(type: "Farrier", start: date, end: date.addingTimeInterval(3600))) {
+                    Text("Farrier")
+                }.frame(width:UIScreen.main.bounds.width*0.6, height:UIScreen.main.bounds.height*0.008, alignment:.center).foregroundColor(.white).padding(UIScreen.main.bounds.height*0.02).background(Color(red: 102/255, green: 172/255, blue: 189/255, opacity: 1.0)).cornerRadius(16)
+                NavigationLink(destination: AddEventView(type: "Custom", start: date,
+                                                         end: date.addingTimeInterval(3600))) {
+                    Text("Custom")
+                }.frame(width:UIScreen.main.bounds.width*0.6, height:UIScreen.main.bounds.height*0.008, alignment:.center).foregroundColor(.white).padding(UIScreen.main.bounds.height*0.02).background(Color(red: 102/255, green: 172/255, blue: 189/255, opacity: 1.0)).cornerRadius(16)
+            }.navigationBarTitle("Choose Event Type")
+            
+            MenuView().padding(EdgeInsets(top: UIScreen.main.bounds.height*0.2, leading: 0, bottom: 0, trailing: 0))
+        }.frame(maxHeight: .infinity, alignment: .bottom)
+        
+        
     }
 }
 

@@ -451,7 +451,6 @@ class ModelData : ObservableObject {
                 formatter1.dateStyle = .medium
                 db.collection("InstructorProfiles").document(uid).setData(["Age": 0, "Email": email ?? "", "Gender": 0, "Height": 0, "ID": uid, "Joined Date": formatter1.string(from: date), "Student": "", "Phone": phone, "name":name, "Student Name": ""], merge:true)
                 
-                self.uploadImage(image: UIImage(imageLiteralResourceName: "Lebron"), id: uid)
             }
             
             // sending Verifcation Link....

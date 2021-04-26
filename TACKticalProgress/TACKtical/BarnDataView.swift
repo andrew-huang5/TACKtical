@@ -126,56 +126,6 @@ struct BarnDataView: View {
                             
                         }
                         
-//                        VStack {
-//                            if url2 != ""{
-//
-//
-//                                NavigationLink(destination: NewInstructorProfileView(id: self.instructorId)){
-//                                    AsyncImage(
-//                                       url: URL(string: url2)!,
-//                                        placeholder: { Color.black},
-//                                       image: { Image(uiImage: $0).resizable() }
-//                                    ).clipShape(Circle()).frame(width:UIScreen.main.bounds.width * 0.2, height:UIScreen.main.bounds.width*0.2).clipShape(Circle()).frame(width:UIScreen.main.bounds.width * 0.2, height:UIScreen.main.bounds.width*0.2)
-//                                }
-//                            }
-//                            else{
-//                                Text("Image").frame(width: UIScreen.main.bounds.width*0.2, height: UIScreen.main.bounds.width*0.2)
-//                                .foregroundColor(Color.white)
-//                                .background(Color(red: 211/255, green: 211/255, blue: 211/255, opacity: 1.0)).clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
-//                            }
-//                        }
-//                        .onAppear() {
-//                            let storage = Storage.storage().reference()
-//                            storage.child(instructorId).listAll{ (result, error) in
-//                                if let error = error {
-//                                    print("an error has occured - \(error.localizedDescription)")
-//                                }
-//                                if result.items == [] && instructorId != "" {
-//                                    storage.child("Default_Pictures/Instructor.png").downloadURL { (url, err) in
-//                                        if err != nil{
-//
-//                                            print((err?.localizedDescription)!)
-//                                            return
-//                                        }
-//
-//                                        self.url2 = "\(url!)"
-//                                    }
-//                                } else{
-//                                    print(instructorId + "11111")
-//                                    storage.child("\(instructorId)/\(instructorId)").downloadURL { (url, err) in
-//                                        if err != nil{
-//
-//                                            print((err?.localizedDescription)!)
-//                                            return
-//                                        }
-//
-//                                        self.url2 = "\(url!)"
-//                                    }
-//                                }
-//                            }
-//
-//                        }
-                        
                     }
                     
                     Text("Create Profiles:").font(.system(size:UIScreen.main.bounds.height*0.03)).frame(width: UIScreen.main.bounds.width*0.7, alignment: .leading).padding()
@@ -204,7 +154,7 @@ struct BarnDataView: View {
                 }
             }.padding(EdgeInsets(top: 0, leading: UIScreen.main.bounds.width*0.15, bottom: UIScreen.main.bounds.height*0.01, trailing: UIScreen.main.bounds.width*0.15)).frame(width: UIScreen.main.bounds.width * 0.8, height: UIScreen.main.bounds.height * 0.6).background(Color(red: 240/255, green: 248/255, blue: 255/255, opacity: 1.0))
             
-            MenuView()
+            MenuView().padding(EdgeInsets(top: UIScreen.main.bounds.height*0.09, leading: 0, bottom: 0, trailing: 0))
         }.padding(EdgeInsets(top: UIScreen.main.bounds.height*0.092, leading: UIScreen.main.bounds.width*0.092, bottom: 0, trailing: UIScreen.main.bounds.width*0.092)).navigationBarTitle("Barn Data", displayMode: .inline).ignoresSafeArea(.keyboard)
         
     }
