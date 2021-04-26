@@ -18,6 +18,7 @@
 		49C1A2562630A6190093F067 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C1A2552630A6190093F067 /* MenuView.swift */; };
 		6700A7E42635F649001CB052 /* EventViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6700A7E32635F649001CB052 /* EventViewModel.swift */; };
 		6768558D26365C32008F15F8 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6768558C26365C32008F15F8 /* HomeView.swift */; };
+		6768558F26366DAF008F15F8 /* EditEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6768558E26366DAF008F15F8 /* EditEventView.swift */; };
 		AB673B002613447600A4BE17 /* NewProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB673AFF2613447600A4BE17 /* NewProfileView.swift */; };
 		AB72B15E26257CE700D3A121 /* DeleteProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB72B15D26257CE700D3A121 /* DeleteProfileView.swift */; };
 		AB72B1632625E27600D3A121 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB72B1622625E27600D3A121 /* ImagePicker.swift */; };
@@ -79,6 +80,7 @@
 		55F1B55EC5A6AE3C4698B068 /* Pods_TACKtical.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TACKtical.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6700A7E32635F649001CB052 /* EventViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventViewModel.swift; sourceTree = "<group>"; };
 		6768558C26365C32008F15F8 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		6768558E26366DAF008F15F8 /* EditEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditEventView.swift; sourceTree = "<group>"; };
 		872F4F50459AB78AA432F298 /* Pods_TACKticalTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TACKticalTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		90F489FA07064A61778C10FA /* Pods-TACKtical-TACKticalUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TACKtical-TACKticalUITests.release.xcconfig"; path = "Target Support Files/Pods-TACKtical-TACKticalUITests/Pods-TACKtical-TACKticalUITests.release.xcconfig"; sourceTree = "<group>"; };
 		A6A221A94B3451F8034D5B78 /* Pods-TACKticalTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TACKticalTests.release.xcconfig"; path = "Target Support Files/Pods-TACKticalTests/Pods-TACKticalTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -193,6 +195,7 @@
 				ABBACB302612655A00818408 /* HorseViewModel.swift */,
 				49C1A2552630A6190093F067 /* MenuView.swift */,
 				6768558C26365C32008F15F8 /* HomeView.swift */,
+				6768558E26366DAF008F15F8 /* EditEventView.swift */,
 				494E1C22261062200077BD2D /* Assets.xcassets */,
 				ABBACB052612583300818408 /* GoogleService-Info.plist */,
 				494E1C27261062200077BD2D /* Info.plist */,
@@ -503,6 +506,7 @@
 				49C1A2562630A6190093F067 /* MenuView.swift in Sources */,
 				AB8D890C26354A69001D1C62 /* ImageLoader.swift in Sources */,
 				AB986646261868CC006F66EA /* BarnDataView.swift in Sources */,
+				6768558F26366DAF008F15F8 /* EditEventView.swift in Sources */,
 				AB72B1632625E27600D3A121 /* ImagePicker.swift in Sources */,
 				AB8D890426354A57001D1C62 /* AsyncImage.swift in Sources */,
 				AB673B002613447600A4BE17 /* NewProfileView.swift in Sources */,

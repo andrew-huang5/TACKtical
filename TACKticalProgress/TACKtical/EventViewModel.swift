@@ -10,7 +10,7 @@ import Firebase
 
 class EventViewModel: ObservableObject {
     
-    @Published var event = Event(id: "", horseID: "", horseName: "", riderID: "", riderName: "", type: "", title: "", start: Date(), end: Date())
+    @Published var event = Event(id: "", horseID: "", horseName: "", riderID: "", riderName: "", type: "", title: "", date: "", startTime: Date(), startTimeString: "", endTime: Date(), endTimeString: "")
     @Published var events = [Event]()
     
     private var db = Firestore.firestore()
@@ -18,7 +18,7 @@ class EventViewModel: ObservableObject {
     
     
     func fetchAllData() {
-        db.collection("Users").document("2C119956-AD83-4787-B3DD-AA2F3718D9DB").collection("Events").addSnapshotListener { (querySnapshot, error) in
+        db.collection("Users").document(Auth.auth().currentUser!.uid).collection("Events").addSnapshotListener { (querySnapshot, error) in
             guard let documents = querySnapshot?.documents else {
                 print("No documents")
                 return
@@ -33,16 +33,20 @@ class EventViewModel: ObservableObject {
                 let riderName = data["riderName"] as? String ?? ""
                 let type = data["type"] as? String ?? ""
                 let title = data["title"] as? String ?? ""
-                let start = (data["start"] as? Timestamp)?.dateValue() ?? Date()
-                let end = (data["end"] as? Timestamp)?.dateValue() ?? Date()
+                let date = data["date"] as? String ?? ""
+                let startTime = data["startTime"] as? String ?? ""
+                let endTime = data["endTime"] as? String ?? ""
+                let timeFormatter = DateFormatter()
+                timeFormatter.timeStyle = .short
                 
-                return Event(id: id, horseID: horseID, horseName: horseName, riderID: riderID, riderName: riderName, type: type, title: title, start: start, end: end)
+                
+                return Event(id: id, horseID: horseID, horseName: horseName, riderID: riderID, riderName: riderName, type: type, title: title, date: date, startTime: timeFormatter.date(from: startTime) ?? Date(), startTimeString: startTime, endTime: timeFormatter.date(from: endTime) ?? Date(), endTimeString: endTime)
             }
         }
     }
     
     func fetchData(id:String){
-        db.collection("Users").document("2C119956-AD83-4787-B3DD-AA2F3718D9DB").collection("Events").document(id).getDocument { (document, error) in
+        db.collection("Users").document(Auth.auth().currentUser!.uid).collection("Events").document(id).getDocument { (document, error) in
             if error == nil {
                 if document != nil && document!.exists {
                     let p = document!.data()!
@@ -53,10 +57,13 @@ class EventViewModel: ObservableObject {
                     let riderName = p["riderName"] as? String ?? ""
                     let type = p["type"] as? String ?? ""
                     let title = p["title"] as? String ?? ""
-                    let start = p["start"] as? Date ?? Date()
-                    let end = p["end"] as? Date ?? Date()
+                    let date = p["date"] as? String ?? ""
+                    let startTime = p["startTime"] as? String ?? ""
+                    let endTime = p["endTime"] as? String ?? ""
+                    let timeFormatter = DateFormatter()
+                    timeFormatter.timeStyle = .short
                     
-                    self.event = Event(id: id, horseID: horseID, horseName: horseName, riderID: riderID, riderName: riderName, type: type, title: title, start: start, end: end)
+                    self.event = Event(id: id, horseID: horseID, horseName: horseName, riderID: riderID, riderName: riderName, type: type, title: title, date: date, startTime: timeFormatter.date(from: startTime) ?? Date(), startTimeString: startTime, endTime: timeFormatter.date(from: endTime) ?? Date(), endTimeString: endTime)
                 }
             }
         }

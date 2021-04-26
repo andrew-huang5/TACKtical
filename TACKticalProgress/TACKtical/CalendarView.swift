@@ -51,7 +51,7 @@ struct CalendarView: View {
                     }) { Image(systemName: "arrow.left") }
                         .frame(width: 35, height: 35, alignment: .leading)
                 
-                    NavigationLink(destination: ChooseEventView(eventID: strDateSelected + uuid, date: calendarData.selectedDate)) {
+                    NavigationLink(destination: ChooseEventView(date: calendarData.selectedDate)) {
                         Text("+").font(.system(size: 25))
                     }.frame(width: UIScreen.main.bounds.width*0.1, height:UIScreen.main.bounds.width*0.1)
                     .foregroundColor(Color.white)
@@ -83,12 +83,15 @@ struct CalendarView: View {
                             if (i.id.starts(with: strDateSelected)) {
                                 VStack(alignment: .leading) {
                                     HStack {
-                                        Text(timeFormatter.string(from: i.start)+"  ~").onAppear(){
+                                        Text(i.startTimeString+"  ~").onAppear(){
                                             timeFormatter.timeStyle = .short
                                         }.font(.system(size:UIScreen.main.bounds.height*0.025))
-                                        Text(timeFormatter.string(from: i.end)).onAppear(){
+                                        Text(i.endTimeString).onAppear(){
                                             timeFormatter.timeStyle = .short
                                         }.font(.system(size:UIScreen.main.bounds.height*0.025))
+                                        NavigationLink(destination: EditEventView(type: i.type, eventID: i.id, start: i.startTime, end: i.endTime, title: i.title, horseName: i.horseName, riderName: i.riderName)) {
+                                            Text("Edit Event")
+                                        }
                                     }
                                     if i.type == "Lesson" || i.type == "Training" || i.type == "Custom" {
                                         (Text(i.title) + Text(" with " + i.horseName + " (Horse) and ") + Text(i.riderName + " (Rider)")).font(.system(size:UIScreen.main.bounds.height*0.022))

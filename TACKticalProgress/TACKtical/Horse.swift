@@ -62,6 +62,9 @@ struct Event: Identifiable & Hashable {
     var riderName: String
     var type: String
     var title: String
-    var start: Date
-    var end: Date
+    var date: String
+    var startTime: Date
+    var startTimeString: String
+    var endTime: Date
+    var endTimeString: String
 }

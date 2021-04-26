@@ -1,53 +1,28 @@
 //
-//  CalendarView.swift
+//  EditEventView.swift
 //  TACKtical
 //
-//  Created by Haris Nashed on 4/8/21.
+//  Created by Haris Nashed on 4/25/21.
 //
-import Foundation
+
 import SwiftUI
 import Firebase
 
-struct ChooseEventView: View {
-    @State var date: Date
-    var body: some View {
-        VStack {
-            NavigationLink(destination: AddEventView(type: "Lesson", start: date, end: date.addingTimeInterval(3600))) {
-                Text("Lesson")
-            }.frame(width: UIScreen.main.bounds.width * 0.8, height: UIScreen.main.bounds.height * 0.1, alignment: .leading)
-            NavigationLink(destination: AddEventView(type: "Training", start: date, end: date.addingTimeInterval(3600))) {
-                Text("Training Ride")
-            }.frame(width: UIScreen.main.bounds.width * 0.8, height: UIScreen.main.bounds.height * 0.1, alignment: .leading)
-            NavigationLink(destination: AddEventView(type: "Vet", start: date, end: date.addingTimeInterval(3600))) {
-                Text("Vet")
-            }.frame(width: UIScreen.main.bounds.width * 0.8, height: UIScreen.main.bounds.height * 0.1, alignment: .leading)
-            NavigationLink(destination: AddEventView(type: "Farrier", start: date, end: date.addingTimeInterval(3600))) {
-                Text("Farrier")
-            }.frame(width: UIScreen.main.bounds.width * 0.8, height: UIScreen.main.bounds.height * 0.1, alignment: .leading)
-            NavigationLink(destination: AddEventView(type: "Custom", start: date,
-                                                     end: date.addingTimeInterval(3600))) {
-                Text("Custom")
-            }.frame(width: UIScreen.main.bounds.width * 0.8, height: UIScreen.main.bounds.height * 0.2, alignment: .leading)
-        }.navigationBarTitle("Choose Event Type")
-    }
-}
-
-
-
-struct AddEventView: View {
+struct EditEventView: View {
     @ObservedObject private var viewModel = EventViewModel()
     @ObservedObject private var horseViewModel = HorseViewModel()
     @ObservedObject private var riderViewModel = RiderViewModel()
     let dateFormatter = DateFormatter()
     
     var type: String
+    @State var eventID: String
     @State var start: Date
     @State var end: Date
-    @State var title = ""
+    @State var title: String
     @State var horseID = ""
-    @State var horseName = ""
+    @State var horseName: String
     @State var riderID = ""
-    @State var riderName = ""
+    @State var riderName: String
     @State var prevHorse = ""
     @State var prevOwner = ""
     @State var prevInstructor = ""
@@ -75,12 +50,12 @@ struct AddEventView: View {
                     }.padding(EdgeInsets(top: UIScreen.main.bounds.height * 0.01, leading: 0, bottom: UIScreen.main.bounds.height * 0.01, trailing: 0))
                     VStack{
                         Text("Choose horse: ")
-                        CustomHorseSearchBar(horses: $horseViewModel.horses, horse: $horseID, horseName: $horseName, prevOwner: $prevOwner, txt: "").onAppear(){horseViewModel.fetchAllData()}
+                        CustomHorseSearchBar(horses: $horseViewModel.horses, horse: $horseID, horseName: $horseName, prevOwner: $prevOwner, txt: horseName).onAppear(){horseViewModel.fetchAllData()}
                     }
                     if type == "Lesson" || type == "Training" || type == "Custom" {
                         VStack {
                             Text("Choose student: ")
-                            CustomRiderSearchBar(riders: $riderViewModel.riders, rider: $riderID, riderName: $riderName, prevInstructor: $prevInstructor, prevHorse: $prevHorse, txt: "").onAppear(){riderViewModel.fetchAllData()}
+                            CustomRiderSearchBar(riders: $riderViewModel.riders, rider: $riderID, riderName: $riderName, prevInstructor: $prevInstructor, prevHorse: $prevHorse, txt: riderName).onAppear(){riderViewModel.fetchAllData()}
                         }
                     }
                     VStack() {
@@ -98,13 +73,9 @@ struct AddEventView: View {
         formatter1.dateStyle = .medium
         let formatter2 = DateFormatter()
         formatter2.timeStyle = .short
-        let formatter3 = DateFormatter()
-        formatter3.dateFormat = "HH:mm"
-        let uuid = UUID().uuidString
-        let id = formatter1.string(from: start) + formatter3.string(from:start) + uuid
-        
         
         let db = Firestore.firestore()
-        db.collection("Users").document(Auth.auth().currentUser!.uid).collection("Events").document(id).setData(["id": id, "horseID": horseID, "horseName": horseName, "riderID": riderID, "riderName": riderName, "type": type, "title": title, "date": formatter1.string(from: start), "startTime": formatter2.string(from: start), "endTime": formatter2.string(from: end)], merge:true)
+        db.collection("Users").document(Auth.auth().currentUser!.uid).collection("Events").document(eventID).setData(["id": eventID, "horseID": horseID, "horseName": horseName, "riderID": riderID, "riderName": riderName, "type": type, "title": title, "date": formatter1.string(from: start), "startTime": formatter2.string(from: start), "endTime": formatter2.string(from: end)], merge:true)
     }
 }
+
