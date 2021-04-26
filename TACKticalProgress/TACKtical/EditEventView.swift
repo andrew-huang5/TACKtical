@@ -75,6 +75,7 @@ struct EditEventView: View {
                 }
             PopUpWindowforEvent(title: "Notice", message: "You sure about this?", buttonText1: "Yes", buttonText2: "No", show: $showPopUp, eventID: eventID)
         }
+        MenuView()
     }
     
     func upload() {

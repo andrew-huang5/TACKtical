@@ -302,12 +302,12 @@ struct NewInstructorProfileView: View {
                             Text("Edit Profile").font(.system(size:UIScreen.main.bounds.height*0.025))
                         }.frame(width:UIScreen.main.bounds.width*0.3, height:UIScreen.main.bounds.height*0.035, alignment:.center).foregroundColor(.black).background(Color(.lightGray)).opacity(0.7).cornerRadius(16)
                     
-                        Button(action:{
-                            //presentationMode.wrappedValue.dismiss()
-                            showPopUp.toggle()
-                        }) {
-                            Text("Delete Profile").font(.system(size:UIScreen.main.bounds.height*0.025)).foregroundColor(.white)
-                        }.frame(width:UIScreen.main.bounds.width*0.3, height:UIScreen.main.bounds.height*0.035, alignment:.center).foregroundColor(.black).background(Color(.red)).opacity(0.7).cornerRadius(16).padding(UIScreen.main.bounds.height*0.005)
+//                        Button(action:{
+//                            //presentationMode.wrappedValue.dismiss()
+//                            showPopUp.toggle()
+//                        }) {
+//                            Text("Delete Profile").font(.system(size:UIScreen.main.bounds.height*0.025)).foregroundColor(.white)
+//                        }.frame(width:UIScreen.main.bounds.width*0.3, height:UIScreen.main.bounds.height*0.035, alignment:.center).foregroundColor(.black).background(Color(.red)).opacity(0.7).cornerRadius(16).padding(UIScreen.main.bounds.height*0.005)
                     }.padding(UIScreen.main.bounds.height*0.005)
                 
                     VStack(alignment: .center, spacing: UIScreen.main.bounds.height*0.01){

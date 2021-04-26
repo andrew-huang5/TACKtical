@@ -52,7 +52,7 @@ struct BarnDataView: View {
                                     print("an error has occured - \(error.localizedDescription)")
                                 }
                                 if result.items == [] {
-                                    storage.child("Default_Pictures/Rider.png").downloadURL { (url, err) in
+                                    storage.child("Default_Pictures/Instructor.png").downloadURL { (url, err) in
                                         if err != nil{
 
                                             print((err?.localizedDescription)!)
@@ -141,10 +141,10 @@ struct BarnDataView: View {
                             Text("Rider \nProfile").font(.system(size:UIScreen.main.bounds.height*0.025)).foregroundColor(Color.black)
                         }.frame(width:UIScreen.main.bounds.width*0.2, height:UIScreen.main.bounds.height*0.09).background(Color(red: 211/255, green: 211/255, blue: 211/255, opacity: 1.0))
                         
-                        NavigationLink(
-                            destination: CreateInstructorProfileView(id: idforInstructor)) {
-                            Text("Instructor \nProfile").font(.system(size:UIScreen.main.bounds.height*0.025)).foregroundColor(Color.black)
-                        }.frame(width:UIScreen.main.bounds.width*0.2, height:UIScreen.main.bounds.height*0.09).background(Color(red: 211/255, green: 211/255, blue: 211/255, opacity: 1.0))
+//                        NavigationLink(
+//                            destination: CreateInstructorProfileView(id: idforInstructor)) {
+//                            Text("Instructor \nProfile").font(.system(size:UIScreen.main.bounds.height*0.025)).foregroundColor(Color.black)
+//                        }.frame(width:UIScreen.main.bounds.width*0.2, height:UIScreen.main.bounds.height*0.09).background(Color(red: 211/255, green: 211/255, blue: 211/255, opacity: 1.0))
                     }.padding()
                     
                 }.position(x:UIScreen.main.bounds.width*0.35, y: UIScreen.main.bounds.height*0.29)

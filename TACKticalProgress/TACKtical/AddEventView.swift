@@ -57,9 +57,10 @@ struct AddEventView: View {
     @State var prevHorse = ""
     @State var prevOwner = ""
     @State var prevInstructor = ""
+    @State private var showPopUp: Bool = false
     
     var body: some View {
-        VStack{
+        ZStack{
             Form {
                 Section {
                     VStack {
@@ -96,7 +97,9 @@ struct AddEventView: View {
                     }
                 }.padding(EdgeInsets(top: 0, leading: UIScreen.main.bounds.width*0.092, bottom: 0, trailing: UIScreen.main.bounds.width*0.092)).navigationBarTitle("New " + type + " Event")
                 }
-            }
+            GeneralPopUpWindow(title: "Notice", message: "Event Created!", buttonText: "OK", show: $showPopUp)
+        }
+        MenuView()
     }
     
     func upload() {
@@ -112,5 +115,6 @@ struct AddEventView: View {
         
         let db = Firestore.firestore()
         db.collection("Users").document(Auth.auth().currentUser!.uid).collection("Events").document(id).setData(["id": id, "horseID": horseID, "horseName": horseName, "riderID": riderID, "riderName": riderName, "type": type, "title": title, "date": formatter1.string(from: start), "startTime": formatter2.string(from: start), "endTime": formatter2.string(from: end)], merge:true)
+        self.showPopUp.toggle()
     }
 }

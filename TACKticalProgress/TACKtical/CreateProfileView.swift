@@ -38,108 +38,112 @@ struct CreateHorseProfileView: View {
     @State private var uploadedImage: Bool = true
     @State private var finishUploadingImage: Bool = false
     @State private var uploadingImage: Bool = false
+    @State private var showPopUp: Bool = false
     
     var body: some View {
-        Form {
-            Section {
-                
-                HStack() {
-                    Text("Picture").foregroundColor(.black)
-                    if upload_image != nil {
-                        Image(uiImage: upload_image!)
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width:30, height:30)
-                    } else {
-                        Image(systemName: "timelapse")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width:30, height:30)
-                    }
-                    Text("Choose").foregroundColor(.blue).onTapGesture {
-                        self.newid = id
-                        self.showActionSheet = true
-                    }.actionSheet(isPresented: $showActionSheet){
-                    ActionSheet(title: Text("Add a picture to the profile"), message: nil, buttons: [
-                    //Button1
-                    .default(Text("Camera"), action: {
-                        self.showImagePicker = true
-                        self.sourceType = .camera
-                    }),
-                    //Button2
-                    .default(Text("Photo Library"), action: {
-                        self.showImagePicker = true
-                        self.sourceType = .photoLibrary
-                    }),
-                                        
-                    //Button3
-                    .cancel()
-                                        
-                    ])
-                    }.sheet(isPresented: $showImagePicker){
-                        imagePicker(image: self.$upload_image, showImagePicker: self.$showImagePicker, sourceType: self.sourceType)
-                                    
-                    }
+        ZStack {
+            Form {
+                Section {
                     
-                    Text("Upload").foregroundColor(.blue).onTapGesture{
-                        if let thisImage = self.upload_image {
-                            self.showNewProfileButton = false
-                            self.uploadedImage = false
-                            self.finishUploadingImage = false
-                            self.uploadingImage = true
-                            uploadImage(image: thisImage)
-                        }else{
-                            print("couldn't upload image - no image present")
+                    HStack() {
+                        Text("Picture").foregroundColor(.black)
+                        if upload_image != nil {
+                            Image(uiImage: upload_image!)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width:30, height:30)
+                        } else {
+                            Image(systemName: "timelapse")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width:30, height:30)
+                        }
+                        Text("Choose").foregroundColor(.blue).onTapGesture {
+                            self.newid = id
+                            self.showActionSheet = true
+                        }.actionSheet(isPresented: $showActionSheet){
+                        ActionSheet(title: Text("Add a picture to the profile"), message: nil, buttons: [
+                        //Button1
+                        .default(Text("Camera"), action: {
+                            self.showImagePicker = true
+                            self.sourceType = .camera
+                        }),
+                        //Button2
+                        .default(Text("Photo Library"), action: {
+                            self.showImagePicker = true
+                            self.sourceType = .photoLibrary
+                        }),
+                                            
+                        //Button3
+                        .cancel()
+                                            
+                        ])
+                        }.sheet(isPresented: $showImagePicker){
+                            imagePicker(image: self.$upload_image, showImagePicker: self.$showImagePicker, sourceType: self.sourceType)
+                                        
+                        }
+                        
+                        Text("Upload").foregroundColor(.blue).onTapGesture{
+                            if let thisImage = self.upload_image {
+                                self.showNewProfileButton = false
+                                self.uploadedImage = false
+                                self.finishUploadingImage = false
+                                self.uploadingImage = true
+                                uploadImage(image: thisImage)
+                            }else{
+                                print("couldn't upload image - no image present")
+                            }
+                        }
+                        
+                        if finishUploadingImage{
+                            Text("Done").foregroundColor(.green)
+                        } else if uploadingImage{
+                            Text("ing").foregroundColor(.gray)
+                        }
+                        
+                    }
+                    HStack() {
+                        Text("Name ").foregroundColor(.black)
+                        Spacer()
+                        TextField("Enter name", text: $name)
+                    }
+                    Picker(selection: $gender, label: Text("Gender")) {
+                        ForEach(0 ..< genderChoices.count) {
+                            Text(self.genderChoices[$0])
+                        }
+                    }
+                    Picker(selection: $color, label: Text("Color")) {
+                        ForEach(0 ..< colorChoices.count) {
+                            Text(self.colorChoices[$0])
+                        }
+                    }
+                    Picker(selection: $height, label: Text("Height")) {
+                        ForEach(0 ..< heightChoices.count) {
+                            Text(self.heightChoices[$0])
+                        }
+                    }
+                    Picker(selection: $feed, label: Text("Feed")) {
+                        ForEach(0 ..< feedChoices.count) {
+                            Text(self.feedChoices[$0])
                         }
                     }
                     
-                    if finishUploadingImage{
-                        Text("Done").foregroundColor(.green)
-                    } else if uploadingImage{
-                        Text("ing").foregroundColor(.gray)
+                    DatePicker(selection: $birth, in: ...Date(), displayedComponents: .date) {
+                        Text("Birth Date")
                     }
                     
-                }
-                HStack() {
-                    Text("Name ").foregroundColor(.black)
-                    Spacer()
-                    TextField("Enter name", text: $name)
-                }
-                Picker(selection: $gender, label: Text("Gender")) {
-                    ForEach(0 ..< genderChoices.count) {
-                        Text(self.genderChoices[$0])
+                    DatePicker(selection: $arrival, in: ...Date(), displayedComponents: .date) {
+                        Text("Arrival Date")
                     }
-                }
-                Picker(selection: $color, label: Text("Color")) {
-                    ForEach(0 ..< colorChoices.count) {
-                        Text(self.colorChoices[$0])
+                    
+                    ZStack(alignment: .top) {
+                        CustomRiderSearchBar(riders: self.viewModel2.riders, rider: $owner, riderName: $ownerName, prevInstructor: $prevInstructor, prevHorse: $prevHorse, txt: "").padding(.top)
+                    }.onAppear() {
+                        self.viewModel2.fetchAllData()
                     }
-                }
-                Picker(selection: $height, label: Text("Height")) {
-                    ForEach(0 ..< heightChoices.count) {
-                        Text(self.heightChoices[$0])
-                    }
-                }
-                Picker(selection: $feed, label: Text("Feed")) {
-                    ForEach(0 ..< feedChoices.count) {
-                        Text(self.feedChoices[$0])
-                    }
-                }
-                
-                DatePicker(selection: $birth, in: ...Date(), displayedComponents: .date) {
-                    Text("Birth Date")
-                }
-                
-                DatePicker(selection: $arrival, in: ...Date(), displayedComponents: .date) {
-                    Text("Arrival Date")
-                }
-                
-                ZStack(alignment: .top) {
-                    CustomRiderSearchBar(riders: self.viewModel2.riders, rider: $owner, riderName: $ownerName, prevInstructor: $prevInstructor, prevHorse: $prevHorse, txt: "").padding(.top)
-                }.onAppear() {
-                    self.viewModel2.fetchAllData()
                 }
             }
+            GeneralPopUpWindow(title: "Notice", message: "Profile Created!", buttonText: "OK", show: $showPopUp)
         }
         VStack {
             
@@ -150,7 +154,7 @@ struct CreateHorseProfileView: View {
                 }
                 self.uploadedOtherData = true
             }){
-                Text("Upload").font(.system(size:UIScreen.main.bounds.height*0.025))
+                Text("Upload Info").font(.system(size:UIScreen.main.bounds.height*0.025))
             }.frame(width:UIScreen.main.bounds.width*0.3, height:UIScreen.main.bounds.height*0.035, alignment:.center).foregroundColor(.black).background(Color(UIColor.lightGray)).opacity(0.7).cornerRadius(16).padding(UIScreen.main.bounds.height*0.005)
             
 //            VStack{
@@ -179,6 +183,7 @@ struct CreateHorseProfileView: View {
             }
             db.collection("RiderProfiles").document(owner).updateData(["Owned Horse": id, "Horse Name": name])
         }
+        self.showPopUp.toggle()
     }
     
     func uploadImage(image: UIImage) {
@@ -239,115 +244,119 @@ struct CreateRiderProfileView: View {
     @State private var uploadedImage: Bool = true
     @State private var finishUploadingImage: Bool = false
     @State private var uploadingImage: Bool = false
+    @State private var showPopUp: Bool = false
     
     var body: some View {
-        Form {
-            Section {
-                
-                HStack() {
-                    Text("Picture").foregroundColor(.black)
-                    if upload_image != nil {
-                        Image(uiImage: upload_image!)
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width:30, height:30)
-                    } else {
-                        Image(systemName: "timelapse")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width:30, height:30)
-                    }
-                    Text("Choose").foregroundColor(.blue).onTapGesture {
-                        self.showActionSheet = true
-                    }.actionSheet(isPresented: $showActionSheet){
-                    ActionSheet(title: Text("Add a picture to the profile"), message: nil, buttons: [
-                    //Button1
-                    .default(Text("Camera"), action: {
-                        self.showImagePicker = true
-                        self.sourceType = .camera
-                    }),
-                    //Button2
-                    .default(Text("Photo Library"), action: {
-                        self.showImagePicker = true
-                        self.sourceType = .photoLibrary
-                    }),
-                                        
-                    //Button3
-                    .cancel()
-                                        
-                    ])
-                    }.sheet(isPresented: $showImagePicker){
-                        imagePicker(image: self.$upload_image, showImagePicker: self.$showImagePicker, sourceType: self.sourceType)
-                                    
-                    }
+        ZStack {
+            Form {
+                Section {
                     
-                    Text("Upload").foregroundColor(.blue).onTapGesture{
-                        if let thisImage = self.upload_image {
-                            self.showNewProfileButton = false
-                            self.uploadedImage = false
-                            self.finishUploadingImage = false
-                            self.uploadingImage = true
-                            uploadImage(image: thisImage)
-                        }else{
-                            print("couldn't upload image - no image present")
+                    HStack() {
+                        Text("Picture").foregroundColor(.black)
+                        if upload_image != nil {
+                            Image(uiImage: upload_image!)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width:30, height:30)
+                        } else {
+                            Image(systemName: "timelapse")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width:30, height:30)
+                        }
+                        Text("Choose").foregroundColor(.blue).onTapGesture {
+                            self.showActionSheet = true
+                        }.actionSheet(isPresented: $showActionSheet){
+                        ActionSheet(title: Text("Add a picture to the profile"), message: nil, buttons: [
+                        //Button1
+                        .default(Text("Camera"), action: {
+                            self.showImagePicker = true
+                            self.sourceType = .camera
+                        }),
+                        //Button2
+                        .default(Text("Photo Library"), action: {
+                            self.showImagePicker = true
+                            self.sourceType = .photoLibrary
+                        }),
+                                            
+                        //Button3
+                        .cancel()
+                                            
+                        ])
+                        }.sheet(isPresented: $showImagePicker){
+                            imagePicker(image: self.$upload_image, showImagePicker: self.$showImagePicker, sourceType: self.sourceType)
+                                        
+                        }
+                        
+                        Text("Upload").foregroundColor(.blue).onTapGesture{
+                            if let thisImage = self.upload_image {
+                                self.showNewProfileButton = false
+                                self.uploadedImage = false
+                                self.finishUploadingImage = false
+                                self.uploadingImage = true
+                                uploadImage(image: thisImage)
+                            }else{
+                                print("couldn't upload image - no image present")
+                            }
+                        }
+                        
+                        if finishUploadingImage{
+                            Text("Done").foregroundColor(.green)
+                        } else if uploadingImage{
+                            Text("ing").foregroundColor(.gray)
+                        }
+                    }
+                    HStack() {
+                        Text("Name ").foregroundColor(.black)
+                        Spacer()
+                        TextField("Enter name", text: $name)
+                    }
+                    Picker(selection: $gender, label: Text("Gender")) {
+                        ForEach(0 ..< genderChoices.count) {
+                            Text(self.genderChoices[$0])
+                        }
+                    }
+                    Picker(selection: $age, label: Text("Age")) {
+                        ForEach(0 ..< ageChoices.count) {
+                            Text(String(self.ageChoices[$0]))
+                        }
+                    }
+                    Picker(selection: $height, label: Text("Height")) {
+                        ForEach(0 ..< heightChoices.count) {
+                            Text(self.heightChoices[$0])
                         }
                     }
                     
-                    if finishUploadingImage{
-                        Text("Done").foregroundColor(.green)
-                    } else if uploadingImage{
-                        Text("ing").foregroundColor(.gray)
+                    HStack() {
+                        Text("Email ").foregroundColor(.black)
+                        TextField("Enter email address", text: $email)
                     }
-                }
-                HStack() {
-                    Text("Name ").foregroundColor(.black)
-                    Spacer()
-                    TextField("Enter name", text: $name)
-                }
-                Picker(selection: $gender, label: Text("Gender")) {
-                    ForEach(0 ..< genderChoices.count) {
-                        Text(self.genderChoices[$0])
+                    
+                    HStack() {
+                        Text("Phone ").foregroundColor(.black)
+                        TextField("Enter phone number", text: $phone)
                     }
-                }
-                Picker(selection: $age, label: Text("Age")) {
-                    ForEach(0 ..< ageChoices.count) {
-                        Text(String(self.ageChoices[$0]))
+                    
+                    DatePicker(selection: $joinedDate, in: ...Date(), displayedComponents: .date) {
+                        Text("Joined Date")
                     }
-                }
-                Picker(selection: $height, label: Text("Height")) {
-                    ForEach(0 ..< heightChoices.count) {
-                        Text(self.heightChoices[$0])
+                    
+                    
+                    ZStack(alignment: .top) {
+                        CustomHorseSearchBar(horses: self.$viewModel2.horses, horse: $horse, horseName: $horseName, prevOwner: $prevOwner, txt: "").padding(.top)
+                    }.onAppear() {
+                        self.viewModel2.fetchAllData()
                     }
+                    
+                    ZStack(alignment: .top) {
+                        CustomInstructorSearchBar(instructors: self.$viewModel3.instructors, instructor: $instructor, instructorName: $instructorName, prevStudent: $prevStudent, txt: "").padding(.top)
+                    }.onAppear() {
+                        self.viewModel3.fetchAllData()
+                    }
+                    
                 }
-                
-                HStack() {
-                    Text("Email ").foregroundColor(.black)
-                    TextField("Enter email address", text: $email)
-                }
-                
-                HStack() {
-                    Text("Phone ").foregroundColor(.black)
-                    TextField("Enter phone number", text: $phone)
-                }
-                
-                DatePicker(selection: $joinedDate, in: ...Date(), displayedComponents: .date) {
-                    Text("Joined Date")
-                }
-                
-                
-                ZStack(alignment: .top) {
-                    CustomHorseSearchBar(horses: self.$viewModel2.horses, horse: $horse, horseName: $horseName, prevOwner: $prevOwner, txt: "").padding(.top)
-                }.onAppear() {
-                    self.viewModel2.fetchAllData()
-                }
-                
-                ZStack(alignment: .top) {
-                    CustomInstructorSearchBar(instructors: self.$viewModel3.instructors, instructor: $instructor, instructorName: $instructorName, prevStudent: $prevStudent, txt: "").padding(.top)
-                }.onAppear() {
-                    self.viewModel3.fetchAllData()
-                }
-                
             }
+            GeneralPopUpWindow(title: "Notice", message: "Profile Created!", buttonText: "OK", show: $showPopUp)
         }
         VStack {
             
@@ -358,7 +367,7 @@ struct CreateRiderProfileView: View {
                 }
                 self.uploadedOtherData = true
             }){
-                Text("Upload").font(.system(size:UIScreen.main.bounds.height*0.025))
+                Text("Upload Info").font(.system(size:UIScreen.main.bounds.height*0.025))
             }.frame(width:UIScreen.main.bounds.width*0.3, height:UIScreen.main.bounds.height*0.035, alignment:.center).foregroundColor(.black).background(Color(UIColor.lightGray)).opacity(0.7).cornerRadius(16).padding(UIScreen.main.bounds.height*0.005)
             
             if showNewProfileButton{
@@ -394,6 +403,7 @@ struct CreateRiderProfileView: View {
             
             db.collection("InstructorProfiles").document(instructor).updateData(["Student": id, "Student Name": name])
         }
+        self.showPopUp.toggle()
     }
     
     func uploadImage(image: UIImage) {
@@ -452,110 +462,114 @@ struct CreateInstructorProfileView: View {
     @State private var uploadedImage: Bool = true
     @State private var uploadingImage: Bool = false
     @State private var finishUploadingImage: Bool = false
+    @State private var showPopUp: Bool = false
     
     
     var body: some View {
-        Form {
-            Section {
-                
-                HStack() {
-                    Text("Picture").foregroundColor(.black)
-                    if upload_image != nil {
-                        Image(uiImage: upload_image!)
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width:30, height:30)
-                    } else {
-                        Image(systemName: "timelapse")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width:30, height:30)
-                    }
-                    Text("Choose").foregroundColor(.blue).onTapGesture {
-                        self.showActionSheet = true
-                    }.actionSheet(isPresented: $showActionSheet){
-                    ActionSheet(title: Text("Add a picture to the profile"), message: nil, buttons: [
-                    //Button1
-                    .default(Text("Camera"), action: {
-                        self.showImagePicker = true
-                        self.sourceType = .camera
-                    }),
-                    //Button2
-                    .default(Text("Photo Library"), action: {
-                        self.showImagePicker = true
-                        self.sourceType = .photoLibrary
-                    }),
-                                        
-                    //Button3
-                    .cancel()
-                                        
-                    ])
-                    }.sheet(isPresented: $showImagePicker){
-                        imagePicker(image: self.$upload_image, showImagePicker: self.$showImagePicker, sourceType: self.sourceType)
-                                    
-                    }
+        ZStack {
+            Form {
+                Section {
                     
-                    Text("Upload").foregroundColor(.blue).onTapGesture{
-                        if let thisImage = self.upload_image {
-                            self.showNewProfileButton = false
-                            self.uploadedImage = false
-                            self.uploadingImage = true
-                            self.finishUploadingImage = false
-                            uploadImage(image: thisImage)
-                        }else{
-                            print("couldn't upload image - no image present")
+                    HStack() {
+                        Text("Picture").foregroundColor(.black)
+                        if upload_image != nil {
+                            Image(uiImage: upload_image!)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width:30, height:30)
+                        } else {
+                            Image(systemName: "timelapse")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width:30, height:30)
+                        }
+                        Text("Choose").foregroundColor(.blue).onTapGesture {
+                            self.showActionSheet = true
+                        }.actionSheet(isPresented: $showActionSheet){
+                        ActionSheet(title: Text("Add a picture to the profile"), message: nil, buttons: [
+                        //Button1
+                        .default(Text("Camera"), action: {
+                            self.showImagePicker = true
+                            self.sourceType = .camera
+                        }),
+                        //Button2
+                        .default(Text("Photo Library"), action: {
+                            self.showImagePicker = true
+                            self.sourceType = .photoLibrary
+                        }),
+                                            
+                        //Button3
+                        .cancel()
+                                            
+                        ])
+                        }.sheet(isPresented: $showImagePicker){
+                            imagePicker(image: self.$upload_image, showImagePicker: self.$showImagePicker, sourceType: self.sourceType)
+                                        
+                        }
+                        
+                        Text("Upload").foregroundColor(.blue).onTapGesture{
+                            if let thisImage = self.upload_image {
+                                self.showNewProfileButton = false
+                                self.uploadedImage = false
+                                self.uploadingImage = true
+                                self.finishUploadingImage = false
+                                uploadImage(image: thisImage)
+                            }else{
+                                print("couldn't upload image - no image present")
+                            }
+                        }
+                        
+                        if finishUploadingImage{
+                            Text("Done").foregroundColor(.green)
+                        } else if uploadingImage{
+                            Text("ing").foregroundColor(.gray)
+                        }
+                    }
+                    HStack() {
+                        Text("Name ").foregroundColor(.black)
+                        Spacer()
+                        TextField("Enter name", text: $name)
+                    }
+                    Picker(selection: $gender, label: Text("Gender")) {
+                        ForEach(0 ..< genderChoices.count) {
+                            Text(self.genderChoices[$0])
+                        }
+                    }
+                    Picker(selection: $age, label: Text("Age")) {
+                        ForEach(0 ..< ageChoices.count) {
+                            Text(String(self.ageChoices[$0]))
+                        }
+                    }
+                    Picker(selection: $height, label: Text("Height")) {
+                        ForEach(0 ..< heightChoices.count) {
+                            Text(self.heightChoices[$0])
                         }
                     }
                     
-                    if finishUploadingImage{
-                        Text("Done").foregroundColor(.green)
-                    } else if uploadingImage{
-                        Text("ing").foregroundColor(.gray)
+                    HStack() {
+                        Text("Email ").foregroundColor(.black)
+                        TextField("Enter email address", text: $email)
                     }
-                }
-                HStack() {
-                    Text("Name ").foregroundColor(.black)
-                    Spacer()
-                    TextField("Enter name", text: $name)
-                }
-                Picker(selection: $gender, label: Text("Gender")) {
-                    ForEach(0 ..< genderChoices.count) {
-                        Text(self.genderChoices[$0])
+                    
+                    HStack() {
+                        Text("Phone ").foregroundColor(.black)
+                        TextField("Enter phone number", text: $phone)
                     }
-                }
-                Picker(selection: $age, label: Text("Age")) {
-                    ForEach(0 ..< ageChoices.count) {
-                        Text(String(self.ageChoices[$0]))
+                    
+                    DatePicker(selection: $joinedDate, in: ...Date(), displayedComponents: .date) {
+                        Text("Joined Date")
                     }
+                    
+                    
+                    ZStack(alignment: .top) {
+                        CustomRiderSearchBar(riders: self.viewModel2.riders, rider: $student, riderName: $studentName, prevInstructor: $prevInstructor, prevHorse: $prevHorse, txt: "").padding(.top)
+                    }.onAppear() {
+                        self.viewModel2.fetchAllData()
+                    }.frame(maxHeight: .infinity)
+                    
                 }
-                Picker(selection: $height, label: Text("Height")) {
-                    ForEach(0 ..< heightChoices.count) {
-                        Text(self.heightChoices[$0])
-                    }
-                }
-                
-                HStack() {
-                    Text("Email ").foregroundColor(.black)
-                    TextField("Enter email address", text: $email)
-                }
-                
-                HStack() {
-                    Text("Phone ").foregroundColor(.black)
-                    TextField("Enter phone number", text: $phone)
-                }
-                
-                DatePicker(selection: $joinedDate, in: ...Date(), displayedComponents: .date) {
-                    Text("Joined Date")
-                }
-                
-                
-                ZStack(alignment: .top) {
-                    CustomRiderSearchBar(riders: self.viewModel2.riders, rider: $student, riderName: $studentName, prevInstructor: $prevInstructor, prevHorse: $prevHorse, txt: "").padding(.top)
-                }.onAppear() {
-                    self.viewModel2.fetchAllData()
-                }.frame(maxHeight: .infinity)
-                
             }
+            GeneralPopUpWindow(title: "Notice", message: "Profile Created!", buttonText: "OK", show: $showPopUp)
         }
         VStack {
             
@@ -566,14 +580,9 @@ struct CreateInstructorProfileView: View {
                 }
                 self.uploadedOtherData = true
             }){
-                Text("Upload").font(.system(size:UIScreen.main.bounds.height*0.025))
+                Text("Upload Info").font(.system(size:UIScreen.main.bounds.height*0.025))
             }.frame(width:UIScreen.main.bounds.width*0.3, height:UIScreen.main.bounds.height*0.035, alignment:.center).foregroundColor(.black).background(Color(UIColor.lightGray)).opacity(0.7).cornerRadius(16).padding(UIScreen.main.bounds.height*0.005)
             
-//            VStack{
-//                Button(action: {upload()}){
-//                    Text("Upload").font(.system(size:UIScreen.main.bounds.height*0.025))
-//                }.frame(width:UIScreen.main.bounds.width*0.3, height:UIScreen.main.bounds.height*0.035, alignment:.center).foregroundColor(.black).background(Color(UIColor.lightGray)).opacity(0.7).cornerRadius(16).padding(UIScreen.main.bounds.height*0.005)
-//            }
             if self.showNewProfileButton {
                 NavigationLink(destination: NewInstructorProfileView(id: newid)) {
                     Text("New Profile").font(.system(size:UIScreen.main.bounds.height*0.025))
@@ -598,6 +607,7 @@ struct CreateInstructorProfileView: View {
             }
             db.collection("RiderProfiles").document(student).updateData(["Instructor": id, "Instructor Name": name])
         }
+        self.showPopUp.toggle()
     }
     
     func uploadImage(image: UIImage) {
