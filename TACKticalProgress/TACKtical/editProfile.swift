@@ -591,7 +591,7 @@ struct GeneralPopUpWindow: View {
                         .frame(height: 45, alignment: .center)
                         .font(Font.system(size: 23, weight: .semibold))
                         .foregroundColor(Color.white)
-                        .background(Color(#colorLiteral(red: 0.6196078431, green: 0.1098039216, blue: 0.2509803922, alpha: 1)))
+                        .background(Color(red: 173/255, green: 216/255, blue: 230/255, opacity: 1.0))
 
                     Text(message)
                         .multilineTextAlignment(.center)
@@ -611,7 +611,7 @@ struct GeneralPopUpWindow: View {
                                 .frame(maxWidth: .infinity)
                                 .frame(height: 54, alignment: .center)
                                 .foregroundColor(Color.white)
-                                .background(Color(#colorLiteral(red: 0.6196078431, green: 0.1098039216, blue: 0.2509803922, alpha: 1)))
+                                .background(Color(red: 173/255, green: 216/255, blue: 230/255, opacity: 1.0))
                                 .font(Font.system(size: 23, weight: .semibold))
                         }).buttonStyle(PlainButtonStyle())
                     }
@@ -619,7 +619,7 @@ struct GeneralPopUpWindow: View {
                 }
                 .frame(maxWidth: 300)
                 .border(Color.white, width: 2)
-                .background(Color(#colorLiteral(red: 0.737254902, green: 0.1294117647, blue: 0.2941176471, alpha: 1)))
+                .background(Color(red: 138/255, green: 199/255, blue: 222/255, opacity: 1.0))
             }
         }
     }
