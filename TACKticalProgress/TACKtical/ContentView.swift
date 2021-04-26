@@ -31,20 +31,10 @@ struct ContentView: View {
     var body: some View {
         
         ZStack{
-            
-            if status{
-                
-                NavigationView{
-                    HomeView()
-                }.onAppear() {
-                    UINavigationBar.appearance().backgroundColor = UIColor(red: 102/255, green: 172/255, blue: 189/255, alpha:1)
-                }
-                
-                
-            }
-            else{
-                
-                LoginView(model:model)
+            NavigationView{
+                HomeView()
+            }.onAppear() {
+                UINavigationBar.appearance().backgroundColor = UIColor(red: 102/255, green: 172/255, blue: 189/255, alpha:1)
             }
         }
     }

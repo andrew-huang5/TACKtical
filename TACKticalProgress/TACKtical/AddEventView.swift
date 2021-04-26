@@ -9,22 +9,24 @@ import SwiftUI
 import Firebase
 
 struct ChooseEventView: View {
+    @State var eventID: String
+    @State var date: Date
     var body: some View {
-        let eventID = UUID().uuidString
         VStack {
-            NavigationLink(destination: AddEventView(id: eventID, type: "Lesson")) {
+            NavigationLink(destination: AddEventView(id: eventID, type: "Lesson", start: date, end: date.addingTimeInterval(3600))) {
                 Text("Lesson")
             }.frame(width: UIScreen.main.bounds.width * 0.8, height: UIScreen.main.bounds.height * 0.1, alignment: .leading)
-            NavigationLink(destination: AddEventView(id: eventID, type: "Training")) {
+            NavigationLink(destination: AddEventView(id: eventID, type: "Training", start: date, end: date.addingTimeInterval(3600))) {
                 Text("Training Ride")
             }.frame(width: UIScreen.main.bounds.width * 0.8, height: UIScreen.main.bounds.height * 0.1, alignment: .leading)
-            NavigationLink(destination: AddEventView(id: eventID, type: "Vet")) {
+            NavigationLink(destination: AddEventView(id: eventID, type: "Vet", start: date, end: date.addingTimeInterval(3600))) {
                 Text("Vet")
             }.frame(width: UIScreen.main.bounds.width * 0.8, height: UIScreen.main.bounds.height * 0.1, alignment: .leading)
-            NavigationLink(destination: AddEventView(id: eventID, type: "Farrier")) {
+            NavigationLink(destination: AddEventView(id: eventID, type: "Farrier", start: date, end: date.addingTimeInterval(3600))) {
                 Text("Farrier")
             }.frame(width: UIScreen.main.bounds.width * 0.8, height: UIScreen.main.bounds.height * 0.1, alignment: .leading)
-            NavigationLink(destination: AddEventView(id: eventID, type: "Custom")) {
+            NavigationLink(destination: AddEventView(id: eventID, type: "Custom", start: date,
+                                                     end: date.addingTimeInterval(3600))) {
                 Text("Custom")
             }.frame(width: UIScreen.main.bounds.width * 0.8, height: UIScreen.main.bounds.height * 0.2, alignment: .leading)
         }.navigationBarTitle("Choose Event Type")
@@ -35,42 +37,52 @@ struct ChooseEventView: View {
 
 struct AddEventView: View {
     @ObservedObject private var viewModel = EventViewModel()
+    @ObservedObject private var horseViewModel = HorseViewModel()
+    @ObservedObject private var riderViewModel = RiderViewModel()
+    let dateFormatter = DateFormatter()
     
     var id: String
     var type: String
+    @State var start: Date
+    @State var end: Date
     @State var title = ""
-    @State var start = Date()
-    @State var end = Date().addingTimeInterval(3600)
     @State var horseID = ""
+    @State var horseName = ""
+    @State var riderID = ""
+    @State var riderName = ""
+    @State var prevHorse = ""
+    @State var prevOwner = ""
+    @State var prevInstructor = ""
     
     var body: some View {
         VStack{
             Form {
                 Section {
+                    VStack {
+                        Text(dateFormatter.string(from: start)).onAppear() {
+                            dateFormatter.dateStyle = .medium
+                        }
+                    }
                     HStack() {
                         Text("Title: ").foregroundColor(.blue)
                         TextField("Enter new title", text: $title)
                     }.padding(EdgeInsets(top: UIScreen.main.bounds.height * 0.01, leading: 0, bottom: UIScreen.main.bounds.height * 0.01, trailing: 0))
                     VStack(alignment: .leading) {
-                        Text("Start:").foregroundColor(.blue)
-                        DatePicker("", selection: $start, displayedComponents: [.date, .hourAndMinute])
+                        Text("Start Time:").foregroundColor(.blue)
+                        DatePicker("", selection: $start, displayedComponents: [.hourAndMinute])
                     }.padding(EdgeInsets(top: UIScreen.main.bounds.height * 0.01, leading: 0, bottom: UIScreen.main.bounds.height * 0.01, trailing: 0))
                     VStack(alignment: .leading) {
-                        Text("End:").foregroundColor(.blue)
-                        DatePicker("", selection: $end, displayedComponents: [.date, .hourAndMinute])
+                        Text("End Time:").foregroundColor(.blue)
+                        DatePicker("", selection: $end, displayedComponents: [.hourAndMinute])
                     }.padding(EdgeInsets(top: UIScreen.main.bounds.height * 0.01, leading: 0, bottom: UIScreen.main.bounds.height * 0.01, trailing: 0))
                     VStack{
                         Text("Choose horse: ")
-                        Dropdown1()
+                        CustomHorseSearchBar(horses: $horseViewModel.horses, horse: $horseID, horseName: $horseName, prevOwner: $prevOwner, txt: "").onAppear(){horseViewModel.fetchAllData()}
                     }
                     if type == "Lesson" || type == "Training" || type == "Custom" {
                         VStack {
-                            Text("Choose rider: ")
-                            Dropdown2()
-                        }
-                        VStack {
-                            Text("Choose instructor: ")
-                            Dropdown3()
+                            Text("Choose student: ")
+                            CustomRiderSearchBar(riders: $riderViewModel.riders, rider: $riderID, riderName: $riderName, prevInstructor: $prevInstructor, prevHorse: $prevHorse, txt: "").onAppear(){riderViewModel.fetchAllData()}
                         }
                     }
                     VStack() {
@@ -85,6 +97,6 @@ struct AddEventView: View {
     
     func upload() {
         let db = Firestore.firestore()
-        db.collection("Events").document(id).setData(["id": id, "horseID": horseID, "riderID": riderID, "instructorID": instructorID, "type": type, "title": title, "start": start, "end": end], merge:true)
+        db.collection("Users").document("2C119956-AD83-4787-B3DD-AA2F3718D9DB").collection("Events").document(id).setData(["id": id, "horseID": horseID, "horseName": horseName, "riderID": riderID, "riderName": riderName, "type": type, "title": title, "start": start, "end": end], merge:true)
     }
 }

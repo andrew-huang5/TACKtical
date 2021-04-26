@@ -53,3 +53,15 @@ struct ObjectName: Identifiable & Hashable {
     var name: String
     var type: String
 }
+
+struct Event: Identifiable & Hashable {
+    var id: String
+    var horseID: String
+    var horseName: String
+    var riderID: String
+    var riderName: String
+    var type: String
+    var title: String
+    var start: Date
+    var end: Date
+}
