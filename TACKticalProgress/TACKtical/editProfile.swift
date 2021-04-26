@@ -28,6 +28,8 @@ struct EditProfileView: View {
     var colorChoices = ["Bay", "Chestnut", "Gray", "Dun"]
     var heightChoices = ["10", "11", "12", "13", "14", "15", "16"]
     var feedChoices = ["Pasture Grass", "Hay", "Grains", "Salt & Minerals", "Bran", "Garden Refuse", "Fruit & Veggie"]
+    @State private var uploadedImage: Bool = false
+    @State private var uploadingImage: Bool = false
     
     
     var body: some View {
@@ -46,8 +48,8 @@ struct EditProfileView: View {
                         .scaledToFit()
                         .frame(width:30, height:30)
                     }
-                    Button(action: {self.showActionSheet = true}) {
-                        Text("Choose Image")
+                    Text("Choose").foregroundColor(.blue).onTapGesture {
+                        self.showActionSheet = true
                     }.actionSheet(isPresented: $showActionSheet){
                     ActionSheet(title: Text("Add a picture to the profile"), message: nil, buttons: [
                     //Button1
@@ -55,13 +57,13 @@ struct EditProfileView: View {
                         self.showImagePicker = true
                         self.sourceType = .camera
                     }),
-                                        //Button2
+                    //Button2
                     .default(Text("Photo Library"), action: {
                         self.showImagePicker = true
                         self.sourceType = .photoLibrary
                     }),
                                         
-                                        //Button3
+                    //Button3
                     .cancel()
                                         
                     ])
@@ -69,6 +71,24 @@ struct EditProfileView: View {
                         imagePicker(image: self.$upload_image, showImagePicker: self.$showImagePicker, sourceType: self.sourceType)
                                     
                     }
+                    
+                    Text("Upload").foregroundColor(.blue).onTapGesture{
+                        if let thisImage = self.upload_image {
+                            uploadingImage.toggle()
+                            uploadedImage = false
+                            uploadImage(image: thisImage)
+                        }else{
+                            print("couldn't upload image - no image present")
+                        }
+                    }
+                    
+                    if uploadedImage{
+                        Text("Done").foregroundColor(.green)
+                    } else if uploadingImage{
+                        Text("ing").foregroundColor(.gray)
+                    }
+                    
+                    
                 }
                 HStack() {
                     Text("Name ").foregroundColor(.black)
@@ -112,21 +132,10 @@ struct EditProfileView: View {
             }
         }
         VStack {
-            Button(action: {
-                if let thisImage = self.upload_image {
-                    uploadImage(image: thisImage)
-                }else{
-                    print("couldn't upload image - no image present")
-                }}) {
-                Text("Upload Image").font(.system(size:UIScreen.main.bounds.height*0.025))
-            }.frame(width:UIScreen.main.bounds.width*0.3, height:UIScreen.main.bounds.height*0.035, alignment:.center).foregroundColor(.black).background(Color(UIColor.lightGray)).opacity(0.7).cornerRadius(16).padding(UIScreen.main.bounds.height*0.005)
             
             Button(action: {upload()}){
                 Text("Upload").font(.system(size:UIScreen.main.bounds.height*0.025))
             }.frame(width:UIScreen.main.bounds.width*0.3, height:UIScreen.main.bounds.height*0.035, alignment:.center).foregroundColor(.black).background(Color(UIColor.lightGray)).opacity(0.7).cornerRadius(16).padding(UIScreen.main.bounds.height*0.005)
-//            NavigationLink(destination: NewProfileView(id:id)) {
-//                Text("New Profile").font(.system(size:UIScreen.main.bounds.height*0.025))
-//            }.frame(width:UIScreen.main.bounds.width*0.3, height:UIScreen.main.bounds.height*0.035, alignment:.center).foregroundColor(.black).background(Color(UIColor.lightGray)).opacity(0.7).cornerRadius(16).padding(UIScreen.main.bounds.height*0.005)
         }.padding(EdgeInsets(top: 0, leading: UIScreen.main.bounds.width*0.15, bottom: 0, trailing: UIScreen.main.bounds.width*0.15)).navigationBarTitle("Edit Profile", displayMode: .inline)
     }
     func upload() {
@@ -156,6 +165,8 @@ struct EditProfileView: View {
                     print("an error has occured - \(err.localizedDescription)")
                 } else {
                     print("image uploaded successfully")
+                    uploadedImage.toggle()
+                    uploadingImage.toggle()
                 }
             }
             
@@ -185,8 +196,10 @@ struct EditRiderProfileView: View {
     @State var upload_image:UIImage?
     
     var genderChoices = ["Male", "Female"]
-    var heightChoices = ["6.1", "6.2", "6.3", "6.4", "6.5", "6.6", "6.7", "6.8", "6.9", "6.10", "6.11", "7.0"]
-    var ageChoices = ["5", "10", "15", "20", "25", "30"]
+    var heightChoices = ["4.1", "4.2", "4.3", "4.4", "4.5", "4.6", "4.7", "4.8", "4.9", "4.10", "4.11", "5.0", "5.1", "5.2", "5.3", "5.4", "5.5", "5.6", "5.7", "5.8", "5.9", "5.10", "5.11", "6.0", "6.1", "6.2", "6.3", "6.4", "6.5", "6.6", "6.7", "6.8", "6.9", "6.10", "6.11", "7.0"]
+    var ageChoices = [Int](15...60)
+    @State private var uploadedImage: Bool = false
+    @State private var uploadingImage: Bool = false
     
     
     var body: some View {
@@ -205,8 +218,8 @@ struct EditRiderProfileView: View {
                         .scaledToFit()
                         .frame(width:30, height:30)
                     }
-                    Button(action: {self.showActionSheet = true}) {
-                        Text("Choose Image")
+                    Text("Choose").foregroundColor(.blue).onTapGesture {
+                        self.showActionSheet = true
                     }.actionSheet(isPresented: $showActionSheet){
                     ActionSheet(title: Text("Add a picture to the profile"), message: nil, buttons: [
                     //Button1
@@ -214,19 +227,35 @@ struct EditRiderProfileView: View {
                         self.showImagePicker = true
                         self.sourceType = .camera
                     }),
-                                        //Button2
+                    //Button2
                     .default(Text("Photo Library"), action: {
                         self.showImagePicker = true
                         self.sourceType = .photoLibrary
                     }),
                                         
-                                        //Button3
+                    //Button3
                     .cancel()
                                         
                     ])
                     }.sheet(isPresented: $showImagePicker){
                         imagePicker(image: self.$upload_image, showImagePicker: self.$showImagePicker, sourceType: self.sourceType)
                                     
+                    }
+                    
+                    Text("Upload").foregroundColor(.blue).onTapGesture{
+                        if let thisImage = self.upload_image {
+                            uploadingImage.toggle()
+                            uploadedImage = false
+                            uploadImage(image: thisImage)
+                        }else{
+                            print("couldn't upload image - no image present")
+                        }
+                    }
+                    
+                    if uploadedImage{
+                        Text("Done").foregroundColor(.green)
+                    } else if uploadingImage{
+                        Text("ing").foregroundColor(.gray)
                     }
                 }
                 HStack() {
@@ -241,7 +270,7 @@ struct EditRiderProfileView: View {
                 }
                 Picker(selection: $rider.age, label: Text("Age")) {
                     ForEach(0 ..< ageChoices.count) {
-                        Text(self.ageChoices[$0])
+                        Text(String(self.ageChoices[$0]))
                     }
                 }
                 Picker(selection: $rider.height, label: Text("Height")) {
@@ -278,21 +307,10 @@ struct EditRiderProfileView: View {
             }
         }
         VStack {
-            Button(action: {
-                if let thisImage = self.upload_image {
-                    uploadImage(image: thisImage)
-                }else{
-                    print("couldn't upload image - no image present")
-                }}) {
-                Text("Upload Image").font(.system(size:UIScreen.main.bounds.height*0.025))
-            }.frame(width:UIScreen.main.bounds.width*0.3, height:UIScreen.main.bounds.height*0.035, alignment:.center).foregroundColor(.black).background(Color(UIColor.lightGray)).opacity(0.7).cornerRadius(16).padding(UIScreen.main.bounds.height*0.005)
             
             Button(action: {upload()}){
                 Text("Upload").font(.system(size:UIScreen.main.bounds.height*0.025))
             }.frame(width:UIScreen.main.bounds.width*0.3, height:UIScreen.main.bounds.height*0.035, alignment:.center).foregroundColor(.black).background(Color(UIColor.lightGray)).opacity(0.7).cornerRadius(16).padding(UIScreen.main.bounds.height*0.005)
-//            NavigationLink(destination: NewProfileView(id:id)) {
-//                Text("New Profile").font(.system(size:UIScreen.main.bounds.height*0.025))
-//            }.frame(width:UIScreen.main.bounds.width*0.3, height:UIScreen.main.bounds.height*0.035, alignment:.center).foregroundColor(.black).background(Color(UIColor.lightGray)).opacity(0.7).cornerRadius(16).padding(UIScreen.main.bounds.height*0.005)
         }.padding(EdgeInsets(top: 0, leading: UIScreen.main.bounds.width*0.15, bottom: 0, trailing: UIScreen.main.bounds.width*0.15)).navigationBarTitle("Edit Profile", displayMode: .inline)
     }
     func upload() {
@@ -302,7 +320,6 @@ struct EditRiderProfileView: View {
         
         db.collection("RiderProfiles").document(id).setData(["Age": rider.age, "Email": rider.email, "Gender": rider.gender, "Height": rider.height, "ID": rider.id, "Joined Date": formatter1.string(from: rider.joinedDate), "Owned Horse": rider.horse, "Phone": rider.phone, "name":rider.name, "Horse Name":rider.horseName], merge:true)
         if rider.horse != ""{
-            //db.collection("RiderProfiles").document(id).collection("Horses").document(horse).setData(["Horse Name": horseName], merge: true)
             if prevOwner != ""{
                 print(prevOwner)
                 db.collection("RiderProfiles").document(prevOwner).updateData(["Owned Horse": "", "Horse Name": ""])
@@ -337,6 +354,8 @@ struct EditRiderProfileView: View {
                     print("an error has occured - \(err.localizedDescription)")
                 } else {
                     print("image uploaded successfully")
+                    uploadedImage.toggle()
+                    uploadingImage.toggle()
                 }
             }
             
@@ -364,8 +383,11 @@ struct EditInstructorProfileView: View {
     @State var upload_image:UIImage?
     
     var genderChoices = ["Male", "Female"]
-    var heightChoices = ["6.1", "6.2", "6.3", "6.4", "6.5", "6.6", "6.7", "6.8", "6.9", "6.10", "6.11", "7.0"]
-    var ageChoices = ["5", "10", "15", "20", "25", "30"]
+    var heightChoices = ["4.1", "4.2", "4.3", "4.4", "4.5", "4.6", "4.7", "4.8", "4.9", "4.10", "4.11", "5.0", "5.1", "5.2", "5.3", "5.4", "5.5", "5.6", "5.7", "5.8", "5.9", "5.10", "5.11", "6.0", "6.1", "6.2", "6.3", "6.4", "6.5", "6.6", "6.7", "6.8", "6.9", "6.10", "6.11", "7.0"]
+    var ageChoices = [Int](15...60)
+    @State private var uploadedImage: Bool = false
+    @State private var uploadingImage: Bool = false
+
     
     var body: some View {
         Form {
@@ -384,8 +406,8 @@ struct EditInstructorProfileView: View {
                         .scaledToFit()
                         .frame(width:30, height:30)
                     }
-                    Button(action: {self.showActionSheet = true}) {
-                        Text("Choose Image")
+                    Text("Choose").foregroundColor(.blue).onTapGesture {
+                        self.showActionSheet = true
                     }.actionSheet(isPresented: $showActionSheet){
                     ActionSheet(title: Text("Add a picture to the profile"), message: nil, buttons: [
                     //Button1
@@ -407,6 +429,22 @@ struct EditInstructorProfileView: View {
                         imagePicker(image: self.$upload_image, showImagePicker: self.$showImagePicker, sourceType: self.sourceType)
                                     
                     }
+                    
+                    Text("Upload").foregroundColor(.blue).onTapGesture{
+                        if let thisImage = self.upload_image {
+                            uploadingImage.toggle()
+                            uploadedImage = false
+                            uploadImage(image: thisImage)
+                        }else{
+                            print("couldn't upload image - no image present")
+                        }
+                    }
+                    
+                    if uploadedImage{
+                        Text("Done").foregroundColor(.green)
+                    } else if uploadingImage{
+                        Text("ing").foregroundColor(.gray)
+                    }
                 }
                 HStack() {
                     Text("Name ").foregroundColor(.black)
@@ -420,7 +458,7 @@ struct EditInstructorProfileView: View {
                 }
                 Picker(selection: $instructor.age, label: Text("Age")) {
                     ForEach(0 ..< ageChoices.count) {
-                        Text(self.ageChoices[$0])
+                        Text(String(self.ageChoices[$0]))
                     }
                 }
                 Picker(selection: $instructor.height, label: Text("Height")) {
@@ -453,14 +491,6 @@ struct EditInstructorProfileView: View {
             }
         }
         VStack {
-            Button(action: {
-                if let thisImage = self.upload_image {
-                    uploadImage(image: thisImage)
-                }else{
-                    print("couldn't upload image - no image present")
-                }}) {
-                Text("Upload Image").font(.system(size:UIScreen.main.bounds.height*0.025))
-            }.frame(width:UIScreen.main.bounds.width*0.3, height:UIScreen.main.bounds.height*0.035, alignment:.center).foregroundColor(.black).background(Color(UIColor.lightGray)).opacity(0.7).cornerRadius(16).padding(UIScreen.main.bounds.height*0.005)
             
             Button(action: {
                     let storage = Storage.storage()
@@ -513,6 +543,8 @@ struct EditInstructorProfileView: View {
                     print("an error has occured - \(err.localizedDescription)")
                 } else {
                     print("image uploaded successfully")
+                    uploadedImage.toggle()
+                    uploadingImage.toggle()
                 }
             }
             

@@ -129,8 +129,8 @@ struct NewRiderProfileView: View {
     
     @ObservedObject private var viewModel = RiderViewModel()
     var genderChoices = ["Male", "Female"]
-    var heightChoices = ["6.1", "6.2", "6.3", "6.4", "6.5", "6.6", "6.7", "6.8", "6.9", "6.10", "6.11", "7.0"]
-    var ageChoices = ["5", "10", "15", "20", "25", "30"]
+    var heightChoices = ["4.1", "4.2", "4.3", "4.4", "4.5", "4.6", "4.7", "4.8", "4.9", "4.10", "4.11", "5.0", "5.1", "5.2", "5.3", "5.4", "5.5", "5.6", "5.7", "5.8", "5.9", "5.10", "5.11", "6.0", "6.1", "6.2", "6.3", "6.4", "6.5", "6.6", "6.7", "6.8", "6.9", "6.10", "6.11", "7.0"]
+    var ageChoices = [Int](15...60)
     //var horse = viewModel.horses[0]
     //let formatter1 = DateFormatter()
     @State var url = ""
@@ -200,7 +200,7 @@ struct NewRiderProfileView: View {
                 
                     VStack(alignment: .center, spacing: UIScreen.main.bounds.height*0.01){
                         Text("Joined Date: " + date_to_string(d: viewModel.rider.joinedDate)).font(.system(size:UIScreen.main.bounds.height*0.025))
-                        Text("Age: " + ageChoices[viewModel.rider.age]).font(.system(size:UIScreen.main.bounds.height*0.025))
+                        Text("Age: " + String(ageChoices[viewModel.rider.age])).font(.system(size:UIScreen.main.bounds.height*0.025))
                         Text("Gender: " + genderChoices[viewModel.rider.gender]).font(.system(size:UIScreen.main.bounds.height*0.025))
                         Text("Height: " + heightChoices[viewModel.rider.height]).font(.system(size:UIScreen.main.bounds.height*0.025))
                         Text("Owned Horse: " + viewModel.rider.horseName).font(.system(size:UIScreen.main.bounds.height*0.025))
@@ -241,8 +241,8 @@ struct NewInstructorProfileView: View {
     
     @ObservedObject private var viewModel = InstructorViewModel()
     var genderChoices = ["Male", "Female"]
-    var heightChoices = ["6.1", "6.2", "6.3", "6.4", "6.5", "6.6", "6.7", "6.8", "6.9", "6.10", "6.11", "7.0"]
-    var ageChoices = ["5", "10", "15", "20", "25", "30"]
+    var heightChoices = ["4.1", "4.2", "4.3", "4.4", "4.5", "4.6", "4.7", "4.8", "4.9", "4.10", "4.11", "5.0", "5.1", "5.2", "5.3", "5.4", "5.5", "5.6", "5.7", "5.8", "5.9", "5.10", "5.11", "6.0", "6.1", "6.2", "6.3", "6.4", "6.5", "6.6", "6.7", "6.8", "6.9", "6.10", "6.11", "7.0"]
+    var ageChoices = [Int](15...60)
     //var horse = viewModel.horses[0]
     //let formatter1 = DateFormatter()
     @State var url = ""
@@ -312,7 +312,7 @@ struct NewInstructorProfileView: View {
                 
                     VStack(alignment: .center, spacing: UIScreen.main.bounds.height*0.01){
                         Text("Joined Date: " + date_to_string(d: viewModel.instructor.joinedDate)).font(.system(size:UIScreen.main.bounds.height*0.025))
-                        Text("Age: " + ageChoices[viewModel.instructor.age]).font(.system(size:UIScreen.main.bounds.height*0.025))
+                        Text("Age: " + String(ageChoices[viewModel.instructor.age])).font(.system(size:UIScreen.main.bounds.height*0.025))
                         Text("Gender: " + genderChoices[viewModel.instructor.gender]).font(.system(size:UIScreen.main.bounds.height*0.025))
                         Text("Height: " + heightChoices[viewModel.instructor.height]).font(.system(size:UIScreen.main.bounds.height*0.025))
                         Text("Student: " + viewModel.instructor.studentName).font(.system(size:UIScreen.main.bounds.height*0.025))

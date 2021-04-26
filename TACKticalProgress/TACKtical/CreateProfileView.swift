@@ -36,6 +36,8 @@ struct CreateHorseProfileView: View {
     @State private var showNewProfileButton: Bool = false
     @State private var uploadedOtherData: Bool = false
     @State private var uploadedImage: Bool = true
+    @State private var finishUploadingImage: Bool = false
+    @State private var uploadingImage: Bool = false
     
     var body: some View {
         Form {
@@ -83,16 +85,20 @@ struct CreateHorseProfileView: View {
                         if let thisImage = self.upload_image {
                             self.showNewProfileButton = false
                             self.uploadedImage = false
+                            self.finishUploadingImage = false
+                            self.uploadingImage = true
                             uploadImage(image: thisImage)
                         }else{
                             print("couldn't upload image - no image present")
                         }
                     }
                     
-//                    Button(action: {
-//                        }) {
-//
-//                    }.frame(width:UIScreen.main.bounds.width*0.3, height:UIScreen.main.bounds.height*0.035, alignment:.center).foregroundColor(.black).background(Color(UIColor.lightGray)).opacity(0.7).cornerRadius(16).padding(UIScreen.main.bounds.height*0.005)
+                    if finishUploadingImage{
+                        Text("Done").foregroundColor(.green)
+                    } else if uploadingImage{
+                        Text("ing").foregroundColor(.gray)
+                    }
+                    
                 }
                 HStack() {
                     Text("Name ").foregroundColor(.black)
@@ -189,6 +195,8 @@ struct CreateHorseProfileView: View {
                         self.showNewProfileButton = true
                     }
                     self.uploadedImage = true
+                    self.finishUploadingImage = true
+                    self.uploadingImage = false
                 }
             }
             
@@ -217,8 +225,8 @@ struct CreateRiderProfileView: View {
     @State var prevOwner: String = ""
     @State var prevStudent: String = ""
     var genderChoices = ["Male", "Female"]
-    var heightChoices = ["6.1", "6.2", "6.3", "6.4", "6.5", "6.6", "6.7", "6.8", "6.9", "6.10", "6.11", "7.0"]
-    var ageChoices = ["5", "10", "15", "20", "25", "30"]
+    var heightChoices = ["4.1", "4.2", "4.3", "4.4", "4.5", "4.6", "4.7", "4.8", "4.9", "4.10", "4.11", "5.0", "5.1", "5.2", "5.3", "5.4", "5.5", "5.6", "5.7", "5.8", "5.9", "5.10", "5.11", "6.0", "6.1", "6.2", "6.3", "6.4", "6.5", "6.6", "6.7", "6.8", "6.9", "6.10", "6.11", "7.0"]
+    var ageChoices = [Int](15...60)
     
     @State var showActionSheet = false
     @State var showImagePicker = false
@@ -229,6 +237,8 @@ struct CreateRiderProfileView: View {
     @State private var showNewProfileButton: Bool = false
     @State private var uploadedOtherData: Bool = false
     @State private var uploadedImage: Bool = true
+    @State private var finishUploadingImage: Bool = false
+    @State private var uploadingImage: Bool = false
     
     var body: some View {
         Form {
@@ -275,10 +285,18 @@ struct CreateRiderProfileView: View {
                         if let thisImage = self.upload_image {
                             self.showNewProfileButton = false
                             self.uploadedImage = false
+                            self.finishUploadingImage = false
+                            self.uploadingImage = true
                             uploadImage(image: thisImage)
                         }else{
                             print("couldn't upload image - no image present")
                         }
+                    }
+                    
+                    if finishUploadingImage{
+                        Text("Done").foregroundColor(.green)
+                    } else if uploadingImage{
+                        Text("ing").foregroundColor(.gray)
                     }
                 }
                 HStack() {
@@ -293,7 +311,7 @@ struct CreateRiderProfileView: View {
                 }
                 Picker(selection: $age, label: Text("Age")) {
                     ForEach(0 ..< ageChoices.count) {
-                        Text(self.ageChoices[$0])
+                        Text(String(self.ageChoices[$0]))
                     }
                 }
                 Picker(selection: $height, label: Text("Height")) {
@@ -343,11 +361,6 @@ struct CreateRiderProfileView: View {
                 Text("Upload").font(.system(size:UIScreen.main.bounds.height*0.025))
             }.frame(width:UIScreen.main.bounds.width*0.3, height:UIScreen.main.bounds.height*0.035, alignment:.center).foregroundColor(.black).background(Color(UIColor.lightGray)).opacity(0.7).cornerRadius(16).padding(UIScreen.main.bounds.height*0.005)
             
-//            VStack{
-//                Button(action: {upload()}){
-//                    Text("Upload").font(.system(size:UIScreen.main.bounds.height*0.025))
-//                }.frame(width:UIScreen.main.bounds.width*0.3, height:UIScreen.main.bounds.height*0.035, alignment:.center).foregroundColor(.black).background(Color(UIColor.lightGray)).opacity(0.7).cornerRadius(16).padding(UIScreen.main.bounds.height*0.005)
-//            }
             if showNewProfileButton{
                 NavigationLink(destination: NewRiderProfileView(id: id)) {
                     Text("New Profile").font(.system(size:UIScreen.main.bounds.height*0.025))
@@ -396,6 +409,8 @@ struct CreateRiderProfileView: View {
                         self.showNewProfileButton = true
                     }
                     self.uploadedImage = true
+                    self.finishUploadingImage = true
+                    self.uploadingImage = false
                 }
             }
             
@@ -423,8 +438,8 @@ struct CreateInstructorProfileView: View {
     @State var prevInstructor: String = ""
     @State var prevHorse: String = ""
     var genderChoices = ["Male", "Female"]
-    var heightChoices = ["6.1", "6.2", "6.3", "6.4", "6.5", "6.6", "6.7", "6.8", "6.9", "6.10", "6.11", "7.0"]
-    var ageChoices = ["5", "10", "15", "20", "25", "30"]
+    var heightChoices = ["4.1", "4.2", "4.3", "4.4", "4.5", "4.6", "4.7", "4.8", "4.9", "4.10", "4.11", "5.0", "5.1", "5.2", "5.3", "5.4", "5.5", "5.6", "5.7", "5.8", "5.9", "5.10", "5.11", "6.0", "6.1", "6.2", "6.3", "6.4", "6.5", "6.6", "6.7", "6.8", "6.9", "6.10", "6.11", "7.0"]
+    var ageChoices = [Int](15...60)
     
     @State var showActionSheet = false
     @State var showImagePicker = false
@@ -435,6 +450,8 @@ struct CreateInstructorProfileView: View {
     @State private var showNewProfileButton: Bool = false
     @State private var uploadedOtherData: Bool = false
     @State private var uploadedImage: Bool = true
+    @State private var uploadingImage: Bool = false
+    @State private var finishUploadingImage: Bool = false
     
     
     var body: some View {
@@ -482,10 +499,18 @@ struct CreateInstructorProfileView: View {
                         if let thisImage = self.upload_image {
                             self.showNewProfileButton = false
                             self.uploadedImage = false
+                            self.uploadingImage = true
+                            self.finishUploadingImage = false
                             uploadImage(image: thisImage)
                         }else{
                             print("couldn't upload image - no image present")
                         }
+                    }
+                    
+                    if finishUploadingImage{
+                        Text("Done").foregroundColor(.green)
+                    } else if uploadingImage{
+                        Text("ing").foregroundColor(.gray)
                     }
                 }
                 HStack() {
@@ -500,7 +525,7 @@ struct CreateInstructorProfileView: View {
                 }
                 Picker(selection: $age, label: Text("Age")) {
                     ForEach(0 ..< ageChoices.count) {
-                        Text(self.ageChoices[$0])
+                        Text(String(self.ageChoices[$0]))
                     }
                 }
                 Picker(selection: $height, label: Text("Height")) {
@@ -588,6 +613,8 @@ struct CreateInstructorProfileView: View {
                         self.showNewProfileButton = true
                     }
                     self.uploadedImage = true
+                    self.finishUploadingImage = true
+                    self.uploadingImage = false
                 }
             }
             
