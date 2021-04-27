@@ -9,7 +9,10 @@ Our product will be in the form of an iOS application. TACKtical will have three
 We will be using agile development process with two week sprints to create our product.
 
 Async Image loader is using the code from https://github.com/V8tr/AsyncImage. AsuncImage.swift, EnvironmentValues+ImageCache.swift, ImageCache.swift, ImageLoader.swift are the files from this github repo. 
+
 The view models' implementation is using the idea in https://www.youtube.com/watch?v=4RUeW5rUcww&t=6s and should be as a reference to this Youtube video. 
+
 Image pickers' implementation is using the idea in https://www.youtube.com/watch?v=nbbjuStXJAk&t=1066s and should be as a reference to this Youtube video. 
+
 Uploading images' implementation is using the idea in https://www.youtube.com/watch?v=alNyRJwiYgg&t=949s and should be as a reference to this Youtube video. 
 
