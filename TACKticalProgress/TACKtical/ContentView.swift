@@ -184,21 +184,21 @@ struct SignUpView: View {
             VStack{
                 Spacer(minLength: 0)
                 
-                ZStack{
-                    if UIScreen.main.bounds.height < 750{
-                        Image("logo")
-                            .resizable()
-                            .frame(width: 130, height: 130)
-                    }
-                    else{
-                        Image("logo")
-                    }
-                }
-                    .padding(.horizontal)
-                    .padding(.vertical,20)
-                    .background(Color.white.opacity(0.2))
-                    .cornerRadius(30)
-                .padding(.top)
+//                ZStack{
+//                    if UIScreen.main.bounds.height < 750{
+//                        Image("logo")
+//                            .resizable()
+//                            .frame(width: 130, height: 130)
+//                    }
+//                    else{
+//                        Image("logo")
+//                    }
+//                }
+//                    .padding(.horizontal)
+//                    .padding(.vertical,20)
+//                    .background(Color.white.opacity(0.2))
+//                    .cornerRadius(30)
+//                .padding(.top)
                 
                 VStack(spacing: 4){
                     
