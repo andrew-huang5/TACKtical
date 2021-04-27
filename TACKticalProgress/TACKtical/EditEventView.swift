@@ -75,6 +75,7 @@ struct EditEventView: View {
                 }
             PopUpWindowforEvent(title: "Notice", message: "You sure about this?", buttonText1: "Yes", buttonText2: "No", show: $showPopUp, eventID: eventID)
         }
+        MenuView()
     }
     
     func upload() {
@@ -84,6 +85,6 @@ struct EditEventView: View {
         formatter2.timeStyle = .short
         
         let db = Firestore.firestore()
-        db.collection("Users").document(Auth.auth().currentUser!.uid).collection("Events").document(eventID).setData(["id": eventID, "horseID": horseID, "horseName": horseName, "riderID": riderID, "riderName": riderName, "type": type, "title": title, "date": formatter1.string(from: start), "startTime": formatter2.string(from: start), "endTime": formatter2.string(from: end)], merge:true)
+        db.collection("Users").document(Auth.auth().currentUser!.uid).collection("Events").document(eventID).setData(["id": eventID, "horseID": horseID, "horseName": horseName, "riderID": riderID, "riderName": riderName, "type": type, "title": title, "date": date, "startTime": formatter2.string(from: start), "endTime": formatter2.string(from: end)], merge:true)
     }
 }
