@@ -7,3 +7,5 @@ Our product will be in the form of an iOS application. TACKtical will have three
 
 
 We will be using agile development process with two week sprints to create our product.
+
+Async Image loader implementation: https://github.com/V8tr/AsyncImage
